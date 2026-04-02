@@ -321,6 +321,7 @@ Feature: 03 SMB Regression feature
     Then I click on button "Close"
     Then I wait for "3" seconds
     Then I click on button "Proceed Quote"
+    Then I wait for "3" seconds
     Then I click on element with text from excel "excel:Application Type"
     Then I click on button "Next"
 #   Applicant Company Details tab Inputs and data verification

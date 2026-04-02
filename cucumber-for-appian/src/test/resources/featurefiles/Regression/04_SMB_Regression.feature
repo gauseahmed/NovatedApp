@@ -19,11 +19,11 @@ Feature: 04 SMB Regression feature
     Then I select grid "[2]" row "[1]"
     Then I click on button "Next"
     Then I click on element with text from excel "excel:What type of asset are you seeking to finance?"
-    Then I click on element with text from excel "excel:Do you have a specific passenger or light commercial vehicle in mind?"
+    Then I click on element with text from excel "excel:Do you have a specific medical, office or other business equipment in mind?"
     Then I click on element with text from excel "excel:Is the medical, office or other business equipment new?"
     Then I click on element with text from excel "excel:Is your quote from a Dealer?"
     Then I click on card direct from excel "excel:What product suits you best?"
-    Then I populate field "Asset Category" with excel "excel:Vehicle or Asset Category"
+    Then I populate field "Asset Category[2]" with excel "excel:Vehicle or Asset Category"
     Then I populate field "Asset Description" with excel "excel:Vehicle or Asset Description"
     Then I populate field "Total Asset Cost (incl. GST)" with excel "excel:Total Asset Cost (incl. GST)"
     Then I populate field type "Text" named "Deposit Amount" with excel "excel:Deposit Amount"
@@ -289,14 +289,31 @@ Feature: 04 SMB Regression feature
     Then I populate field "Vehicle Category" with excel "excel:Vehicle or Asset Category"
     Then I populate field "Vehicle Description" with excel "excel:Vehicle or Asset Description"
     Then I populate field "Total Asset Cost (incl. GST)" with excel "excel:Total Asset Cost (incl. GST)"
-    Then I populate field type "Text" named "Deposit Amount" with excel "excel:Deposit Amount"
     Then I populate field "Dealer Origination Fee (excl. GST)" with excel "excel:Dealer Origination Fee (excl. GST)"
     Then I populate field "Brokerage % (excl. GST)" with excel "excel:Brokerage % (excl. GST)"
-    Then I populate field "Balloon %" with excel "excel:Balloon %"
+    Then I populate field "Total GST" with excel "excel:Total GST"
     Then I click on radio option from excel "excel:Payment Method"
-    Then I click on card direct from excel "excel:What services would you like included with your quote?"
     Then I click on term card from excel "excel:Select a Term"
     Then I click on button "Next"
+    Then I populate field "Make" with excel "excel:Make"
+    Then I populate field "Model" with excel "excel:Model"
+    Then I populate field "Sub Model" with excel "excel:Sub Model"
+    Then I click on button "SEARCH[2]"
+    Then I click on button "SELECT VEHICLE"
+    Then I populate field "VIN" with excel "excel:VIN"
+    Then I populate field "Registration Number" with excel "excel:Registration Number"
+    Then I populate field "Engine Number" with excel "excel:Engine Number"
+    Then I populate field "Other Comments" with excel "excel:Other Comments"
+    Then I click on button "Next"
+    Then I verify text "A value is required" is present
+    Then I populate field "Quote Document" with excel "C:\Users\HP\Downloads\DealerQuote.pdf"
+    Then I click on button "Next"
+    Then I verify text "Indicative Quote Summary" is present
+    Then I verify text "Finance Lease without Services" is present
+    Then I verify text "Your Passenger or Light Commercial Vehicle" is present
+    Then I verify text "Passenger or Light Commercial Vehicle Description" is present
+    Then I verify text "Total Cost of Lease" is present
+    Then I verify text "Total Asset Cost (incl GST)" is present
     Then I click on button "Complete Quote"
     Then I click on button "Proceed Quote"
     Then I click on element with text from excel "excel:Application Type"
@@ -407,7 +424,7 @@ Feature: 04 SMB Regression feature
     Then I verify grid "" column "Result" row "[6]" contains "Approved"
     Then I verify grid "" column "Name" row "[7]" contains "Credit File Age"
     Then I verify grid "" column "Rule Description" row "[7]" contains "Credit file age is equal to or greater than 12 months"
-    Then I verify grid "" column "Result" row "[7]" contains "Referred"
+    Then I verify grid "" column "Result" row "[7]" contains "Approved"
     Then I verify grid "" column "Name" row "[8]" contains "Credit File Activity"
     Then I verify grid "" column "Rule Description" row "[8]" contains "Credit file has activity recorded in the past 24 months from date of submission for current credit application"
     Then I verify grid "" column "Value" row "[8]" contains "True"
@@ -444,8 +461,8 @@ Feature: 04 SMB Regression feature
     Then I verify grid "" column "Rule Description" row "[16]" contains "The Application falls under the Low Doc criteria"
     Then I verify grid "" column "Value" row "[16]" contains "True"
     Then I verify grid "" column "Result" row "[16]" contains "Approved"
-    Then I verify grid "" column "Name" row "[17]" contains "Luxury Vehicle (New)"
-    Then I verify grid "" column "Rule Description" row "[17]" contains "Asset being financed is a New Passenger Car valued over $160K."
+    Then I verify grid "" column "Name" row "[17]" contains "Luxury Vehicle (Used)"
+    Then I verify grid "" column "Rule Description" row "[17]" contains "Asset being financed is a Used Passenger Car valued over $100K."
     Then I verify grid "" column "Value" row "[17]" contains "False"
     Then I verify grid "" column "Result" row "[17]" contains "Approved"
     Then I verify grid "" column "Name" row "[18]" contains "NZ Citizen"
@@ -486,11 +503,9 @@ Feature: 04 SMB Regression feature
     Then I verify text "Updated Application" is present
     Then I click on record view "Quote Details"
 #    Verifying content on 'Quote Details'
-    Then I verify text "Chattel Mortgage" is present
+    Then I verify text "Finance Lease without Services" is present
     Then I verify field "Total Asset Cost" contains excel "excel:Total Asset Cost (incl. GST)"
-    Then I verify field "Balloon Payment" contains excel "excel:Balloon Payment"
-    Then I verify field "Total Cost of Loan" contains excel "excel:Total Cost of Loan"
-    Then I verify field "Monthly Payment" contains excel "excel:Monthly Payment"
+    Then I verify field "Total Cost of Lease" contains excel "excel:Total Cost of Lease"
     Then I verify field "Specific Asset" contains excel "excel:Specific Asset"
     Then I verify field "New Asset" contains excel "excel:New Asset"
     Then I verify field "Payment Method" contains excel "excel:Payment Method"
@@ -499,14 +514,16 @@ Feature: 04 SMB Regression feature
     Then I verify field "Monthly GST" contains excel "excel:Monthly GST"
     Then I verify field "Total GST" contains excel "excel:Total GST"
     Then I verify field "Deposit Percentage" contains excel "excel:Deposit Percentage"
-    Then I verify field "Balloon Percentage" contains excel "excel:Balloon %"
+    Then I verify field "Residual Percentage" contains excel "excel:Residual Percentage"
     Then I click on record view "Summary"
     Then I click on button "Take Ownership"
     Then I click on button "Done"
-    Then I click on button with tooltip "More actions"
-    Then I click on element with text "Reallocate Application"
-    Then I populate field "Credit Officer" with "Automation Credit Approver"
-    Then I click on button "SUBMIT"
-    Then I verify text "Owner" is present
-    Then I verify text "Automation Credit Approver" is present
-    Then I verify text "Updated Application Assignee, new assignee - Automation Credit Approver" is present
+    Then I click on button "Request Information"
+    Then I verify text "Request for Further Information" is present
+    Then I verify text "Request Body" is present
+    Then I verify text "Hi Automation Introducer" is present
+    Then I click on element with text "GST registered less than 3 months."
+    Then I click on element with text "Current Tax Portals."
+    Then I click on button "Submit"
+    Then I verify text "Overall Decision" is present
+    Then I verify text "Awaiting Information" is present
