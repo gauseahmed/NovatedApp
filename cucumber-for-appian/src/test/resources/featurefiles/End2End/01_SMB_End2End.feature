@@ -17,6 +17,7 @@ Feature: 01 SMB End2End feature
     Then I populate field "Search Journeys" with excel "excel:ABN"
     Then I click on button "SEARCH[2]"
     Then I select grid "[2]" row "[1]"
+
     Then I click on button "Next"
     Then I click on element with text from excel "excel:What type of asset are you seeking to finance?"
     Then I click on element with text from excel "excel:Do you have a specific passenger or light commercial vehicle in mind?"
