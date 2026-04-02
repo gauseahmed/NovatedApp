@@ -45,7 +45,7 @@ Feature: 01 SMB Regression feature
     Then I populate field "Other Comments" with excel "excel:Other Comments"
     Then I click on button "Next"
     Then I verify text "A value is required" is present
-    Then I populate field "Quote Document" with excel "excel:Quote Document"
+    Then I populate field "Quote Document" with excel "C:\Users\HP\Downloads\DealerQuote.pdf"
     Then I click on button "Next"
     Then I verify text "Indicative Quote Summary" is present
     Then I verify text "Chattel Mortgage" is present
