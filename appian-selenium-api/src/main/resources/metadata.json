@@ -1489,7 +1489,7 @@
                 },
                 {
                     "label": "xpathAbsoluteFieldLayoutLabel",
-                    "value": "//*[(self::label or self::span) and contains(@class, 'FieldLayout---field_label') and starts-with(translate(text(),'ABCDEFGHIJKLMNOPQRSTUVWXYZÁÉÍÓÚÜÑÇ','abcdefghijklmnopqrstuvwxyzáéíóúüñç'),%1$s)]/parent::div/parent::div | (//*[(self::span or self::label)and contains(@id, '_labelText') and starts-with(translate(text(),'ABCDEFGHIJKLMNOPQRSTUVWXYZ','abcdefghijklmnopqrstuvwxyz'),%1$s)]/ancestor::div/parent::div)"
+                    "value": "//*[(self::label or self::span) and contains(@class, 'FieldLayout---field_label') and starts-with(translate(text(),'ABCDEFGHIJKLMNOPQRSTUVWXYZÁÉÍÓÚÜÑÇ','abcdefghijklmnopqrstuvwxyzáéíóúüñç'),%1$s)]/parent::div/parent::div | (//*[(self::span or self::label)and contains(@id, '_labelText') and starts-with(translate(text(),'ABCDEFGHIJKLMNOPQRSTUVWXYZ','abcdefghijklmnopqrstuvwxyz'),%1$s)]/ancestor::div/parent::div) |//p[.//strong[contains(translate(text(),'ABCDEFGHIJKLMNOPQRSTUVWXYZ','abcdefghijklmnopqrstuvwxyz'),%1$s)]]/ancestor::div[contains(@class,'FieldLayout---field_layout')]"
                 },
               {
                 "label": "xpathAbsoluteFieldLayoutLabel2",
@@ -1825,7 +1825,7 @@
                 },
                 {
                     "label": "xpathAbsoluteIconLinkFieldAltText",
-                    "value": "(//a[descendant::*[contains(@class, 'IconWidget---svg') and contains(translate(@aria-label,'ABCDEFGHIJKLMNOPQRSTUVWXYZÁÉÍÓÚÜÑÇ','abcdefghijklmnopqrstuvwxyzáéíóúüñç'),%1$s)]])"
+                    "value": "(//a[descendant::*[contains(@class, 'IconWidget---svg') and contains(translate(@aria-label,'ABCDEFGHIJKLMNOPQRSTUVWXYZÁÉÍÓÚÜÑÇ','abcdefghijklmnopqrstuvwxyzáéíóúüñç'),%1$s)]]) | (//a[descendant::*[contains(@class, 'IconWidget---svg') and contains(translate(@data-owl-icon-name,'ABCDEFGHIJKLMNOPQRSTUVWXYZÁÉÍÓÚÜÑÇ','abcdefghijklmnopqrstuvwxyzáéíóúüñç'),%1$s)]]) "
                 }
             ],
             "locales": [
@@ -1958,7 +1958,7 @@
                 },
                 {
                     "label": "xpathGeneralText",
-                    "value": "//div/descendant::*[text()[contains(translate(.,'ABCDEFGHIJKLMNOPQRSTUVWXYZÁÉÍÓÚÜÑÇ','abcdefghijklmnopqrstuvwxyzáéíóúüñç'),%1$s)]]"
+                    "value": "//div/descendant::*[text()[contains(translate(.,'ABCDEFGHIJKLMNOPQRSTUVWXYZÁÉÍÓÚÜÑÇ','abcdefghijklmnopqrstuvwxyzáéíóúüñç'),%1$s)]] | //div[@data-testid='SideBySideItem-wrapper'] [.//p[contains(     translate(normalize-space(.),'ABCDEFGHIJKLMNOPQRSTUVWXYZ','abcdefghijklmnopqrstuvwxyz'),translate(normalize-space(%1$s),'ABCDEFGHIJKLMNOPQRSTUVWXYZ','abcdefghijklmnopqrstuvwxyz'))]]"
                 }
             ]
         },
