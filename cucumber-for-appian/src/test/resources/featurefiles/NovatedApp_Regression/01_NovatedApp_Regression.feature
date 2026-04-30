@@ -1,5 +1,5 @@
-@End2End @SingleRun
-Feature: 01 NovatedApp End2End feature
+@Regression
+Feature: 01 NovatedApp Regression feature
 
   Background: Setup background and environment
     Given I setup browser
@@ -10,7 +10,7 @@ Feature: 01 NovatedApp End2End feature
     And I set take error screenshots to "screenshot.boolean"
     And I set stop on error to "screenshot.stop.on.error"
 
-  Scenario: TC001_Verify driver can submit and verify request of reimbursement claim with correct information per claim type. Claim Type - Fuel
+  Scenario: TC001_Verify driver can submit and verify request of reimbursement claim with Claim Type as Maintenance
     Given I setup environment and login with role "DriverInafune"
     Given I load test data for "TC001" from "01_NovatedApp_End2End"
     Then I click on element with text "Submit Reimbursement"
@@ -19,12 +19,14 @@ Feature: 01 NovatedApp End2End feature
     Then I get field "Reading Date" value and store in excel "excel:Reading Date"
     Then I verify field "New Odometer" is present
     Then I verify text "Claims" is present
+    Then I verify text "No Claims Added" is present
     #Need to add auto calculation
     Then I populate field "New Odometer" with excel "excel:New Odometer"
     Then I click on icon link "plus-circle"
     Then I populate field "Claim Type" with excel "excel:Claim Type"
     Then I wait for "1" seconds
     Then I populate field "Amount" with excel "excel:Amount ($)"
+    Then I populate field "Maintenance Activity Completed" with excel "excel:Maintenance Activity Completed"
     Then I populate field "File Upload[20]" with excel "excel:Proof of Payment"
     Then I click on button "Save"
     Then I wait for "1" seconds
