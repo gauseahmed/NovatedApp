@@ -11,7 +11,7 @@ Feature: 03 NovatedApp End2End feature
     And I set stop on error to "screenshot.stop.on.error"
 
   Scenario: TC001_Verify driver can submit and verify request of reimbursement claim with correct information per claim type. Claim Type - Maintenance
-    Given I setup environment and login with role "Driverjosh"
+    Given I setup environment and login with role "Drivervisionpro"
     Given I load test data for "TC001" from "03_NovatedApp_End2End"
     Then I click on element with text "Submit Reimbursement"
     Then I get field "Last Odometer Reading" value and store in excel "excel:Last Odometer Reading"
@@ -46,7 +46,7 @@ Feature: 03 NovatedApp End2End feature
     Then I wait for "2" seconds
     #Need to verify req no in real time
     ## Update - below vehicle name and number
-    Then I verify text "FORD RANGER - EXB72A" is present
+    Then I verify text "VOLVO C40 - CPK418" is present
     Then I verify button "Cancel Claim" is enabled
     Then I verify field "Request Type" contains excel "excel:Request Type"
     Then I verify field "Claim Type" contains excel "excel:Claim Type"
