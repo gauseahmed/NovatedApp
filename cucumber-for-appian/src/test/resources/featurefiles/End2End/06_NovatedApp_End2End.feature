@@ -1,5 +1,5 @@
-@End2End @SingleRun
-Feature: 04 NovatedApp End2End feature
+@End2End
+Feature: 06 NovatedApp End2End feature
 
   Background: Setup background and environment
     Given I setup browser
@@ -12,7 +12,7 @@ Feature: 04 NovatedApp End2End feature
 
   Scenario: TC001_Verify driver can raise request to Add New Fuel Card
     Given I setup environment and login with role "Drivervisionpro"
-    Given I load test data for "TC001" from "04_NovatedApp_End2End"
+    Given I load test data for "TC001" from "06_NovatedApp_End2End"
     Then I click on element with text "Fuel Cards"
     Then I wait for "2" seconds
     Then I click on element with text "Add New Fuel Card"
