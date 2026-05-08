@@ -1,7 +1,7 @@
 package com.appiancorp.ps.cucumber.utils;
 import org.apache.poi.ss.usermodel.*;
 import java.io.*;
-
+import org.apache.poi.ss.usermodel.FormulaEvaluator;
 public class ExcelWriter {
 
         /**
@@ -69,6 +69,16 @@ public class ExcelWriter {
 
                 try (FileOutputStream fos =
                              new FileOutputStream(filePath)) {
+
+                    // Recalculate all formulas
+                    FormulaEvaluator evaluator =
+                            wb.getCreationHelper().createFormulaEvaluator();
+
+                    evaluator.evaluateAll();
+
+                    // Force Excel recalculation on open
+                    wb.setForceFormulaRecalculation(true);
+
                     wb.write(fos);
                 }
 

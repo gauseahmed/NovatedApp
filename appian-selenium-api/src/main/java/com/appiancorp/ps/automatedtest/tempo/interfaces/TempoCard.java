@@ -128,4 +128,32 @@ public class TempoCard extends TempoContainer implements WaitFor, WaitForReturn,
     public boolean waitForReturn(boolean waitForPresent, String... params) {
         return waitForReturn(waitForPresent, settings.getTimeoutSeconds(), params);
     }
+    public String[] getCardHeaderAndVehicle(String... params) {
+
+        WebElement card = settings.getDriver().findElement(
+                By.xpath("(//div[contains(@class,'CardLayout---card_item')][.//em])[1]")
+        );
+
+        String header = card.findElements(
+                By.xpath(".//h3")
+        ).get(0).getText().trim();
+
+        String vehicle = card.findElement(
+                By.xpath(".//em")
+        ).getText().trim();
+
+        return new String[]{header, vehicle};
+    }
+    public String getLeaseEndDate() {
+
+        String xpath =
+                "//em[contains(normalize-space(),'Lease End Date')]" +
+                        "/ancestor::div[contains(@class,'FieldLayout---field_layout')]" +
+                        "/preceding-sibling::div[contains(@class,'FieldLayout---field_layout')][1]" +
+                        "//strong";
+
+        WebElement element = settings.getDriver().findElement(By.xpath(xpath));
+
+        return element.getText().trim();
+    }
 }

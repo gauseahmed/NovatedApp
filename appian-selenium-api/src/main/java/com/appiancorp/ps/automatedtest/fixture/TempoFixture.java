@@ -2792,4 +2792,11 @@ public class TempoFixture extends BaseFixture {
         return TempoAssertion.getInstance(settings)
                 .waitForReturn(false, settings.getNotPresentTimeoutSeconds(), textOnInterface);
     }
+       public String[] getCardHeaderAndVehicle(String cardName) {
+        return TempoCard.getInstance(settings)
+                .getCardHeaderAndVehicle(cardName);
+    }
+    public String getLeaseEndDate() {
+        return TempoCard.getInstance(settings).getLeaseEndDate();
+    }
 }
