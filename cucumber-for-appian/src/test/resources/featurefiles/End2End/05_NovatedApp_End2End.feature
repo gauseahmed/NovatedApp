@@ -10,9 +10,21 @@ Feature: 05 NovatedApp End2End feature
     And I set take error screenshots to "screenshot.boolean"
     And I set stop on error to "screenshot.stop.on.error"
 
-  Scenario: TC001_Verify driver can raise request to Add New Fuel Card
+  Scenario: TC001_Verify driver can raise request to Cancel Fuel Card
     Given I setup environment and login with role "Drivervisionpro"
     Given I load test data for "TC001" from "05_NovatedApp_End2End"
+    #Storing Driver profile information as first step to validate in future tasks
+    Then I click on element with text "Profile"
+    Then I get field "Salutation" value and store in excel "excel:Driver Salutation"
+    Then I get field "Legal First Name" value and store in excel "excel:Driver First Name"
+    Then I get field "Legal Last Name" value and store in excel "excel:Driver Last Name"
+    Then I get field "Date of Birth" value and store in excel "excel:Driver Date of Birth"
+    Then I get field "Mobile Phone" value and store in excel "excel:Driver Mobile Phone"
+    Then I get field "Email" value and store in excel "excel:Driver Email"
+    Then I get field "Your Residential Address" value and store in excel "excel:Driver Your Residential Address"
+    Then I get field "Employer Name" value and store in excel "excel:Driver Employer Name"
+    Then I click on element with text "Home"
+    Then I wait for "1" seconds
     Then I click on element with text "Fuel Cards"
     Then I wait for "2" seconds
     Then I click on element with text "Add New Fuel Card"
@@ -34,7 +46,7 @@ Feature: 05 NovatedApp End2End feature
     Then I wait for "2" seconds
     Then I click on grid "[1]" column "[1]" row "[1]"
     Then I wait for "2" seconds
-    Then I verify text "VOLVO C40 - CPK418" is present
+    Then I get field "Vehicle" value and store in excel "excel:Vehicle"
     Then I verify field "Request Type" contains excel "excel:Request Type"
     Then I get field "Request Subtype" value and store in excel "excel:Request Subtype"
     Then I verify field "Fuel Card Provider" contains excel "excel:Fuel Provider"
@@ -55,9 +67,9 @@ Feature: 05 NovatedApp End2End feature
     Then I verify text "Request Details" is present
     Then I verify field "Status" contains "New"
     Then I verify field "End Of Lease Date" contains "25/09/2026"
-    Then I verify field "Submitted By" contains "David Stewart"
+    Then I verify field "Submitted By" contains excel "excel:Driver Name"
     #Then I verify field "Submitted On" contains excel "excel:Reading Date"
-    Then I verify field "Updated By" contains "David Stewart"
+    Then I verify field "Updated By" contains excel "excel:Driver Name"
     #Then I verify field "Updated On" contains excel "excel:Reading Date"
     Then I verify field "Request Type" contains excel "excel:Request Type"
     Then I verify field "Claim Type" contains excel "excel:Request Subtype"
@@ -66,12 +78,12 @@ Feature: 05 NovatedApp End2End feature
     Then I verify field "Assigned To" contains "Unassigned"
     Then I wait for "5" seconds
     Then I verify text "Driver Details" is present
-    Then I verify field "Salutation" contains "Mr"
-    Then I verify field "First Name" contains "David"
-    Then I verify field "Last Name" contains "Stewart"
-    Then I verify field "Primary Email" contains "visionpro101@gmail.com.test"
-    Then I verify field "Mobile" contains "0499999999"
-    Then I verify field "Employer" contains "Test Employer"
+    Then I verify field "Salutation" contains excel "excel:Driver Salutation"
+    Then I verify field "First Name" contains excel "excel:Driver First Name"
+    Then I verify field "Last Name" contains excel "excel:Driver Last Name"
+    Then I verify field "Primary Email" contains excel "excel:Driver Email"
+    Then I verify field "Mobile" contains excel "excel:Driver Mobile Phone"
+    Then I verify field "Employer" contains excel "excel:Driver Employer Name"
     Then I verify field "State" contains "NSW"
     Then I verify text "Vehicle Details" is present
     Then I verify field "Vehicle Description" contains "VOLVO C40"

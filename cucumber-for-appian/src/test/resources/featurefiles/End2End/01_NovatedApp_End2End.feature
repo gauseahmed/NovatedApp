@@ -10,9 +10,29 @@ Feature: 01 NovatedApp End2End feature
     And I set take error screenshots to "screenshot.boolean"
     And I set stop on error to "screenshot.stop.on.error"
 
-  Scenario: TC001_Verify driver can submit and verify request of reimbursement claim with correct information per claim type. Claim Type - Fuel
+  Scenario: TC001_:Get logged in Driver information to validate in future
     Given I setup environment and login with role "DriverInafune"
     Given I load test data for "TC001" from "01_NovatedApp_End2End"
+    Then I get first card values and store in excel "excel:Vehicle number" and "excel:Vehicle name"
+    Then I get lease end date and store in excel "excel:Lease End Date"
+     #Storing Driver profile information as first step to validate in future tasks
+    Then I click on element with text "Profile"
+    Then I get field "Salutation" value and store in excel "excel:Driver Salutation"
+    Then I get field "Legal First Name" value and store in excel "excel:Driver First Name"
+    Then I get field "Legal Last Name" value and store in excel "excel:Driver Last Name"
+#    Then I get field "Date of Birth" value and store in excel "excel:Driver Date of Birth"
+#    Then I get field "Mobile Phone" value and store in excel "excel:Driver Mobile Phone"
+#    Then I get field "Email" value and store in excel "excel:Driver Email"
+#    Then I get field "Your Residential Address" value and store in excel "excel:Driver Your Residential Address"
+#    Then I get field "Employer Name" value and store in excel "excel:Driver Employer Name"
+    Then I click on element with text "Home"
+    Then I click on element with text "Submit Reimbursement"
+    Then I get field "Last Odometer Reading" value and store in excel "excel:Last Odometer Reading"
+
+  Scenario: TC002_Verify driver can submit and verify request of reimbursement claim with correct information per claim type. Claim Type - Fuel
+    Given I setup environment and login with role "DriverInafune"
+    Given I load test data for "TC001" from "01_NovatedApp_End2End"
+    Then I wait for "1" seconds
     Then I click on element with text "Submit Reimbursement"
     Then I get field "Last Odometer Reading" value and store in excel "excel:Last Odometer Reading"
     Then I get field "Last Reading Date" value and store in excel "excel:Last Reading Date"
@@ -44,7 +64,7 @@ Feature: 01 NovatedApp End2End feature
     Then I wait for "2" seconds
     #Need to verify req no in real time
     ## Update - below vehicle name and number
-    Then I verify text "MAZDA CX-5 - FTV21M" is present
+    Then I get field "Vehicle" value and store in excel "excel:Vehicle"
     Then I verify button "Cancel Claim" is enabled
     Then I verify field "Request Type" contains excel "excel:Request Type"
     Then I verify field "Claim Type" contains excel "excel:Claim Type"
@@ -54,9 +74,9 @@ Feature: 01 NovatedApp End2End feature
     Then I verify grid "[1]" column "File Name" row "[1]" contains "Invoice.pdf"
     Then I verify grid "[1]" column "Type" row "[1]" contains "Proof of Payment"
      ## Update - below Submitted By and Updated By based on logged in driver user
-    Then I verify field "Submitted By" contains "Toshihiko Inafune"
+    Then I verify field "Submitted By" contains excel "excel:Driver Name"
     Then I verify field "Request Submission Date" contains excel "excel:Reading Date"
-    Then I verify field "Updated By" contains "Toshihiko Inafune"
+    Then I verify field "Updated By" contains excel "excel:Driver Name"
     Then I verify field "Last Update Date" contains excel "excel:Reading Date"
     Then I wait for "2" seconds
 
@@ -73,9 +93,9 @@ Feature: 01 NovatedApp End2End feature
     Then I verify text "Request Details" is present
     Then I verify field "Status" contains "New"
     Then I verify field "End Of Lease Date" contains "30/08/2029"
-    Then I verify field "Submitted By" contains "Toshihiko Inafune"
+    Then I verify field "Submitted By" contains excel "excel:Driver Name"
     Then I verify field "Submitted On" contains excel "excel:Reading Date"
-    Then I verify field "Updated By" contains "Toshihiko Inafune"
+    Then I verify field "Updated By" contains excel "excel:Driver Name"
     Then I verify field "Updated On" contains excel "excel:Reading Date"
     Then I verify field "Request Type" contains excel "excel:Request Type"
     Then I verify field "Claim Type" contains excel "excel:Claim Type"
@@ -84,12 +104,12 @@ Feature: 01 NovatedApp End2End feature
     Then I verify field "Assigned To" contains "Unassigned"
     Then I wait for "5" seconds
     Then I verify text "Driver Details" is present
-    Then I verify field "Salutation" contains "Mr"
-    Then I verify field "First Name" contains "Toshihiko"
-    Then I verify field "Last Name" contains "Inafune"
-    Then I verify field "Primary Email" contains "inafune@jfcaust.com.au.test"
-    Then I verify field "Mobile" contains "0469750861"
-    Then I verify field "Employer" contains "Test Employer"
+    Then I verify field "Salutation" contains excel "excel:Driver Salutation"
+    Then I verify field "First Name" contains excel "excel:Driver First Name"
+    Then I verify field "Last Name" contains excel "excel:Driver Last Name"
+    Then I verify field "Primary Email" contains excel "excel:Driver Email"
+    Then I verify field "Mobile" contains excel "excel:Driver Mobile Phone"
+    Then I verify field "Employer" contains excel "excel:Driver Employer Name"
     Then I verify field "State" contains "NSW"
     Then I verify text "Vehicle Details" is present
     Then I verify field "Vehicle Description" contains "MAZDA CX-5"
