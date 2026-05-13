@@ -1,5 +1,5 @@
-@End2End @SingleRun
-Feature: 04 NovatedApp End2End feature
+@End2End
+Feature: 08 NovatedApp End2End feature
 
   Background: Setup background and environment
     Given I setup browser
@@ -10,11 +10,13 @@ Feature: 04 NovatedApp End2End feature
     And I set take error screenshots to "screenshot.boolean"
     And I set stop on error to "screenshot.stop.on.error"
 
-  Scenario: TC001_Verify driver can raise request to Add New Fuel Card
+  Scenario: TC001_Validate that a Driver can submit an End of Lease decision to Terminate Lease and choose to Payout Residual Value
     Given I setup environment and login with role "Drivervisionpro"
-    Given I load test data for "TC001" from "04_NovatedApp_End2End"
+    Given I load test data for "TC001" from "08_NovatedApp_End2End"
     Then I get first card values and store in excel "excel:Vehicle number" and "excel:Vehicle name"
     Then I get lease end date and store in excel "excel:Lease End Date"
+    Then I click on element with text "Submit Reimbursement"
+    Then I get field "Last Odometer Reading" value and store in excel "excel:Last Odometer Reading"
     #Storing Driver profile information as first step to validate in future tasks
     Then I click on element with text "Profile"
     Then I get field "Salutation" value and store in excel "excel:Driver Salutation"
@@ -27,43 +29,40 @@ Feature: 04 NovatedApp End2End feature
     Then I get field "Employer Name" value and store in excel "excel:Driver Employer Name"
     Then I click on element with text "Home"
     Then I wait for "1" seconds
-    Then I click on element with text "Fuel Cards"
+    Then I click on button "End of Lease Decision"
+    Then I verify text "End of Lease Details" is present
     Then I wait for "2" seconds
-    Then I click on element with text "Add New Fuel Card"
-    #Commented below as we have only 1 option which is already selected
-    #Then I populate field "Fuel Provider" with excel "Fuel Provider"
-    Then I verify text "8 Alfred St, Lilyfield NSW 2040" is present
-    Then I get field "Delivery Address" value and store in excel "excel:Delivery Address"
-    Then I verify button "Submit Request" is enabled
-    Then I verify button "Cancel" is enabled
-    Then I click on button "Submit Request"
-    Then I verify text "Are you sure you wish to order the selected fuel card?" is present
-    Then I click on button "yes"
-    Then I verify text "Your request has been sent to the ORIX team." is present
-    Then I click on button "DONE"
-    Then I wait for "1" seconds
-    Then I get first card values and store in excel "excel:Vehicle number" and "excel:Vehicle name"
-    Then I click on element with text "My Requests"
-    Then I wait for "1" seconds
-    Then I get grid "[1]" column "[1]" row "[1]" value and store in excel "excel:Reference Number"
-    Then I wait for "2" seconds
-    Then I click on grid "[1]" column "[1]" row "[1]"
-    Then I wait for "2" seconds
-    Then I get field "Vehicle" value and store in excel "excel:Vehicle"
-    Then I verify field "Request Type" contains excel "excel:Request Type"
-    Then I get field "Request Subtype" value and store in excel "excel:Request Subtype"
-    Then I verify field "Fuel Card Provider" contains excel "excel:Fuel Provider"
-    Then I get field "Request Submission Date" value and store in excel "excel:Request Submission Date"
-    Then I get field "Last Update Date" value and store in excel "excel:Last Update Date"
+    Then I verify field "Last Odometer Reading" contains excel "excel:Last Odometer Reading"
+    Then I get field "Last Odometer Read Date" value and store in excel "excel:Last Reading Date"
+    Then I get field "Days Remaining until EOL" value and store in excel "excel:Days Remaining until EOL"
+    Then I click on button "Next"
+    Then I verify text "EOL Choices" is present
+    Then I click on element with text "Finalise your lease with ORIX by choosing from one of our termination options."
+    Then I click on button "Next"
+    Then I verify text "Review" is present
+    Then I verify field "End of Lease Choice" contains "Terminate Lease"
+    Then I verify field "EOL Date" contains excel "excel:Lease End Date"
+    Then I verify field "Days Remaining until EOL" contains excel "excel:Days Remaining until EOL"
+    Then I verify field "Last Odometer Read Date" contains excel "excel:Last Reading Date"
+    Then I verify field "Last Odometer Reading" contains excel "excel:Last Odometer Reading"
+    Then I click on button "Proceed"
+    Then I click on element with text "Payout Residual Value"
+    Then I click on button "Next"
+    Then I click on element with text "Cash"
+    Then I click on button "Next"
+    Then I verify text "Payout by Cash" is present
+    Then I verify text "ORIX Bank Details" is present
+    Then I verify text "Westpac Banking Corporation" is present
+    Then I verify text "Payment Due Date" is present
+    Then I verify field "Terminating Lease Method chosen" contains "Payout Residual Value"
+    Then I verify field "Payout Method chosen" contains "Cash"
+    Then I click on button "Confirm Termination"
     Then I wait for "2" seconds
 
-
-  Scenario: TC002_Verify Novated lease specialist can view and complete decision on submitted Add New Fuel Card
+  Scenario: TC002_Verify Novated Lease  Specialist is able to complete end-of-lease termination tasks and manage wash-up activities
     Given I setup environment and login with role "AutoLease"
-    Given I load test data for "TC002" from "04_NovatedApp_End2End"
+    Given I load test data for "TC002" from "08_NovatedApp_End2End"
     Then I click on site page "Requests"
-    Then I populate field "Search Requests" with excel "excel:Reference Number"
-    Then I click on button "Search"
     Then I wait for "3" seconds
     Then I click on grid "[1]" column "[1]" row "[1]"
     Then I wait for "2" seconds
@@ -71,13 +70,6 @@ Feature: 04 NovatedApp End2End feature
     Then I verify text "Request Details" is present
     Then I verify field "Status" contains "New"
     Then I verify field "End Of Lease Date" contains "25/09/2026"
-    Then I verify field "Submitted By" contains excel "excel:Driver Name"
-    Then I verify field "Submitted On" contains excel "excel:Reading Date"
-    Then I verify field "Updated By" contains excel "excel:Driver Name"
-    Then I verify field "Updated On" contains excel "excel:Reading Date"
-    Then I verify field "Request Type" contains excel "excel:Request Type"
-    Then I verify field "Claim Type" contains excel "excel:Request Subtype"
-    Then I verify field "Odometer Reading" contains excel "excel:Odometer"
     Then I verify field "Assigned To" contains "Unassigned"
     Then I wait for "5" seconds
     Then I verify text "Driver Details" is present
@@ -86,7 +78,7 @@ Feature: 04 NovatedApp End2End feature
     Then I verify field "Last Name" contains excel "excel:Driver Last Name"
     Then I verify field "Primary Email" contains excel "excel:Driver Email"
     Then I verify field "Mobile" contains excel "excel:Driver Mobile Phone"
-    Then I verify field "Employer" contains excel "excel:Driver Employer Name"
+    Then I verify field "Employer" contains "Test Employer"
     Then I verify field "State" contains "NSW"
     Then I verify text "Vehicle Details" is present
     Then I verify field "Vehicle Description" contains excel "excel:Vehicle name"
@@ -94,16 +86,26 @@ Feature: 04 NovatedApp End2End feature
 #    Then I verify field "Vehicle Description" contains "VOLVO C40"
 #    Then I verify field "Registration Number" contains "CPK418"
     Then I verify field "Registration State" contains "VIC"
-    Then I verify text "Files Uploaded" is present
     Then I verify text "Event History" is present
     Then I click on button "Take Ownership"
-    Then I wait for "2" seconds
+    Then I wait for "1" seconds
     Then I verify text "has been successfully assigned to you" is present
     Then I click on button "DONE"
-    Then I wait for "5" seconds
+    Then I wait for "2" seconds
     Then I verify field "Status" contains "In Progress"
     Then I verify field "Updated By" contains "Auto Lease"
     Then I verify field "Assigned To" contains "Auto Lease"
     Then I verify text "Assigned Request" is present
     Then I click on button "Action Checklist"
+    Then I click on checkbox option "Post Washup Document"
+    Then I click on checkbox option "Finalise Reimbursements  "
+    Then I click on checkbox option "EV Declaration"
+    Then I click on checkbox option "Process Outstanding Service Invoices"
     Then I click on button "Submit"
+
+  Scenario: TC003_Validate that a Driver can submit an End of Lease decision to Terminate Lease and choose to Payout Residual Value
+    Given I setup environment and login with role "Drivervisionpro"
+    Given I load test data for "TC001" from "08_NovatedApp_End2End"
+    Then I verify text "Intend to Terminate on" is present
+    Then I verify field "End of Lease Decisions" contains excel "excel:Last Reading Date"
+    

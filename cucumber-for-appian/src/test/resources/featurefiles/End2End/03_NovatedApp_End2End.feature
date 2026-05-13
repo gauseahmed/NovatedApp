@@ -13,6 +13,10 @@ Feature: 03 NovatedApp End2End feature
   Scenario: TC001_Verify driver can submit and verify request of reimbursement claim with correct information per claim type. Claim Type - Maintenance
     Given I setup environment and login with role "Drivervisionpro"
     Given I load test data for "TC001" from "03_NovatedApp_End2End"
+    Then I get first card values and store in excel "excel:Vehicle number" and "excel:Vehicle name"
+    Then I get lease end date and store in excel "excel:Lease End Date"
+    Then I click on element with text "Submit Reimbursement"
+    Then I get field "Last Odometer Reading" value and store in excel "excel:Last Odometer Reading"
     #Storing Driver profile information as first step to validate in future tasks
     Then I click on element with text "Profile"
     Then I get field "Salutation" value and store in excel "excel:Driver Salutation"
@@ -26,7 +30,7 @@ Feature: 03 NovatedApp End2End feature
     Then I click on element with text "Home"
     Then I wait for "1" seconds
     Then I click on element with text "Submit Reimbursement"
-    Then I get field "Last Odometer Reading" value and store in excel "excel:Last Odometer Reading"
+    Then I verify field "Last Odometer Reading" contains excel "excel:Last Odometer Reading"
     Then I get field "Last Reading Date" value and store in excel "excel:Last Reading Date"
     Then I get field "Reading Date" value and store in excel "excel:Reading Date"
     Then I verify field "New Odometer" is present
@@ -57,8 +61,7 @@ Feature: 03 NovatedApp End2End feature
     Then I click on grid "[1]" column "[1]" row "[1]"
     Then I wait for "2" seconds
     #Need to verify req no in real time
-    ## Update - below vehicle name and number
-    Then I get field "Vehicle" value and store in excel "excel:Vehicle"
+    Then I verify field "Vehicle" contains excel "excel:Vehicle"
     Then I verify button "Cancel Claim" is enabled
     Then I verify field "Request Type" contains excel "excel:Request Type"
     Then I verify field "Claim Type" contains excel "excel:Claim Type"
@@ -72,7 +75,7 @@ Feature: 03 NovatedApp End2End feature
      ## Update - below Submitted By and Updated By based on logged in driver user
     Then I verify field "Submitted By" contains excel "excel:Driver Name"
     Then I verify field "Request Submission Date" contains excel "excel:Reading Date"
-    Then I verify field "Updated By" contains "Joshua Milne"
+    Then I verify field "Updated By" contains excel "excel:Driver Name"
     Then I verify field "Last Update Date" contains excel "excel:Reading Date"
     Then I wait for "2" seconds
 
@@ -88,7 +91,8 @@ Feature: 03 NovatedApp End2End feature
     #Need to verify req no in real time
     Then I verify text "Request Details" is present
     Then I verify field "Status" contains "New"
-    Then I verify field "End Of Lease Date" contains "17/03/2026"
+        #Then I verify field "End Of Lease Date" contains excel "excel:Lease End Date"  //due to date format issue
+    Then I verify field "End Of Lease Date" contains "25/09/2026"
     Then I verify field "Submitted By" contains excel "excel:Driver Name"
     Then I verify field "Submitted On" contains excel "excel:Reading Date"
     Then I verify field "Updated By" contains excel "excel:Driver Name"
@@ -105,11 +109,13 @@ Feature: 03 NovatedApp End2End feature
     Then I verify field "Last Name" contains excel "excel:Driver Last Name"
     Then I verify field "Primary Email" contains excel "excel:Driver Email"
     Then I verify field "Mobile" contains excel "excel:Driver Mobile Phone"
-    Then I verify field "Employer" contains excel "excel:Driver Employer Name"
+    Then I verify field "Employer" contains "Test Employer"
     Then I verify field "State" contains "NSW"
     Then I verify text "Vehicle Details" is present
-    Then I verify field "Vehicle Description" contains "FORD RANGER"
-    Then I verify field "Registration Number" contains "EXB72A"
+    Then I verify field "Vehicle Description" contains excel "excel:Vehicle name"
+    Then I verify field "Registration Number" contains excel "excel:Vehicle number"
+#    Then I verify field "Vehicle Description" contains "FORD RANGER"
+#    Then I verify field "Registration Number" contains "EXB72A"
     Then I verify field "Registration State" contains "NSW"
     Then I verify text "Files Uploaded" is present
     Then I verify grid "[1]" column "File Name" row "[1]" contains "Invoice.pdf"
