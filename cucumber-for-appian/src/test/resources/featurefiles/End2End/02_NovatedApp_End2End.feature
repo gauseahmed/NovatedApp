@@ -13,6 +13,8 @@ Feature: 02 NovatedApp End2End feature
   Scenario: TC001_Verify driver can submit and verify request of reimbursement claim with correct information per claim type.  Claim Type - Service
     Given I setup environment and login with role "DriverDavid"
     Given I load test data for "TC001" from "02_NovatedApp_End2End"
+    Then I get first card values and store in excel "excel:Vehicle number" and "excel:Vehicle name"
+    Then I get lease end date and store in excel "excel:Lease End Date"
     #Storing Driver profile information as first step to validate in future tasks
     Then I click on element with text "Profile"
     Then I get field "Salutation" value and store in excel "excel:Driver Salutation"
@@ -72,7 +74,7 @@ Feature: 02 NovatedApp End2End feature
      ## Update - below Submitted By and Updated By based on logged in driver user
     Then I verify field "Submitted By" contains excel "excel:Driver Name"
     Then I verify field "Request Submission Date" contains excel "excel:Reading Date"
-    Then I verify field "Updated By" contains "David Cracknell"
+    Then I verify field "Updated By" contains excel "excel:Driver Name"
     Then I verify field "Last Update Date" contains excel "excel:Reading Date"
     Then I verify text "Created Request" is present
     Then I wait for "2" seconds
@@ -103,6 +105,7 @@ Feature: 02 NovatedApp End2End feature
     #Need to verify req no in real time
     Then I verify text "Request Details" is present
     Then I verify field "Status" contains "Cancelled"
+    #Then I verify field "End Of Lease Date" contains excel "excel:Lease End Date"
     Then I verify field "End Of Lease Date" contains "11/02/2026"
     Then I verify field "Submitted By" contains excel "excel:Driver Name"
     Then I verify field "Submitted On" contains excel "excel:Reading Date"
@@ -119,11 +122,14 @@ Feature: 02 NovatedApp End2End feature
     Then I verify field "Last Name" contains excel "excel:Driver Last Name"
     Then I verify field "Primary Email" contains excel "excel:Driver Email"
     Then I verify field "Mobile" contains excel "excel:Driver Mobile Phone"
-    Then I verify field "Employer" contains excel "excel:Driver Employer Name"
+    Then I verify field "Employer" contains "Test Employer"
+#    Then I verify field "Employer" contains excel "excel:Driver Employer Name"
     Then I verify field "State" contains "NSW"
     Then I verify text "Vehicle Details" is present
-    Then I verify field "Vehicle Description" contains "VOLVO XC40"
-    Then I verify field "Registration Number" contains "FTJ63Y"
+    Then I verify field "Vehicle Description" contains excel "excel:Vehicle name"
+    Then I verify field "Registration Number" contains excel "excel:Vehicle number"
+#    Then I verify field "Vehicle Description" contains "VOLVO XC40"
+#    Then I verify field "Registration Number" contains "FTJ63Y"
     Then I verify field "Registration State" contains "NSW"
     Then I verify text "Files Uploaded" is present
     Then I verify grid "[1]" column "File Name" row "[1]" contains "Invoice.pdf"

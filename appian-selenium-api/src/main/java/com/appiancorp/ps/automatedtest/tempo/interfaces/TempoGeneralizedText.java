@@ -22,7 +22,7 @@ public class TempoGeneralizedText extends TempoContainer implements WaitFor, Wai
 
     private static final Logger LOG = LogManager.getLogger(TempoGeneralizedText.class);
     private static final String XPATH_GENERAL_TEXT = Settings.getByConstant("xpathGeneralText");
-    private static final String XPATH_GENERAL_TEXT_INDEX = "(" + Settings.getByConstant("xpathGeneralText") + ")[%2$d]";
+        private static final String XPATH_GENERAL_TEXT_INDEX = "(" + Settings.getByConstant("xpathGeneralText") + ")[%2$d]";
 
     public static TempoGeneralizedText getInstance(Settings settings) {
         return new TempoGeneralizedText(settings);
