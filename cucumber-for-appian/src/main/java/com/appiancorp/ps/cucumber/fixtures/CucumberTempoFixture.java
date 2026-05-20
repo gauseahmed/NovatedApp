@@ -9,6 +9,7 @@ import io.cucumber.java.en.Given;
 import io.cucumber.java.en.When;
 
 import java.util.List;
+import java.util.Map;
 
 public class CucumberTempoFixture {
 
@@ -687,19 +688,30 @@ public class CucumberTempoFixture {
         // Capture value from UI
         String capturedValue = fixture.getFieldValue(fieldName);
 
-        // Clean column name (remove excel: if present)
+        // 🔥 Remove label prefix dynamically
+        if (capturedValue != null &&
+                capturedValue.toLowerCase().startsWith(fieldName.toLowerCase())) {
+
+            capturedValue = capturedValue
+                    .replaceFirst("(?i)" +
+                            java.util.regex.Pattern.quote(fieldName) +
+                            "\\s*:\\s*", "")
+                    .trim();
+        }
+
+        // Clean column name
         String columnName = excelRef.startsWith("excel:")
                 ? excelRef.replace("excel:", "").trim()
                 : excelRef;
 
-        // Store for current execution (TC001 → TC002, same run)
+        // Store runtime
         TestDataManager.put(columnName, capturedValue);
 
-        // Persist into Excel for future scenarios / reruns
+        // Persist to Excel
         ExcelWriter.write(
-                TestDataManager.getCurrentExcelFile(),   // already without .xlsx
-                TestDataManager.getCurrentScenarioId(),  // scenario row (TC001)
-                columnName,                              // clean column header
+                TestDataManager.getCurrentExcelFile(),
+                TestDataManager.getCurrentScenarioId(),
+                columnName,
                 capturedValue
         );
 
@@ -708,7 +720,6 @@ public class CucumberTempoFixture {
                         "] into Excel column [" + columnName + "]"
         );
     }
-
 
 
     @Given("^I get regex \"([^\"]*)\" group \"([^\"]*)\" from field \"([^\"]*)\" value$")
@@ -1488,5 +1499,61 @@ public class CucumberTempoFixture {
 
     public String[] parseListToArray(List<String> table) {
         return table.toArray(new String[table.size()]);
+    }
+    @Given("^I get first card values and store in excel \"([^\"]*)\" and \"([^\"]*)\"$")
+    public void getFirstCardValuesAndStoreInExcel(String excelRef1,
+                                                  String excelRef2) {
+
+        String[] values = fixture.getCardHeaderAndVehicle("");
+
+        String headerValue = values[0];
+        String vehicleValue = values[1];
+
+        String column1 = excelRef1.replace("excel:", "").trim();
+        String column2 = excelRef2.replace("excel:", "").trim();
+
+        TestDataManager.put(column1, headerValue);
+        TestDataManager.put(column2, vehicleValue);
+
+        ExcelWriter.write(
+                TestDataManager.getCurrentExcelFile(),
+                TestDataManager.getCurrentScenarioId(),
+                column1,
+                headerValue
+        );
+
+        ExcelWriter.write(
+                TestDataManager.getCurrentExcelFile(),
+                TestDataManager.getCurrentScenarioId(),
+                column2,
+                vehicleValue
+        );
+    }
+    @Given("^I get lease end date and store in excel \"([^\"]*)\"$")
+    public void getLeaseEndDateAndStoreInExcel(String excelRef) {
+
+        // Capture value from UI
+        String leaseDate = fixture.getLeaseEndDate();
+
+        // Clean column name
+        String columnName = excelRef.startsWith("excel:")
+                ? excelRef.replace("excel:", "").trim()
+                : excelRef;
+
+        // Store runtime data
+        TestDataManager.put(columnName, leaseDate);
+
+        // Store in Excel
+        ExcelWriter.write(
+                TestDataManager.getCurrentExcelFile(),
+                TestDataManager.getCurrentScenarioId(),
+                columnName,
+                leaseDate
+        );
+
+        System.out.println(
+                "Stored value [" + leaseDate +
+                        "] into Excel column [" + columnName + "]"
+        );
     }
 }

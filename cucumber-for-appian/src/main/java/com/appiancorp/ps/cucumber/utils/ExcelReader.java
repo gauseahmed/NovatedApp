@@ -12,7 +12,11 @@ public class ExcelReader {
             String scenarioId) {
 
         try (FileInputStream fis = new FileInputStream(filePath);
-             Workbook wb = WorkbookFactory.create(fis)) {
+             Workbook wb = WorkbookFactory.create(fis))
+        {
+
+            // FormulaEvaluator added - 10 April 2026
+            FormulaEvaluator evaluator = wb.getCreationHelper().createFormulaEvaluator();
 
             Sheet sheet = wb.getSheetAt(0); // first sheet (no hardcoding name)
 
@@ -23,7 +27,7 @@ public class ExcelReader {
 
             Map<Integer, String> headers = new HashMap<>();
             for (Cell cell : headerRow) {
-                headers.put(cell.getColumnIndex(), getCellValue(cell));
+                headers.put(cell.getColumnIndex(), getCellValue(cell, evaluator));
             }
 
             Map<String, Map<String, String>> allScenarioData = new HashMap<>();
@@ -33,14 +37,15 @@ public class ExcelReader {
                 Row row = sheet.getRow(i);
                 if (row == null) continue;
 
-                String rowScenarioId = getCellValue(row.getCell(0));
+                // pass evaluator - 10 April 2026
+                String rowScenarioId = getCellValue(row.getCell(0), evaluator);
                 if (rowScenarioId.isEmpty()) continue;
 
                 Map<String, String> rowData = new HashMap<>();
 
                 for (Map.Entry<Integer, String> h : headers.entrySet()) {
                     Cell cell = row.getCell(h.getKey());
-                    rowData.put(h.getValue(), getCellValue(cell));
+                    rowData.put(h.getValue(), getCellValue(cell, evaluator));
                 }
 
                 allScenarioData.put(rowScenarioId, rowData);
@@ -85,7 +90,7 @@ public class ExcelReader {
         return value;
     }
 
-    private static String getCellValue(Cell cell) {
+    private static String getCellValue(Cell cell, FormulaEvaluator evaluator) {
 
         if (cell == null) return "";
 
@@ -99,7 +104,22 @@ public class ExcelReader {
             case BOOLEAN:
                 return String.valueOf(cell.getBooleanCellValue());
             case FORMULA:
-                return cell.getCellFormula();
+                CellValue evaluatedValue = evaluator.evaluate(cell);
+
+                switch (evaluatedValue.getCellType()) {
+
+                    case STRING:
+                        return evaluatedValue.getStringValue().trim();
+
+                    case NUMERIC:
+                        return String.valueOf((long) evaluatedValue.getNumberValue());
+
+                    case BOOLEAN:
+                        return String.valueOf(evaluatedValue.getBooleanValue());
+
+                    default:
+                        return "";
+                }
             default:
                 return "";
         }
