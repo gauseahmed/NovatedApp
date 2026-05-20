@@ -1,5 +1,5 @@
 @Regression
-Feature: 01 NovatedApp Regression feature
+Feature: 04 NovatedApp Regression feature
 
   Background: Setup background and environment
     Given I setup browser
@@ -10,9 +10,9 @@ Feature: 01 NovatedApp Regression feature
     And I set take error screenshots to "screenshot.boolean"
     And I set stop on error to "screenshot.stop.on.error"
 
-  Scenario: TC001_Verify driver can submit and verify request of reimbursement claim with Claim Type as Maintenance
+  Scenario: TC001_Detailing_Verify driver can submit and verify request of reimbursement claim
     Given I setup environment and login with role "DriverInafune"
-    Given I load test data for "TC001" from "01_NovatedApp_Regression"
+    Given I load test data for "TC001" from "04_NovatedApp_Regression"
     Then I click on element with text "Submit Reimbursement"
     Then I get field "Last Odometer Reading" value and store in excel "excel:Last Odometer Reading"
     Then I get field "Last Reading Date" value and store in excel "excel:Last Reading Date"
@@ -63,9 +63,9 @@ Feature: 01 NovatedApp Regression feature
     Then I verify field "Last Update Date" contains excel "excel:Reading Date"
     Then I wait for "2" seconds
 
-  Scenario: TC002_Verify Novated lease specialist can view and take decision on submitted claim
+  Scenario: TC002_Detailing_Verify Novated lease specialist can view and take decision on submitted claim
     Given I setup environment and login with role "AutoLease"
-    Given I load test data for "TC002" from "01_NovatedApp_Regression"
+    Given I load test data for "TC002" from "04_NovatedApp_Regression"
     Then I click on site page "Requests"
     Then I populate field "Search Requests" with excel "excel:Reference Number"
     Then I click on button "Search"
@@ -116,9 +116,9 @@ Feature: 01 NovatedApp Regression feature
 #    Then I click on button "Action Checklist"
 #    Then I click on button "Submit"
 
-  Scenario: TC003_Verify driver can submit and verify request of reimbursement claim with Claim Type as Tyres
+  Scenario: TC003_Car Wash_Verify driver can submit and verify request of reimbursement claim
     Given I setup environment and login with role "DriverInafune"
-    Given I load test data for "TC003" from "01_NovatedApp_Regression"
+    Given I load test data for "TC003" from "04_NovatedApp_Regression"
     Then I click on element with text "Submit Reimbursement"
     Then I get field "Last Odometer Reading" value and store in excel "excel:Last Odometer Reading"
     Then I get field "Last Reading Date" value and store in excel "excel:Last Reading Date"
@@ -167,9 +167,9 @@ Feature: 01 NovatedApp Regression feature
     Then I verify field "Last Update Date" contains excel "excel:Reading Date"
     Then I wait for "2" seconds
 
-  Scenario: TC004_Verify Novated lease specialist can view  canceled request
+  Scenario: TC004_Car Wash_Verify Novated lease specialist can view  canceled request
     Given I setup environment and login with role "AutoLease"
-    Given I load test data for "TC004" from "01_NovatedApp_Regression"
+    Given I load test data for "TC004" from "04_NovatedApp_Regression"
     Then I click on site page "Requests"
     Then I clear record type user filter "Status"
     Then I wait for "1" seconds
@@ -192,9 +192,9 @@ Feature: 01 NovatedApp Regression feature
     Then I verify field "Dollar Amount" contains excel "excel:Amount ($)"
     Then I verify field "Assigned To" contains excel "excel:Assigned To"
 
-  Scenario: TC005_Verify driver can submit and verify request of reimbursement claim with Claim Type as 'Rotate & Balance Wheels'
+  Scenario: TC005_Verify driver can submit and verify request of reimbursement claim with other (Claim type other has been raised due to some spare damage.)
     Given I setup environment and login with role "DriverInafune"
-    Given I load test data for "TC005" from "01_NovatedApp_Regression"
+    Given I load test data for "TC005" from "04_NovatedApp_Regression"
     Then I click on element with text "Submit Reimbursement"
     Then I get field "Last Odometer Reading" value and store in excel "excel:Last Odometer Reading"
     Then I get field "Last Reading Date" value and store in excel "excel:Last Reading Date"
@@ -242,9 +242,9 @@ Feature: 01 NovatedApp Regression feature
     Then I verify field "Last Update Date" contains excel "excel:Reading Date"
     Then I wait for "2" seconds
 
-  Scenario: TC006_Verify Novated lease specialist can view and take decision on submitted claim
+  Scenario: TC006_Verify Novated lease specialist can view and take decision on submitted claim with other (Claim type other has been raised due to some spare damage.)
     Given I setup environment and login with role "AutoLease"
-    Given I load test data for "TC002" from "01_NovatedApp_Regression"
+    Given I load test data for "TC002" from "04_NovatedApp_Regression"
     Then I click on site page "Requests"
     Then I populate field "Search Requests" with excel "excel:Reference Number"
     Then I click on button "Search"
@@ -286,7 +286,7 @@ Feature: 01 NovatedApp Regression feature
     Then I verify text "has been successfully assigned to you" is present
     Then I wait for "2" seconds
     Then I click on button "DONE"
-    Then I wait for "2" seconds
+    Then I wait for "2" seconds with Insurance Australia Group (IAG)
   #Bug
 #    Then I verify field "Status" contains "In Progress"
 #    Then I verify field "Updated By" contains "Auto Lease"
@@ -295,9 +295,9 @@ Feature: 01 NovatedApp Regression feature
 #    Then I click on button "Action Checklist"
 #    Then I click on button "Submit"
 
-  Scenario: TC007_Verify driver can submit and verify request of reimbursement claim with Claim Type as Tyre Puncture
+  Scenario: TC007_Windscreen Repair_Verify driver can submit and verify request of reimbursement claim
     Given I setup environment and login with role "DriverInafune"
-    Given I load test data for "TC007" from "01_NovatedApp_Regression"
+    Given I load test data for "TC007" from "03_NovatedApp_Regression"
     Then I click on element with text "Submit Reimbursement"
     Then I get field "Last Odometer Reading" value and store in excel "excel:Last Odometer Reading"
     Then I get field "Last Reading Date" value and store in excel "excel:Last Reading Date"
@@ -345,9 +345,9 @@ Feature: 01 NovatedApp Regression feature
     Then I verify field "Last Update Date" contains excel "excel:Reading Date"
     Then I wait for "2" seconds
 
-  Scenario: TC008_Verify Novated lease specialist can view and take decision on submitted claim
+  Scenario: TC008_Windscreen Repair_Verify Novated lease specialist can view and take decision on submitted claim
     Given I setup environment and login with role "AutoLease"
-    Given I load test data for "TC008" from "01_NovatedApp_Regression"
+    Given I load test data for "TC008" from "03_NovatedApp_Regression"
     Then I click on site page "Requests"
     Then I populate field "Search Requests" with excel "excel:Reference Number"
     Then I click on button "Search"
