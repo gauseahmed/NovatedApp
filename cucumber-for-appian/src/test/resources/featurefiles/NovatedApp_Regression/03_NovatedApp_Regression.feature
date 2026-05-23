@@ -20,33 +20,38 @@ Feature: 03 NovatedApp Regression feature
     Then I verify field "New Odometer" is present
     Then I verify text "Claims" is present
     Then I verify text "No Claims Added" is present
+
+    Given I setup environment and login with role "DriverInafune"
+    Given I load test data for "TC001" from "03_NovatedApp_Regression"
+    Then I click on element with text "Submit Reimbursement"
     #Need to add auto calculation
     Then I populate field "New Odometer" with excel "excel:New Odometer"
     Then I click on icon link "plus-circle"
     Then I populate field "Claim Type" with excel "excel:Claim Type"
     Then I wait for "1" seconds
     Then I populate field "Amount" with excel "excel:Amount ($)"
-    Then I populate field "Maintenance Activity Completed" with excel "excel:Maintenance Activity Completed"
+    Then I populate field "Insurance Company" with excel "excel:Insurance Company"
+    Then I populate field "Insurance Company Name" with excel "excel:Insurance Company Name"
+    Then I populate field "Policy Start Date" with excel "excel:Policy Start Date"
+    Then I populate field "Insurance Expiry Date" with excel "excel:Insurance Expiry Date"
     Then I populate field "File Upload[20]" with excel "excel:Proof of Payment"
     Then I populate field "File Upload[22]" with excel "excel:Tax Invoice"
     Then I click on button "Save"
     Then I wait for "1" seconds
     Then I click on icon link "square-o"
     Then I click on button "Submit Claim"
+    Then I verify text "Are you sure you want to submit this Reimbursement Claim" is present
     Then I click on button "Yes"
     Then I verify text "Your request has been sent to the ORIX team." is present
+    Then I verify text "You'll be notified once your request has been processed. You can view your submitted request at any time via the 'My Requests' tab." is present
     Then I click on button "DONE"
     Then I wait for "5" seconds
-    #Then I get field "Odometer" value and store in excel "excel:Odometer"
-    #Then I verify field "Odometer" contains excel "excel:Odometer"
     Then I click on element with text "My Requests"
     Then I wait for "1" seconds
     Then I get grid "[1]" column "[1]" row "[1]" value and store in excel "excel:Reference Number"
     Then I wait for "10" seconds
     Then I click on grid "[1]" column "[1]" row "[1]"
     Then I wait for "2" seconds
-    #Need to verify req no in real time
-    ## Update - below vehicle name and number
     Then I verify text "MAZDA CX-5 - FTV21M" is present
     Then I verify button "Cancel Claim" is enabled
     Then I verify field "Request Type" contains excel "excel:Request Type"
@@ -74,7 +79,7 @@ Feature: 03 NovatedApp Regression feature
     Then I wait for "2" seconds
     #Need to verify req no in real time
     Then I verify text "Request Details" is present
-    Then I verify field "Status" contains "New"
+    Then I verify field "Status" contains excel "excel:Status"
     Then I verify field "End Of Lease Date" contains excel "excel:End Of Lease Date"
     Then I verify field "Submitted By" contains excel "excel:Submitted By"
     Then I verify field "Submitted On" contains excel "excel:Reading Date"
@@ -85,19 +90,21 @@ Feature: 03 NovatedApp Regression feature
     Then I verify field "Odometer Reading" contains excel "excel:Odometer"
     Then I verify field "Dollar Amount" contains excel "excel:Amount ($)"
     Then I verify field "Assigned To" contains excel "excel:Assigned To"
+    Then I verify field "Policy Start Date" contains excel "excel:Policy Start Date"
+    Then I verify field "Insurance Expiry Date" contains excel "excel:Insurance Expiry Date"
     Then I wait for "3" seconds
     Then I verify text "Driver Details" is present
-    Then I verify field "Salutation" contains "Mr"
-    Then I verify field "First Name" contains "Toshihiko"
-    Then I verify field "Last Name" contains "Inafune"
-    Then I verify field "Primary Email" contains "inafune@jfcaust.com.au.test"
-    Then I verify field "Mobile" contains "0469750861"
-    Then I verify field "Employer" contains "Test Employer"
-    Then I verify field "State" contains "NSW"
+    Then I verify field "Salutation" contains excel "excel:Salutation"
+    Then I verify field "First Name" contains excel "excel:First Name"
+    Then I verify field "Last Name" contains excel "excel:Last Name"
+    Then I verify field "Primary Email" contains excel "excel:Primary Email"
+    Then I verify field "Mobile" contains excel "excel:Mobile"
+    Then I verify field "Employer" contains excel "excel:Employer"
+    Then I verify field "State" contains excel "excel:State"
     Then I verify text "Vehicle Details" is present
-    Then I verify field "Vehicle Description" contains "MAZDA CX-5"
-    Then I verify field "Registration Number" contains "FTV21M"
-    Then I verify field "Registration State" contains "NSW"
+    Then I verify field "Vehicle Description" contains excel "excel:Vehicle Description"
+    Then I verify field "Registration Number" contains excel "excel:Registration Number"
+    Then I verify field "Registration State" contains excel "excel:Registration State"
     Then I verify text "Files Uploaded" is present
     Then I verify grid "[1]" column "File Name" row "[1]" contains "Invoice.pdf"
     Then I verify grid "[1]" column "Type" row "[1]" contains "Proof of Payment"
@@ -108,13 +115,10 @@ Feature: 03 NovatedApp Regression feature
     Then I wait for "2" seconds
     Then I click on button "DONE"
     Then I wait for "2" seconds
-  #Bug
-#    Then I verify field "Status" contains "In Progress"
-#    Then I verify field "Updated By" contains "Auto Lease"
-#    Then I verify field "Assigned To" contains "Auto Lease"
-#    Then I verify text "Assigned Request" is present
-#    Then I click on button "Action Checklist"
-#    Then I click on button "Submit"
+    Then I verify field "Status" contains excel "excel:Status1"
+    Then I verify field "Updated By" contains excel "excel:Updated By1"
+    Then I verify field "Assigned To" contains excel "excel:Assigned To1"
+    Then I verify text "Assigned Request" is present
 
   Scenario: TC003_CTP_Verify driver can submit and verify request of reimbursement claim
     Given I setup environment and login with role "DriverInafune"
@@ -126,24 +130,28 @@ Feature: 03 NovatedApp Regression feature
     Then I verify field "New Odometer" is present
     Then I verify text "Claims" is present
     Then I verify text "No Claims Added" is present
+
+    Given I setup environment and login with role "DriverInafune"
+    Given I load test data for "TC003" from "03_NovatedApp_Regression"
+    Then I click on element with text "Submit Reimbursement"
     #Need to add auto calculation
     Then I populate field "New Odometer" with excel "excel:New Odometer"
     Then I click on icon link "plus-circle"
     Then I populate field "Claim Type" with excel "excel:Claim Type"
     Then I wait for "1" seconds
-    Then I populate field "Tyre Quantity" with excel "excel:Tyre Quantity"
     Then I populate field "Amount" with excel "excel:Amount ($)"
-   Then I populate field "File Upload[20]" with excel "excel:Proof of Payment"
-    Then I populate field "File Upload[22]" with excel "excel:Tax Invoice"
+    Then I populate field "Policy Start Date" with excel "excel:Policy Start Date"
+    Then I populate field "File Upload[20]" with excel "excel:Proof of Payment"
+    Then I populate field "File Upload[22]" with excel "excel:Copy of CTP Renewal"
     Then I click on button "Save"
     Then I wait for "1" seconds
     Then I click on icon link "square-o"
-    Then I wait for "1" seconds
     Then I click on button "Submit Claim"
-    Then I wait for "1" seconds
     Then I verify text "Are you sure you want to submit this Reimbursement Claim" is present
-    Then I wait for "1" seconds
     Then I click on button "Yes"
+    Then I verify text "Your request has been sent to the ORIX team." is present
+    Then I verify text "You'll be notified once your request has been processed. You can view your submitted request at any time via the 'My Requests' tab." is present
+    Then I click on button "DONE"
     Then I wait for "5" seconds
     Then I click on element with text "My Requests"
     Then I wait for "1" seconds
@@ -160,6 +168,8 @@ Feature: 03 NovatedApp Regression feature
     Then I verify text "Submitted Documents" is present
     Then I verify grid "[1]" column "File Name" row "[1]" contains "Invoice.pdf"
     Then I verify grid "[1]" column "Type" row "[1]" contains "Proof of Payment"
+    Then I verify grid "[1]" column "File Name" row "[2]" contains "Invoice.pdf"
+    Then I verify grid "[1]" column "Type" row "[2]" contains "CPT Renewal"
      ## Update - below Submitted By and Updated By based on logged in driver user
     Then I verify field "Submitted By" contains "Toshihiko Inafune"
     Then I verify field "Request Submission Date" contains excel "excel:Reading Date"
@@ -167,12 +177,10 @@ Feature: 03 NovatedApp Regression feature
     Then I verify field "Last Update Date" contains excel "excel:Reading Date"
     Then I wait for "2" seconds
 
-  Scenario: TC004_CTP_Verify Novated lease specialist can view  canceled request
+  Scenario: TC004_CTP_Verify Novated lease specialist can view and take decision on submitted claim
     Given I setup environment and login with role "AutoLease"
     Given I load test data for "TC004" from "03_NovatedApp_Regression"
     Then I click on site page "Requests"
-    Then I clear record type user filter "Status"
-    Then I wait for "1" seconds
     Then I populate field "Search Requests" with excel "excel:Reference Number"
     Then I click on button "Search"
     Then I wait for "3" seconds
@@ -180,19 +188,47 @@ Feature: 03 NovatedApp Regression feature
     Then I wait for "2" seconds
     #Need to verify req no in real time
     Then I verify text "Request Details" is present
-    Then I verify field "Status" contains "Cancelled"
+    Then I verify field "Status" contains excel "excel:Status"
     Then I verify field "End Of Lease Date" contains excel "excel:End Of Lease Date"
     Then I verify field "Submitted By" contains excel "excel:Submitted By"
-    Then I verify field "Submitted On" contains excel "excel:Submitted On"
+    Then I verify field "Submitted On" contains excel "excel:Reading Date"
     Then I verify field "Updated By" contains excel "excel:Updated By"
-    Then I verify field "Updated On" contains excel "excel:Updated On"
+    Then I verify field "Updated On" contains excel "excel:Reading Date"
     Then I verify field "Request Type" contains excel "excel:Request Type"
     Then I verify field "Claim Type" contains excel "excel:Claim Type"
     Then I verify field "Odometer Reading" contains excel "excel:Odometer"
     Then I verify field "Dollar Amount" contains excel "excel:Amount ($)"
     Then I verify field "Assigned To" contains excel "excel:Assigned To"
+    Then I verify field "Policy Start Date" contains excel "excel:Policy Start Date"
+    Then I wait for "3" seconds
+    Then I verify text "Driver Details" is present
+    Then I verify field "Salutation" contains excel "excel:Salutation"
+    Then I verify field "First Name" contains excel "excel:First Name"
+    Then I verify field "Last Name" contains excel "excel:Last Name"
+    Then I verify field "Primary Email" contains excel "excel:Primary Email"
+    Then I verify field "Mobile" contains excel "excel:Mobile"
+    Then I verify field "Employer" contains excel "excel:Employer"
+    Then I verify field "State" contains excel "excel:State"
+    Then I verify text "Vehicle Details" is present
+    Then I verify field "Vehicle Description" contains excel "excel:Vehicle Description"
+    Then I verify field "Registration Number" contains excel "excel:Registration Number"
+    Then I verify field "Registration State" contains excel "excel:Registration State"
+    Then I verify text "Files Uploaded" is present
+    Then I verify grid "[1]" column "File Name" row "[1]" contains "Invoice.pdf"
+    Then I verify grid "[1]" column "Type" row "[1]" contains "Proof of Payment"
+    Then I verify text "Event History" is present
+    Then I click on button "Take Ownership"
+    Then I wait for "1" seconds
+    Then I verify text "has been successfully assigned to you" is present
+    Then I wait for "2" seconds
+    Then I click on button "DONE"
+    Then I wait for "2" seconds
+    Then I verify field "Status" contains excel "excel:Status1"
+    Then I verify field "Updated By" contains excel "excel:Updated By1"
+    Then I verify field "Assigned To" contains excel "excel:Assigned To1"
+    Then I verify text "Assigned Request" is present
 
-  Scenario: TC005_Battery_Verify driver can submit and verify request of reimbursement claim with Insurance Australia Group (IAG)
+  Scenario: TC005_Battery_Verify driver can submit and verify request of reimbursement claim
     Given I setup environment and login with role "DriverInafune"
     Given I load test data for "TC005" from "03_NovatedApp_Regression"
     Then I click on element with text "Submit Reimbursement"
@@ -202,6 +238,10 @@ Feature: 03 NovatedApp Regression feature
     Then I verify field "New Odometer" is present
     Then I verify text "Claims" is present
     Then I verify text "No Claims Added" is present
+
+    Given I setup environment and login with role "DriverInafune"
+    Given I load test data for "TC005" from "03_NovatedApp_Regression"
+    Then I click on element with text "Submit Reimbursement"
     #Need to add auto calculation
     Then I populate field "New Odometer" with excel "excel:New Odometer"
     Then I click on icon link "plus-circle"
@@ -242,9 +282,9 @@ Feature: 03 NovatedApp Regression feature
     Then I verify field "Last Update Date" contains excel "excel:Reading Date"
     Then I wait for "2" seconds
 
-  Scenario: TC006_Battery_Verify Novated lease specialist can view and take decision on submitted claim Insurance Australia Group (IAG)
+  Scenario: TC006_Battery_Verify Novated lease specialist can view and take decision on submitted claim
     Given I setup environment and login with role "AutoLease"
-    Given I load test data for "TC002" from "03_NovatedApp_Regression"
+    Given I load test data for "TC006" from "03_NovatedApp_Regression"
     Then I click on site page "Requests"
     Then I populate field "Search Requests" with excel "excel:Reference Number"
     Then I click on button "Search"
@@ -253,7 +293,7 @@ Feature: 03 NovatedApp Regression feature
     Then I wait for "2" seconds
     #Need to verify req no in real time
     Then I verify text "Request Details" is present
-    Then I verify field "Status" contains "New"
+    Then I verify field "Status" contains excel "excel:Status"
     Then I verify field "End Of Lease Date" contains excel "excel:End Of Lease Date"
     Then I verify field "Submitted By" contains excel "excel:Submitted By"
     Then I verify field "Submitted On" contains excel "excel:Reading Date"
@@ -266,17 +306,17 @@ Feature: 03 NovatedApp Regression feature
     Then I verify field "Assigned To" contains excel "excel:Assigned To"
     Then I wait for "3" seconds
     Then I verify text "Driver Details" is present
-    Then I verify field "Salutation" contains "Mr"
-    Then I verify field "First Name" contains "Toshihiko"
-    Then I verify field "Last Name" contains "Inafune"
-    Then I verify field "Primary Email" contains "inafune@jfcaust.com.au.test"
-    Then I verify field "Mobile" contains "0469750861"
-    Then I verify field "Employer" contains "Test Employer"
-    Then I verify field "State" contains "NSW"
+    Then I verify field "Salutation" contains excel "excel:Salutation"
+    Then I verify field "First Name" contains excel "excel:First Name"
+    Then I verify field "Last Name" contains excel "excel:Last Name"
+    Then I verify field "Primary Email" contains excel "excel:Primary Email"
+    Then I verify field "Mobile" contains excel "excel:Mobile"
+    Then I verify field "Employer" contains excel "excel:Employer"
+    Then I verify field "State" contains excel "excel:State"
     Then I verify text "Vehicle Details" is present
-    Then I verify field "Vehicle Description" contains "MAZDA CX-5"
-    Then I verify field "Registration Number" contains "FTV21M"
-    Then I verify field "Registration State" contains "NSW"
+    Then I verify field "Vehicle Description" contains excel "excel:Vehicle Description"
+    Then I verify field "Registration Number" contains excel "excel:Registration Number"
+    Then I verify field "Registration State" contains excel "excel:Registration State"
     Then I verify text "Files Uploaded" is present
     Then I verify grid "[1]" column "File Name" row "[1]" contains "Invoice.pdf"
     Then I verify grid "[1]" column "Type" row "[1]" contains "Proof of Payment"
@@ -286,14 +326,11 @@ Feature: 03 NovatedApp Regression feature
     Then I verify text "has been successfully assigned to you" is present
     Then I wait for "2" seconds
     Then I click on button "DONE"
-    Then I wait for "2" seconds with Insurance Australia Group (IAG)
-  #Bug
-#    Then I verify field "Status" contains "In Progress"
-#    Then I verify field "Updated By" contains "Auto Lease"
-#    Then I verify field "Assigned To" contains "Auto Lease"
-#    Then I verify text "Assigned Request" is present
-#    Then I click on button "Action Checklist"
-#    Then I click on button "Submit"
+    Then I wait for "2" seconds
+    Then I verify field "Status" contains excel "excel:Status1"
+    Then I verify field "Updated By" contains excel "excel:Updated By1"
+    Then I verify field "Assigned To" contains excel "excel:Assigned To1"
+    Then I verify text "Assigned Request" is present
 
   Scenario: TC007_Windscreen Repair_Verify driver can submit and verify request of reimbursement claim
     Given I setup environment and login with role "DriverInafune"
@@ -305,6 +342,10 @@ Feature: 03 NovatedApp Regression feature
     Then I verify field "New Odometer" is present
     Then I verify text "Claims" is present
     Then I verify text "No Claims Added" is present
+
+    Given I setup environment and login with role "DriverInafune"
+    Given I load test data for "TC007" from "03_NovatedApp_Regression"
+    Then I click on element with text "Submit Reimbursement"
     #Need to add auto calculation
     Then I populate field "New Odometer" with excel "excel:New Odometer"
     Then I click on icon link "plus-circle"
@@ -356,7 +397,7 @@ Feature: 03 NovatedApp Regression feature
     Then I wait for "2" seconds
     #Need to verify req no in real time
     Then I verify text "Request Details" is present
-    Then I verify field "Status" contains "New"
+    Then I verify field "Status" contains excel "excel:Status"
     Then I verify field "End Of Lease Date" contains excel "excel:End Of Lease Date"
     Then I verify field "Submitted By" contains excel "excel:Submitted By"
     Then I verify field "Submitted On" contains excel "excel:Reading Date"
@@ -369,17 +410,17 @@ Feature: 03 NovatedApp Regression feature
     Then I verify field "Assigned To" contains excel "excel:Assigned To"
     Then I wait for "3" seconds
     Then I verify text "Driver Details" is present
-    Then I verify field "Salutation" contains "Mr"
-    Then I verify field "First Name" contains "Toshihiko"
-    Then I verify field "Last Name" contains "Inafune"
-    Then I verify field "Primary Email" contains "inafune@jfcaust.com.au.test"
-    Then I verify field "Mobile" contains "0469750861"
-    Then I verify field "Employer" contains "Test Employer"
-    Then I verify field "State" contains "NSW"
+    Then I verify field "Salutation" contains excel "excel:Salutation"
+    Then I verify field "First Name" contains excel "excel:First Name"
+    Then I verify field "Last Name" contains excel "excel:Last Name"
+    Then I verify field "Primary Email" contains excel "excel:Primary Email"
+    Then I verify field "Mobile" contains excel "excel:Mobile"
+    Then I verify field "Employer" contains excel "excel:Employer"
+    Then I verify field "State" contains excel "excel:State"
     Then I verify text "Vehicle Details" is present
-    Then I verify field "Vehicle Description" contains "MAZDA CX-5"
-    Then I verify field "Registration Number" contains "FTV21M"
-    Then I verify field "Registration State" contains "NSW"
+    Then I verify field "Vehicle Description" contains excel "excel:Vehicle Description"
+    Then I verify field "Registration Number" contains excel "excel:Registration Number"
+    Then I verify field "Registration State" contains excel "excel:Registration State"
     Then I verify text "Files Uploaded" is present
     Then I verify grid "[1]" column "File Name" row "[1]" contains "Invoice.pdf"
     Then I verify grid "[1]" column "Type" row "[1]" contains "Proof of Payment"
@@ -390,10 +431,7 @@ Feature: 03 NovatedApp Regression feature
     Then I wait for "2" seconds
     Then I click on button "DONE"
     Then I wait for "2" seconds
-  #Bug
-#    Then I verify field "Status" contains "In Progress"
-#    Then I verify field "Updated By" contains "Auto Lease"
-#    Then I verify field "Assigned To" contains "Auto Lease"
-#    Then I verify text "Assigned Request" is present
-#    Then I click on button "Action Checklist"
-#    Then I click on button "Submit"
+    Then I verify field "Status" contains excel "excel:Status1"
+    Then I verify field "Updated By" contains excel "excel:Updated By1"
+    Then I verify field "Assigned To" contains excel "excel:Assigned To1"
+    Then I verify text "Assigned Request" is present
