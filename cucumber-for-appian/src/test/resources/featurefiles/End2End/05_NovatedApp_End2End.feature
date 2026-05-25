@@ -10,12 +10,14 @@ Feature: 05 NovatedApp End2End feature
     And I set take error screenshots to "screenshot.boolean"
     And I set stop on error to "screenshot.stop.on.error"
 
-  Scenario: TC001_Verify driver can raise request to Replace Fuel Card with reason Lost
-    Given I setup environment and login with role "Drivervisionpro"
+  Scenario: TC001_Collecting Driver details to validate in future task
+    Given I setup environment and login with role "Driverneil"
     Given I load test data for "TC001" from "05_NovatedApp_End2End"
     Then I get first card values and store in excel "excel:Vehicle number" and "excel:Vehicle name"
-    Then I get lease end date and store in excel "excel:Lease End Date"
-    #Storing Driver profile information as first step to validate in future tasks
+    #Then I get lease end date and store in excel "excel:Lease End Date"
+    Then I click on element with text "Submit Reimbursement"
+    Then I get field "Last Odometer Reading" value and store in excel "excel:Last Odometer Reading"
+     #Storing Driver profile information as first step to validate in future tasks
     Then I click on element with text "Profile"
     Then I get field "Salutation" value and store in excel "excel:Driver Salutation"
     Then I get field "Legal First Name" value and store in excel "excel:Driver First Name"
@@ -25,18 +27,22 @@ Feature: 05 NovatedApp End2End feature
     Then I get field "Email" value and store in excel "excel:Driver Email"
     Then I get field "Your Residential Address" value and store in excel "excel:Driver Your Residential Address"
     Then I get field "Employer Name" value and store in excel "excel:Driver Employer Name"
-    Then I click on element with text "Home"
+
+  Scenario: TC002_Verify driver can raise request to Replace Fuel Card with reason Lost
+    Given I setup environment and login with role "Driverneil"
+    Given I load test data for "TC001" from "05_NovatedApp_End2End"
     Then I wait for "1" seconds
     Then I click on element with text "Fuel Cards"
     Then I wait for "2" seconds
-    Then I click on element with text "Replace[4]"
+    Then I click on element with text "Replace[3]"
     Then I populate field "Reason for replacement" with excel "excel:Replace Fuel Card"
-    Then I verify text "8 Alfred St, Lilyfield NSW 2040" is present
+    Then I verify text "1 Shelley St, Sydney NSW 2000" is present
     Then I verify button "Submit Request" is enabled
     Then I verify button "Cancel" is enabled
     Then I click on button "Submit Request"
     Then I verify text "Are you sure you wish to replace the selected fuel card? This will cancel your current fuel card" is present
     Then I click on button "yes"
+    Then I wait for "2" seconds
     Then I verify text "Your request has been sent to the ORIX team." is present
     Then I click on button "DONE"
     Then I wait for "1" seconds
@@ -58,9 +64,10 @@ Feature: 05 NovatedApp End2End feature
     Then I get field "Last Update Date" value and store in excel "excel:Last Update Date"
     Then I wait for "2" seconds
 
-  Scenario: TC002_Verify Novated lease specialist can view and complete decision on submitted Replace Fuel Card Request
+  Scenario: TC003_Verify Novated lease specialist can view and complete decision on submitted Replace Fuel Card Request
     Given I setup environment and login with role "AutoLease"
     Given I load test data for "TC002" from "05_NovatedApp_End2End"
+    Then I wait for "2" seconds
     Then I click on site page "Requests"
     Then I populate field "Search Requests" with excel "excel:Reference Number"
     Then I click on button "Search"

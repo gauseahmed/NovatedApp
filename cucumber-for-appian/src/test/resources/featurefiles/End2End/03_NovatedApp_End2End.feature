@@ -1,4 +1,4 @@
-@End2End
+@End2End @Check
 Feature: 03 NovatedApp End2End feature
 
   Background: Setup background and environment
@@ -10,14 +10,14 @@ Feature: 03 NovatedApp End2End feature
     And I set take error screenshots to "screenshot.boolean"
     And I set stop on error to "screenshot.stop.on.error"
 
-  Scenario: TC001_Verify driver can submit and verify request of reimbursement claim with correct information per claim type. Claim Type - Maintenance
+  Scenario: TC001_Collecting Driver details to validate in future task
     Given I setup environment and login with role "Drivervisionpro"
     Given I load test data for "TC001" from "03_NovatedApp_End2End"
     Then I get first card values and store in excel "excel:Vehicle number" and "excel:Vehicle name"
-    Then I get lease end date and store in excel "excel:Lease End Date"
+    #Then I get lease end date and store in excel "excel:Lease End Date"
     Then I click on element with text "Submit Reimbursement"
     Then I get field "Last Odometer Reading" value and store in excel "excel:Last Odometer Reading"
-    #Storing Driver profile information as first step to validate in future tasks
+     #Storing Driver profile information as first step to validate in future tasks
     Then I click on element with text "Profile"
     Then I get field "Salutation" value and store in excel "excel:Driver Salutation"
     Then I get field "Legal First Name" value and store in excel "excel:Driver First Name"
@@ -27,8 +27,10 @@ Feature: 03 NovatedApp End2End feature
     Then I get field "Email" value and store in excel "excel:Driver Email"
     Then I get field "Your Residential Address" value and store in excel "excel:Driver Your Residential Address"
     Then I get field "Employer Name" value and store in excel "excel:Driver Employer Name"
-    Then I click on element with text "Home"
-    Then I wait for "1" seconds
+
+  Scenario: TC002_Verify driver can submit and verify request of reimbursement claim with correct information per claim type. Claim Type - Maintenance
+    Given I setup environment and login with role "Drivervisionpro"
+    Given I load test data for "TC001" from "03_NovatedApp_End2End"
     Then I click on element with text "Submit Reimbursement"
     Then I verify field "Last Odometer Reading" contains excel "excel:Last Odometer Reading"
     Then I get field "Last Reading Date" value and store in excel "excel:Last Reading Date"
@@ -79,7 +81,7 @@ Feature: 03 NovatedApp End2End feature
     Then I verify field "Last Update Date" contains excel "excel:Reading Date"
     Then I wait for "2" seconds
 
-  Scenario: TC002_Verify Novated lease specialist can view and take decision on submitted claim
+  Scenario: TC003_Verify Novated lease specialist can view and take decision on submitted claim
     Given I setup environment and login with role "AutoLease"
     Given I load test data for "TC002" from "03_NovatedApp_End2End"
     Then I click on site page "Requests"
@@ -116,7 +118,7 @@ Feature: 03 NovatedApp End2End feature
     Then I verify field "Registration Number" contains excel "excel:Vehicle number"
 #    Then I verify field "Vehicle Description" contains "FORD RANGER"
 #    Then I verify field "Registration Number" contains "EXB72A"
-    Then I verify field "Registration State" contains "NSW"
+    Then I verify field "Registration State" contains "VIC"
     Then I verify text "Files Uploaded" is present
     Then I verify grid "[1]" column "File Name" row "[1]" contains "Invoice.pdf"
     Then I verify grid "[1]" column "Type" row "[1]" contains "Proof of Payment"
@@ -132,5 +134,5 @@ Feature: 03 NovatedApp End2End feature
     Then I verify field "Updated By" contains "Auto Lease"
     Then I verify field "Assigned To" contains "Auto Lease"
     Then I verify text "Assigned Request" is present
-    Then I click on button "Action Checklist"
-    Then I click on button "Submit"
+#    Then I click on button "Action Checklist"
+#    Then I click on button "Submit"

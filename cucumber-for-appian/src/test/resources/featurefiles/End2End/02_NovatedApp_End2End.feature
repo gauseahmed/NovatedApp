@@ -1,4 +1,4 @@
-@End2End @SingleRun
+@End2End @Check
 Feature: 02 NovatedApp End2End feature
 
   Background: Setup background and environment
@@ -10,12 +10,14 @@ Feature: 02 NovatedApp End2End feature
     And I set take error screenshots to "screenshot.boolean"
     And I set stop on error to "screenshot.stop.on.error"
 
-  Scenario: TC001_Verify driver can submit and verify request of reimbursement claim with correct information per claim type.  Claim Type - Service
+  Scenario: TC001_Collecting Driver details to validate in future task
     Given I setup environment and login with role "DriverDavid"
     Given I load test data for "TC001" from "02_NovatedApp_End2End"
     Then I get first card values and store in excel "excel:Vehicle number" and "excel:Vehicle name"
-    Then I get lease end date and store in excel "excel:Lease End Date"
-    #Storing Driver profile information as first step to validate in future tasks
+    #Then I get lease end date and store in excel "excel:Lease End Date"
+    Then I click on element with text "Submit Reimbursement"
+    Then I get field "Last Odometer Reading" value and store in excel "excel:Last Odometer Reading"
+     #Storing Driver profile information as first step to validate in future tasks
     Then I click on element with text "Profile"
     Then I get field "Salutation" value and store in excel "excel:Driver Salutation"
     Then I get field "Legal First Name" value and store in excel "excel:Driver First Name"
@@ -25,8 +27,10 @@ Feature: 02 NovatedApp End2End feature
     Then I get field "Email" value and store in excel "excel:Driver Email"
     Then I get field "Your Residential Address" value and store in excel "excel:Driver Your Residential Address"
     Then I get field "Employer Name" value and store in excel "excel:Driver Employer Name"
-    Then I click on element with text "Home"
-    Then I wait for "1" seconds
+
+  Scenario: TC002_Verify driver can submit and verify request of reimbursement claim with correct information per claim type.  Claim Type - Service
+    Given I setup environment and login with role "DriverDavid"
+    Given I load test data for "TC001" from "02_NovatedApp_End2End"
     Then I click on element with text "Submit Reimbursement"
     Then I get field "Last Odometer Reading" value and store in excel "excel:Last Odometer Reading"
     Then I get field "Last Reading Date" value and store in excel "excel:Last Reading Date"
@@ -89,8 +93,7 @@ Feature: 02 NovatedApp End2End feature
     Then I wait for "3" seconds
 
 
-
-  Scenario: TC002_Verify Novated lease specialist can view and take decision on submitted claim
+  Scenario: TC003_Verify Novated lease specialist can view and take decision on submitted claim
     Given I setup environment and login with role "AutoLease"
     Given I load test data for "TC002" from "02_NovatedApp_End2End"
     Then I click on site page "Requests"
