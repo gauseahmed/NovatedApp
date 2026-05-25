@@ -1,4 +1,4 @@
-@End2End
+@End2End @Check
 Feature: 01 NovatedApp End2End feature
 
   Background: Setup background and environment
@@ -10,7 +10,8 @@ Feature: 01 NovatedApp End2End feature
     And I set take error screenshots to "screenshot.boolean"
     And I set stop on error to "screenshot.stop.on.error"
 
-    Scenario: TC001_Verify driver can submit and verify request of reimbursement claim with correct information per claim type. Claim Type - Fuel
+
+  Scenario: TC001_Collecting Driver details to validate in future task
     Given I setup environment and login with role "DriverInafune"
     Given I load test data for "TC001" from "01_NovatedApp_End2End"
     Then I get first card values and store in excel "excel:Vehicle number" and "excel:Vehicle name"
@@ -27,7 +28,10 @@ Feature: 01 NovatedApp End2End feature
     Then I get field "Email" value and store in excel "excel:Driver Email"
     Then I get field "Your Residential Address" value and store in excel "excel:Driver Your Residential Address"
     Then I get field "Employer Name" value and store in excel "excel:Driver Employer Name"
-    Then I click on element with text "Home"
+
+  Scenario: TC002_Verify driver can submit and verify request of reimbursement claim with correct information per claim type. Claim Type - Fuel
+    Given I setup environment and login with role "DriverInafune"
+    Given I load test data for "TC001" from "01_NovatedApp_End2End"
     Then I click on element with text "Submit Reimbursement"
     Then I verify field "Last Odometer Reading" contains excel "excel:Last Odometer Reading"
     Then I get field "Last Reading Date" value and store in excel "excel:Last Reading Date"
@@ -74,7 +78,7 @@ Feature: 01 NovatedApp End2End feature
     Then I verify field "Last Update Date" contains excel "excel:Reading Date"
     Then I wait for "2" seconds
 
-  Scenario: TC002_Verify Novated lease specialist can view and take decision on submitted claim
+  Scenario: TC003_Verify Novated lease specialist can view and take decision on submitted claim
     Given I setup environment and login with role "AutoLease"
     Given I load test data for "TC002" from "01_NovatedApp_End2End"
     Then I click on site page "Requests"
