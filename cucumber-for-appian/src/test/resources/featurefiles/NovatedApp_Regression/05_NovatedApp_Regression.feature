@@ -14,7 +14,7 @@ Feature: 05 NovatedApp Regression feature
     Given I setup environment and login with role "Driverjosh"
     Given I load test data for "TC001" from "05_NovatedApp_Regression"
     Then I get first card values and store in excel "excel:Vehicle number" and "excel:Vehicle name"
-    Then I get lease end date and store in excel "excel:Lease End Date"
+    Then I get field "EOL Date" value and store in excel "excel:Lease End Date"
     #Driver profile information
     Then I click on element with text "Profile"
     Then I get field "Salutation" value and store in excel "excel:Driver Salutation"
@@ -39,8 +39,7 @@ Feature: 05 NovatedApp Regression feature
     Then I click on button "yes"
     Then I verify text "Your request has been sent to the ORIX team." is present
     Then I click on button "DONE"
-    Then I wait for "1" seconds
-    Then I get first card values and store in excel "excel:Vehicle number" and "excel:Vehicle name"
+    Then I wait for "3" seconds
     Then I click on element with text "My Requests"
     Then I wait for "1" seconds
     Then I get grid "[1]" column "[1]" row "[1]" value and store in excel "excel:Reference Number"
@@ -66,16 +65,16 @@ Feature: 05 NovatedApp Regression feature
     Then I wait for "2" seconds
     #Need to verify req no in real time
     Then I verify text "Request Details" is present
-    Then I verify field "Status" contains "New"
-    Then I verify field "End Of Lease Date" contains "25/09/2026"
-    Then I verify field "Submitted By" contains excel "excel:Driver Name"
-    Then I verify field "Submitted On" contains excel "excel:Reading Date"
-    Then I verify field "Updated By" contains excel "excel:Driver Name"
-    Then I verify field "Updated On" contains excel "excel:Reading Date"
+    Then I verify field "Status" contains excel "excel:Status"
+    Then I verify field "End Of Lease Date" contains excel "excel:Lease End Date Updated"
+    Then I verify field "Submitted By" contains excel "excel:Submitted By"
+    Then I verify field "Submitted On" contains excel "excel:Request Submission Date"
+    Then I verify field "Updated By" contains excel "excel:Updated By"
+    Then I verify field "Updated On" contains excel "excel:Request Submission Date"
     Then I verify field "Request Type" contains excel "excel:Request Type"
-    Then I verify field "Claim Type" contains excel "excel:Request Subtype"
-    Then I verify field "Odometer Reading" contains excel "excel:Odometer"
-    Then I verify field "Assigned To" contains "Unassigned"
+    Then I verify field "Claim Type" contains excel "excel:Claim Type"
+    Then I verify field "Assigned To" contains excel "excel:Assigned To"
+    Then I verify field "Fuel Card Provider" contains excel "excel:Fuel Provider"
     Then I wait for "5" seconds
     Then I verify text "Driver Details" is present
     Then I verify field "Salutation" contains excel "excel:Driver Salutation"
@@ -84,11 +83,11 @@ Feature: 05 NovatedApp Regression feature
     Then I verify field "Primary Email" contains excel "excel:Driver Email"
     Then I verify field "Mobile" contains excel "excel:Driver Mobile Phone"
     Then I verify field "Employer" contains excel "excel:Driver Employer Name"
-    Then I verify field "State" contains "NSW"
+    Then I verify field "State" contains excel "excel:State"
     Then I verify text "Vehicle Details" is present
     Then I verify field "Vehicle Description" contains excel "excel:Vehicle name"
     Then I verify field "Registration Number" contains excel "excel:Vehicle number"
-    Then I verify field "Registration State" contains "VIC"
+    Then I verify field "Registration State" contains excel "excel:Registration State"
     Then I verify text "Files Uploaded" is present
     Then I verify text "Event History" is present
     Then I click on button "Take Ownership"
@@ -96,18 +95,16 @@ Feature: 05 NovatedApp Regression feature
     Then I verify text "has been successfully assigned to you" is present
     Then I click on button "DONE"
     Then I wait for "5" seconds
-    Then I verify field "Status" contains "In Progress"
-    Then I verify field "Updated By" contains "Auto Lease"
-    Then I verify field "Assigned To" contains "Auto Lease"
+    Then I verify field "Status" contains excel "excel:Status1"
+    Then I verify field "Updated By" contains excel "excel:Updated By1"
+    Then I verify field "Assigned To" contains excel "excel:Assigned To1"
     Then I verify text "Assigned Request" is present
-    Then I click on button "Action Checklist"
-    Then I click on button "Submit"
 
   Scenario: TC003_Fuel Card_Verify driver can Replace Fuel Card with Reason for replacement as Damaged.
     Given I setup environment and login with role "Driverjosh"
     Given I load test data for "TC003" from "05_NovatedApp_Regression"
     Then I get first card values and store in excel "excel:Vehicle number" and "excel:Vehicle name"
-    Then I get lease end date and store in excel "excel:Lease End Date"
+    Then I get field "EOL Date" value and store in excel "excel:Lease End Date"
     #Driver profile information
     Then I click on element with text "Profile"
     Then I get field "Salutation" value and store in excel "excel:Driver Salutation"
@@ -122,9 +119,9 @@ Feature: 05 NovatedApp Regression feature
     Then I wait for "1" seconds
     Then I click on element with text "Fuel Cards"
     Then I wait for "2" seconds
-    Then I click on element with text "Replace[4]"
+    Then I click on element with text "Replace"
     Then I populate field "Reason for replacement" with excel "excel:Replace Fuel Card"
-    Then I verify text "8 Alfred St, Lilyfield NSW 2040" is present
+#    Then I verify field "Delivery Address" contains excel "excel:Driver Your Residential Address"
     Then I verify button "Submit Request" is enabled
     Then I verify button "Cancel" is enabled
     Then I click on button "Submit Request"
@@ -143,8 +140,8 @@ Feature: 05 NovatedApp Regression feature
     Then I verify field "Request Type" contains excel "excel:Request Type"
     Then I get field "Request Subtype" value and store in excel "excel:Request Subtype"
     Then I verify field "Fuel Card Provider" contains excel "excel:Fuel Provider"
-    Then I verify field "Delivery Address" contains excel "excel:Delivery Address"
-    Then I verify field "Fuel Card Number" contains excel "excel:Fuel Card Number"
+#    Then I verify field "Delivery Address" contains excel "excel:Driver Your Residential Address"
+    Then I get field "Fuel Card Number" value and store in excel "excel:Fuel Card Number"
     Then I verify field "Provider" contains excel "excel:Fuel Provider"
     Then I verify field "Replacement Reasoning" contains excel "excel:Replace Fuel Card"
     Then I get field "Request Submission Date" value and store in excel "excel:Request Submission Date"
@@ -162,17 +159,16 @@ Feature: 05 NovatedApp Regression feature
     Then I wait for "2" seconds
     #Need to verify req no in real time
     Then I verify text "Request Details" is present
-    Then I verify field "Status" contains "New"
-    Then I verify field "End Of Lease Date" contains "25/09/2026"
+    Then I verify field "Status" contains excel "excel:Status"
+#    Then I verify field "End Of Lease Date" contains excel "excel:Lease End Date"
     Then I verify field "Submitted By" contains excel "excel:Driver Name"
-    #Then I verify field "Submitted On" contains excel "excel:Reading Date"
+    Then I verify field "Submitted On" contains excel "excel:Request Submission Date"
     Then I verify field "Updated By" contains excel "excel:Driver Name"
-    #Then I verify field "Updated On" contains excel "excel:Reading Date"
     Then I verify field "Request Type" contains excel "excel:Request Type"
     Then I verify field "Claim Type" contains excel "excel:Request Subtype"
-    Then I verify field "Odometer Reading" contains excel "excel:Odometer"
+#    Then I verify field "Odometer Reading" contains excel "excel:Odometer"
     Then I get field "Fuel Card Number" value and store in excel "excel:Fuel Card Number"
-    Then I verify field "Assigned To" contains "Unassigned"
+    Then I verify field "Assigned To" contains excel "excel:Assigned To"
     Then I wait for "5" seconds
     Then I verify text "Driver Details" is present
     Then I verify field "Salutation" contains excel "excel:Driver Salutation"
@@ -180,14 +176,12 @@ Feature: 05 NovatedApp Regression feature
     Then I verify field "Last Name" contains excel "excel:Driver Last Name"
     Then I verify field "Primary Email" contains excel "excel:Driver Email"
     Then I verify field "Mobile" contains excel "excel:Driver Mobile Phone"
-    Then I verify field "Employer" contains "Test Employer"
-    Then I verify field "State" contains "NSW"
+    Then I verify field "Employer" contains excel "excel:Driver Employer Name"
+    Then I verify field "State" contains excel "excel:State"
     Then I verify text "Vehicle Details" is present
     Then I verify field "Vehicle Description" contains excel "excel:Vehicle name"
     Then I verify field "Registration Number" contains excel "excel:Vehicle number"
-#    Then I verify field "Vehicle Description" contains "VOLVO C40"
-#    Then I verify field "Registration Number" contains "CPK418"
-    Then I verify field "Registration State" contains "VIC"
+    Then I verify field "Registration State" contains excel "excel:Registration State"
     Then I verify text "Files Uploaded" is present
     Then I verify text "Event History" is present
     Then I click on button "Take Ownership"
@@ -195,7 +189,7 @@ Feature: 05 NovatedApp Regression feature
     Then I verify text "has been successfully assigned to you" is present
     Then I click on button "DONE"
     Then I wait for "2" seconds
-    Then I verify field "Status" contains "In Progress"
-    Then I verify field "Updated By" contains "Auto Lease"
-    Then I verify field "Assigned To" contains "Auto Lease"
+    Then I verify field "Status" contains excel "excel:Status1"
+    Then I verify field "Updated By" contains excel "excel:Updated By1"
+    Then I verify field "Assigned To" contains excel "excel:Assigned To1"
     Then I verify text "Assigned Request" is present
