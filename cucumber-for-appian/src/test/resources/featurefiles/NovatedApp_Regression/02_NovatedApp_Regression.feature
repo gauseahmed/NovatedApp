@@ -13,6 +13,7 @@ Feature: 02 NovatedApp Regression feature
   Scenario: TC001_Roadside Assistance_Verify driver can submit and verify request of reimbursement claim
     Given I setup environment and login with role "DriverInafune"
     Given I load test data for "TC001" from "02_NovatedApp_Regression"
+    When I get lease end date and store in excel "End Of Lease Date"
     Then I click on element with text "Submit Reimbursement"
     Then I get field "Last Odometer Reading" value and store in excel "excel:Last Odometer Reading"
     Then I get field "Last Reading Date" value and store in excel "excel:Last Reading Date"
@@ -57,7 +58,7 @@ Feature: 02 NovatedApp Regression feature
     Then I verify grid "[1]" column "Type" row "[1]" contains "Proof of Payment"
     Then I verify field "Submitted By" contains excel "excel:Submitted By"
     Then I verify field "Request Submission Date" contains excel "excel:Reading Date"
-    Then I verify field "Updated By" contains "Toshihiko Inafune"
+    Then I verify field "Updated By" contains excel "excel:Updated By"
     Then I verify field "Last Update Date" contains excel "excel:Reading Date"
     Then I wait for "2" seconds
 
@@ -114,6 +115,7 @@ Feature: 02 NovatedApp Regression feature
   Scenario: TC003_Registration_Verify driver can submit and verify request of reimbursement claim
     Given I setup environment and login with role "DriverInafune"
     Given I load test data for "TC003" from "02_NovatedApp_Regression"
+    When I get lease end date and store in excel "End Of Lease Date"
     Then I click on element with text "Submit Reimbursement"
     Then I get field "Last Odometer Reading" value and store in excel "excel:Last Odometer Reading"
     Then I get field "Last Reading Date" value and store in excel "excel:Last Reading Date"
@@ -132,7 +134,8 @@ Feature: 02 NovatedApp Regression feature
     Then I wait for "1" seconds
     Then I populate field "Amount" with excel "excel:Amount ($)"
     Then I populate field "Policy Start Date" with excel "excel:Policy Start Date"
-    Then I populate field "New Registration Expiry Date" with excel "excel:New Registration Expiry Date"
+    Then I populate field "New Registration Expiry Date" with "TODAY+7"
+    Then I get field "New Registration Expiry Date" value and store in excel "New Registration Expiry Date"
    Then I populate field "File Upload[20]" with excel "excel:Proof of Payment"
     Then I populate field "File Upload[22]" with excel "excel:Tax Invoice"
     Then I click on button "Save"
@@ -161,9 +164,9 @@ Feature: 02 NovatedApp Regression feature
     Then I verify grid "[1]" column "File Name" row "[1]" contains "Invoice.pdf"
     Then I verify grid "[1]" column "Type" row "[1]" contains "Proof of Payment"
      ## Update - below Submitted By and Updated By based on logged in driver user
-    Then I verify field "Submitted By" contains "Toshihiko Inafune"
+    Then I verify field "Submitted By" contains excel "excel:Submitted By"
     Then I verify field "Request Submission Date" contains excel "excel:Reading Date"
-    Then I verify field "Updated By" contains "Toshihiko Inafune"
+    Then I verify field "Updated By" contains excel "excel:Updated By"
     Then I verify field "Last Update Date" contains excel "excel:Reading Date"
     Then I wait for "2" seconds
 
@@ -222,6 +225,7 @@ Feature: 02 NovatedApp Regression feature
   Scenario: TC005_Comprehensive Insurance_Verify driver can submit and verify request of reimbursement claim with Insurance Australia Group (IAG)
     Given I setup environment and login with role "DriverInafune"
     Given I load test data for "TC005" from "02_NovatedApp_Regression"
+    When I get lease end date and store in excel "End Of Lease Date"
     Then I click on element with text "Submit Reimbursement"
     Then I get field "Last Odometer Reading" value and store in excel "excel:Last Odometer Reading"
     Then I get field "Last Reading Date" value and store in excel "excel:Last Reading Date"
@@ -270,9 +274,9 @@ Feature: 02 NovatedApp Regression feature
     Then I verify grid "[1]" column "File Name" row "[1]" contains "Invoice.pdf"
     Then I verify grid "[1]" column "Type" row "[1]" contains "Proof of Payment"
      ## Update - below Submitted By and Updated By based on logged in driver user
-    Then I verify field "Submitted By" contains "Toshihiko Inafune"
+    Then I verify field "Submitted By" contains excel "excel:Submitted By"
     Then I verify field "Request Submission Date" contains excel "excel:Reading Date"
-    Then I verify field "Updated By" contains "Toshihiko Inafune"
+    Then I verify field "Updated By" contains excel "excel:Updated By"
     Then I verify field "Last Update Date" contains excel "excel:Reading Date"
     Then I wait for "2" seconds
 
@@ -331,6 +335,7 @@ Feature: 02 NovatedApp Regression feature
   Scenario: TC007_Comprehensive Insurance_Verify driver can submit and verify request of reimbursement claim with AAI Limited (Vero Insurance)
     Given I setup environment and login with role "DriverInafune"
     Given I load test data for "TC007" from "02_NovatedApp_Regression"
+    When I get lease end date and store in excel "End Of Lease Date"
     Then I click on element with text "Submit Reimbursement"
     Then I get field "Last Odometer Reading" value and store in excel "excel:Last Odometer Reading"
     Then I get field "Last Reading Date" value and store in excel "excel:Last Reading Date"
@@ -379,9 +384,9 @@ Feature: 02 NovatedApp Regression feature
     Then I verify grid "[1]" column "File Name" row "[1]" contains "Invoice.pdf"
     Then I verify grid "[1]" column "Type" row "[1]" contains "Proof of Payment"
      ## Update - below Submitted By and Updated By based on logged in driver user
-    Then I verify field "Submitted By" contains "Toshihiko Inafune"
+    Then I verify field "Submitted By" contains excel "excel:Submitted By"
     Then I verify field "Request Submission Date" contains excel "excel:Reading Date"
-    Then I verify field "Updated By" contains "Toshihiko Inafune"
+    Then I verify field "Updated By" contains excel "excel:Updated By"
     Then I verify field "Last Update Date" contains excel "excel:Reading Date"
     Then I wait for "2" seconds
 

@@ -30,6 +30,26 @@ public final class TempoDateField extends AbstractTempoField {
     private TempoDateField(Settings settings) {
         super(settings);
     }
+    @Override
+    public Date parseDate(String value) throws ParseException {
+        value = value.trim().toUpperCase();
+        // Case 1: TODAY
+        if (value.equals("TODAY")) {
+            return new Date();
+        }
+        // Case 2: TODAY+N or TODAY-N
+        if (value.startsWith("TODAY")) {
+            int offset = 0;
+            if (value.contains("+")) {
+                offset = Integer.parseInt(value.split("\\+")[1]);
+            } else if (value.contains("-")) {
+                offset = -Integer.parseInt(value.split("-")[1]);
+            }
+            return DateUtils.addDays(new Date(), offset);
+        }
+        // Default – original behaviour
+        return new SimpleDateFormat(settings.getDateFormat()).parse(value);
+    }
 
     @Override
     public void populate(WebElement fieldLayout, String... params) throws ParseException {

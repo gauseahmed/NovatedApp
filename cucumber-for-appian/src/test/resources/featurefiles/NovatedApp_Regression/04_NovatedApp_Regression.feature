@@ -13,6 +13,7 @@ Feature: 04 NovatedApp Regression feature
   Scenario: TC001_Detailing_Verify driver can submit and verify request of reimbursement claim
     Given I setup environment and login with role "DriverInafune"
     Given I load test data for "TC001" from "04_NovatedApp_Regression"
+    When I get lease end date and store in excel "End Of Lease Date"
     Then I click on element with text "Submit Reimbursement"
     Then I get field "Last Odometer Reading" value and store in excel "excel:Last Odometer Reading"
     Then I get field "Last Reading Date" value and store in excel "excel:Last Reading Date"
@@ -117,6 +118,7 @@ Feature: 04 NovatedApp Regression feature
   Scenario: TC003_Car Wash_Verify driver can submit and verify request of reimbursement claim
     Given I setup environment and login with role "DriverInafune"
     Given I load test data for "TC003" from "04_NovatedApp_Regression"
+    When I get lease end date and store in excel "End Of Lease Date"
     Then I click on element with text "Submit Reimbursement"
     Then I get field "Last Odometer Reading" value and store in excel "excel:Last Odometer Reading"
     Then I get field "Last Reading Date" value and store in excel "excel:Last Reading Date"
@@ -221,6 +223,7 @@ Feature: 04 NovatedApp Regression feature
   Scenario: TC005_Verify driver can submit and verify request of reimbursement claim with other (Claim type other has been raised due to some spare damage.)
    Given I setup environment and login with role "DriverInafune"
     Given I load test data for "TC005" from "04_NovatedApp_Regression"
+    When I get lease end date and store in excel "End Of Lease Date"
     Then I click on element with text "Submit Reimbursement"
     Then I get field "Last Odometer Reading" value and store in excel "excel:Last Odometer Reading"
     Then I get field "Last Reading Date" value and store in excel "excel:Last Reading Date"
