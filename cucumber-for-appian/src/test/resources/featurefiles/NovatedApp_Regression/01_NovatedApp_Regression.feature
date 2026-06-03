@@ -13,6 +13,7 @@ Feature: 01 NovatedApp Regression feature
   Scenario: TC001_Maintenance_Verify driver can submit and verify request of reimbursement claim
     Given I setup environment and login with role "DriverInafune"
     Given I load test data for "TC001" from "01_NovatedApp_Regression"
+    When I get lease end date and store in excel "End Of Lease Date"
     Then I click on element with text "Submit Reimbursement"
     Then I get field "Last Odometer Reading" value and store in excel "excel:Last Odometer Reading"
     Then I get field "Last Reading Date" value and store in excel "excel:Last Reading Date"
@@ -37,6 +38,7 @@ Feature: 01 NovatedApp Regression feature
     Then I wait for "1" seconds
     Then I click on icon link "square-o"
     Then I click on button "Submit Claim"
+    Then I wait for "1" seconds
     Then I click on button "Yes"
     Then I verify text "Your request has been sent to the ORIX team." is present
     Then I click on button "DONE"
@@ -57,9 +59,9 @@ Feature: 01 NovatedApp Regression feature
     Then I verify grid "[1]" column "File Name" row "[1]" contains "Invoice.pdf"
     Then I verify grid "[1]" column "Type" row "[1]" contains "Proof of Payment"
     # Update - below Submitted By and Updated By based on logged in driver user
-    Then I verify field "Submitted By" contains "Toshihiko Inafune"
+    Then I verify field "Submitted By" contains excel "excel:Submitted By"
     Then I verify field "Request Submission Date" contains excel "excel:Reading Date"
-    Then I verify field "Updated By" contains "Toshihiko Inafune"
+    Then I verify field "Updated By" contains excel "excel:Updated By"
     Then I verify field "Last Update Date" contains excel "excel:Reading Date"
     Then I wait for "2" seconds
 
@@ -116,6 +118,7 @@ Feature: 01 NovatedApp Regression feature
   Scenario: TC003_Tyres_Verify driver can submit and verify request of reimbursement claim
     Given I setup environment and login with role "DriverInafune"
     Given I load test data for "TC003" from "01_NovatedApp_Regression"
+    When I get lease end date and store in excel "End Of Lease Date"
     Then I click on element with text "Submit Reimbursement"
     Then I get field "Last Odometer Reading" value and store in excel "excel:Last Odometer Reading"
     Then I get field "Last Reading Date" value and store in excel "excel:Last Reading Date"
@@ -217,6 +220,7 @@ Feature: 01 NovatedApp Regression feature
   Scenario: TC005_Rotate & Balance Wheels_Verify driver can submit and verify request of reimbursement claim
     Given I setup environment and login with role "DriverInafune"
     Given I load test data for "TC005" from "01_NovatedApp_Regression"
+    When I get lease end date and store in excel "End Of Lease Date"
     Then I click on element with text "Submit Reimbursement"
     Then I get field "Last Odometer Reading" value and store in excel "excel:Last Odometer Reading"
     Then I get field "Last Reading Date" value and store in excel "excel:Last Reading Date"
@@ -323,7 +327,9 @@ Feature: 01 NovatedApp Regression feature
   Scenario: TC007_Tyre Puncture_Verify driver can submit and verify request of reimbursement claim
     Given I setup environment and login with role "DriverInafune"
     Given I load test data for "TC007" from "01_NovatedApp_Regression"
+    When I get lease end date and store in excel "End Of Lease Date"
     Then I click on element with text "Submit Reimbursement"
+    Then I wait for "1" seconds
     Then I get field "Last Odometer Reading" value and store in excel "excel:Last Odometer Reading"
     Then I get field "Last Reading Date" value and store in excel "excel:Last Reading Date"
     Then I get field "Reading Date" value and store in excel "excel:Reading Date"
