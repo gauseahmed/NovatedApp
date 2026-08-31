@@ -11,10 +11,10 @@ Feature: 06 NovatedApp Regression feature
     And I set stop on error to "screenshot.stop.on.error"
 
   Scenario: TC001_Fuel Card_Verify driver can Replace Fuel Card with Reason for replacement as Stolen.
-    Given I setup environment and login with role "Driverjosh"
+    Given I setup environment and login with role "DriverInafune"
     Given I load test data for "TC001" from "06_NovatedApp_Regression"
     Then I get first card values and store in excel "excel:Vehicle number" and "excel:Vehicle name"
-    Then I get field "EOL Date" value and store in excel "excel:Lease End Date"
+    When I get lease end date and store in excel "End Of Lease Date"
     #Driver profile information
     Then I click on element with text "Profile"
     Then I get field "Salutation" value and store in excel "excel:Driver Salutation"
@@ -69,7 +69,7 @@ Feature: 06 NovatedApp Regression feature
     Then I wait for "2" seconds
     Then I verify text "Request Details" is present
     Then I verify field "Status" contains excel "excel:Status"
-#    Then I verify field "End Of Lease Date" contains excel "excel:Lease End Date"
+    Then I verify field "End Of Lease Date" contains excel "excel:End Of Lease Date"
     Then I verify field "Submitted By" contains excel "excel:Driver Name"
     Then I verify field "Submitted On" contains excel "excel:Request Submission Date"
     Then I verify field "Updated By" contains excel "excel:Driver Name"
@@ -104,7 +104,7 @@ Feature: 06 NovatedApp Regression feature
     Then I verify text "Assigned Request" is present
 
   Scenario: TC003_Verify driver can raise request to Cancel Fuel Card
-    Given I setup environment and login with role "Driverjosh"
+    Given I setup environment and login with role "DriverInafune"
     Given I load test data for "TC001" from "06_NovatedApp_Regression"
     Then I get first card values and store in excel "excel:Vehicle number" and "excel:Vehicle name"
     Then I get field "EOL Date" value and store in excel "excel:Lease End Date"
@@ -157,7 +157,7 @@ Feature: 06 NovatedApp Regression feature
     Then I wait for "2" seconds
     Then I verify text "Request Details" is present
     Then I verify field "Status" contains excel "excel:Status"
-#    Then I verify field "End Of Lease Date" contains excel "excel:Lease End Date"
+    Then I verify field "End Of Lease Date" contains excel "excel:End Of Lease Date"
     Then I verify field "Submitted By" contains excel "excel:Driver Name"
     Then I verify field "Submitted On" contains excel "excel:Request Submission Date"
     Then I verify field "Updated By" contains excel "excel:Driver Name"
