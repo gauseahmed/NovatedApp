@@ -23,8 +23,7 @@ Feature: 01 NovatedApp End2End feature
 #    Then I click on element with text "Submit Reimbursement"
 #    Then I get field "Last Odometer Reading" value and store in excel "excel:Last Odometer Reading"
      #Storing Driver profile information as first step to validate in future tasks
-#    Then I click on element with text "Profile"
-    Then I click on button with tooltip "Profile"
+    Then I click on element with text "Profile"
     Then I get field "Salutation" value and store in excel "excel:Driver Salutation"
     Then I get field "Legal First Name" value and store in excel "excel:Driver First Name"
     Then I get field "Legal Last Name" value and store in excel "excel:Driver Last Name"
