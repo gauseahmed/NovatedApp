@@ -15,7 +15,7 @@ Feature: 01 NovatedApp End2End feature
     Given I setup environment and login with role "DriverInafune"
     Given I load test data for "TC001" from "01_NovatedApp_End2End"
 #    Then I click on button with tooltip "Navigation"
-#    Then I wait for "1" seconds
+#    Then I wait for "1" secondsa
 #    Then I click on element with text "My Leases"
 #    Then I wait for "1" seconds
 #    Then I get first card values and store in excel "excel:Vehicle number" and "excel:Vehicle name"

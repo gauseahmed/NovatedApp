@@ -14,7 +14,7 @@ Feature: 08 NovatedApp End2End feature
     Given I setup environment and login with role "DriverSudeep"
     Given I load test data for "TC001" from "08_NovatedApp_End2End"
     Then I get first card values and store in excel "excel:Vehicle number" and "excel:Vehicle name"
-    #Then I get lease end date and store in excel "excel:Lease End Date"
+    #Then I get lease end date and store in excel "excel:Lease End Date"a
     Then I get field "EOL Date" value and store in excel "excel:EOL Date"
     Then I click on element with text "Submit Reimbursement"
     Then I get field "Last Odometer Reading" value and store in excel "excel:Last Odometer Reading"

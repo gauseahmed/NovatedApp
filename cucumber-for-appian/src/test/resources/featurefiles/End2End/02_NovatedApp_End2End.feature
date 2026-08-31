@@ -54,7 +54,7 @@ Feature: 02 NovatedApp End2End feature
     Then I verify text "Your request has been sent to the ORIX team." is present
     Then I click on button "DONE"
     Then I wait for "5" seconds
-    #Then I get field "Odometer" value and store in excel "excel:Odometer"
+    #Then I get field "Odometer" value and store in excel "excel:Odometer"a
     #Then I verify field "Odometer" contains excel "excel:Odometer"
     Then I click on element with text "Requests"
     Then I wait for "1" seconds

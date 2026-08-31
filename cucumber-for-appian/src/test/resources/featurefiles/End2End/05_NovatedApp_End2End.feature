@@ -18,7 +18,7 @@ Feature: 05 NovatedApp End2End feature
     Then I click on element with text "My Leases"
     Then I wait for "1" seconds
     Then I get first card values and store in excel "excel:Vehicle number" and "excel:Vehicle name"
-    #Then I get lease end date and store in excel "excel:Lease End Date"
+    #Then I get lease end date and store in excel "excel:Lease End Date"a
     Then I click on element with text "Submit Reimbursement"
     Then I get field "Last Odometer Reading" value and store in excel "excel:Last Odometer Reading"
      #Storing Driver profile information as first step to validate in future tasks
