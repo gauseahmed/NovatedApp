@@ -1,5 +1,5 @@
-@End2End
-Feature: 07 NovatedApp End2End feature
+@Regression
+Feature: 08 NovatedApp Regression feature
 
   Background: Setup background and environment
     Given I setup browser
@@ -11,18 +11,14 @@ Feature: 07 NovatedApp End2End feature
     And I set stop on error to "screenshot.stop.on.error"
 
   Scenario: TC001_Collecting Driver details to validate in future task
-    Given I setup environment and login with role "DriverMightycats"
-    Given I load test data for "TC001" from "07_NovatedApp_End2End"
-    Then I click on button with tooltip "Navigation"
-    Then I wait for "1" seconds
-    Then I click on element with text "My Leases"
+    Given I setup environment and login with role "Driverandrew"
+    Given I load test data for "TC001" from "08_NovatedApp_Regression"
     Then I get first card values and store in excel "excel:Vehicle number" and "excel:Vehicle name"
-    Then I wait for "3" seconds
     #Then I get lease end date and store in excel "excel:Lease End Date"
     Then I get field "EOL Date" value and store in excel "excel:EOL Date"
     Then I click on element with text "Submit Reimbursement"
     Then I get field "Last Odometer Reading" value and store in excel "excel:Last Odometer Reading"
-     #Storing Driver profile information as first step to validate in future tasksa
+     #Storing Driver profile information as first step to validate in future tasks
     Then I click on element with text "Profile"
     Then I get field "Salutation" value and store in excel "excel:Driver Salutation"
     Then I get field "Legal First Name" value and store in excel "excel:Driver First Name"
@@ -34,11 +30,8 @@ Feature: 07 NovatedApp End2End feature
     Then I get field "Employer Name" value and store in excel "excel:Driver Employer Name"
 
   Scenario: TC002_Verify driver can request payout
-    Given I setup environment and login with role "DriverMightycats"
-    Given I load test data for "TC001" from "07_NovatedApp_End2End"
-    Then I click on button with tooltip "Navigation"
-    Then I wait for "1" seconds
-    Then I click on element with text "My Leases"
+    Given I setup environment and login with role "Driverandrew"
+    Given I load test data for "TC001" from "08_NovatedApp_Regression"
     Then I wait for "1" seconds
     Then I click on element with text "Request Payout"
     Then I wait for "2" seconds
@@ -65,11 +58,11 @@ Feature: 07 NovatedApp End2End feature
     Then I populate field "Notes" with "Uploaded documents Successfully"
     Then I click on button "UPLOAD"
     Then I click on button "Complete Form: Motor Vehicle Declaration Form"
-    #Then I verify button "Save Draft" is enabled
+    Then I verify button "Save Draft" is enabled
     Then I verify field "Vehicle Description" contains excel "excel:Vehicle name"
     Then I verify field "Registration Number" contains excel "excel:Vehicle number"
     Then I verify field "Driver" contains excel "excel:Driver Name"
-    Then I verify field "Effective Date" contains excel "excel:EOL Date"
+    #Then I verify field "Effective Date" contains excel "excel:EOL Date"
     Then I verify field "Last Odometer Reading" contains excel "excel:Last Odometer Reading"
     Then I get field "Last Reading Date" value and store in excel "excel:Last Reading Date"
     Then I get field "Reading Date" value and store in excel "excel:Reading Date"
@@ -77,11 +70,11 @@ Feature: 07 NovatedApp End2End feature
     Then I click on element with text "Add Declarations"
     Then I populate field "Date Surrendered" with excel "excel:Reading Date"
     Then I populate field "Date Collected" with excel "excel:Reading Date"
-    #Then I verify field "No. of FBT Days" contains "-1 day(s)"
-    Then I populate field "Unavailable Reason" with "Garaged At Employer's Premises"
+    Then I verify field "No. of FBT Days" contains "-1 day(s)"
+    Then I populate field "Reason" with "declaration has been done"
     Then I verify button "Save" is enabled
     Then I verify button "Close" is enabled
-    Then I click on button "Save[2]"
+    Then I click on button "Save[3]"
     Then I click on icon link "square-o"
     Then I click on button "Submit"
     Then I verify text "Are you sure you want to submit this Motor Declarartion Entries" is present
@@ -96,7 +89,7 @@ Feature: 07 NovatedApp End2End feature
     Then I get grid "[1]" column "[1]" row "[1]" value and store in excel "excel:Reference Number"
     Then I click on grid "[1]" column "[1]" row "[1]"
     Then I wait for "2" seconds
-    #Then I verify field "Vehicle" contains excel "excel:Vehicle"
+    Then I verify field "Vehicle" contains excel "excel:Vehicle"
     Then I verify button "Cancel Claim" is enabled
     Then I verify field "Request Type" contains excel "excel:Request Type"
     Then I verify field "Odometer Reading" contains excel "excel:Odometer"
@@ -107,8 +100,8 @@ Feature: 07 NovatedApp End2End feature
 
 
   Scenario: TC003_Verify Novated Lease  Specialist can view and action payout requests
-    Given I setup environment and login with role "LeaseSpecialist"
-    Given I load test data for "TC002" from "07_NovatedApp_End2End"
+    Given I setup environment and login with role "AutoLease"
+    Given I load test data for "TC002" from "08_NovatedApp_Regression"
     Then I click on site page "Requests"
     Then I populate field "Search Requests" with excel "excel:Reference Number"
     Then I click on button "Search"
