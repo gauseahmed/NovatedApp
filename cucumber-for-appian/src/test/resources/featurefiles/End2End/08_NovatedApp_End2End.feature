@@ -11,7 +11,7 @@ Feature: 08 NovatedApp End2End feature
     And I set stop on error to "screenshot.stop.on.error"
 
   Scenario: TC001_Collecting Driver details to validate in future task
-    Given I setup environment and login with role "Driverstephen"
+    Given I setup environment and login with role "DriverSudeep"
     Given I load test data for "TC001" from "08_NovatedApp_End2End"
     Then I get first card values and store in excel "excel:Vehicle number" and "excel:Vehicle name"
     #Then I get lease end date and store in excel "excel:Lease End Date"
@@ -30,7 +30,7 @@ Feature: 08 NovatedApp End2End feature
     Then I get field "Employer Name" value and store in excel "excel:Driver Employer Name"
 
   Scenario: TC002_Validate that a Driver can submit an End of Lease decision to Terminate Lease and choose to Payout Residual Value
-    Given I setup environment and login with role "Driverstephen"
+    Given I setup environment and login with role "DriverSudeep"
     Given I load test data for "TC001" from "08_NovatedApp_End2End"
     Then I wait for "1" seconds
     Then I click on button "End of Lease Decision"
@@ -88,8 +88,6 @@ Feature: 08 NovatedApp End2End feature
     Then I verify text "Vehicle Details" is present
     Then I verify field "Vehicle Description" contains excel "excel:Vehicle name"
     Then I verify field "Registration Number" contains excel "excel:Vehicle number"
-#    Then I verify field "Vehicle Description" contains "VOLVO C40"
-#    Then I verify field "Registration Number" contains "CPK418"
     #Then I verify field "Registration State" contains "VIC"
     Then I verify text "Event History" is present
     Then I click on button "Take Ownership"
@@ -109,7 +107,7 @@ Feature: 08 NovatedApp End2End feature
     Then I click on button "Submit"
 
   Scenario: TC004_Validate that a Driver can submit an End of Lease decision to Terminate Lease and choose to Payout Residual Value
-    Given I setup environment and login with role "Driverstephen"
+    Given I setup environment and login with role "Driverandrew"
     Given I load test data for "TC001" from "08_NovatedApp_End2End"
     Then I verify text "Intend to Terminate on" is present
     #Then I verify field "End of Lease Decisions" contains excel "excel:Last Reading Date"

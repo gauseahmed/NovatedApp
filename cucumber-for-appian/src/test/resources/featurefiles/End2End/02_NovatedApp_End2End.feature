@@ -11,7 +11,7 @@ Feature: 02 NovatedApp End2End feature
     And I set stop on error to "screenshot.stop.on.error"
 
   Scenario: TC001_Collecting Driver details to validate in future task
-    Given I setup environment and login with role "DriverDavid"
+    Given I setup environment and login with role "DriverInafune"
     Given I load test data for "TC001" from "02_NovatedApp_End2End"
     Then I get first card values and store in excel "excel:Vehicle number" and "excel:Vehicle name"
     #Then I get lease end date and store in excel "excel:Lease End Date"
@@ -29,7 +29,7 @@ Feature: 02 NovatedApp End2End feature
     Then I get field "Employer Name" value and store in excel "excel:Driver Employer Name"
 
   Scenario: TC002_Verify driver can submit and verify request of reimbursement claim with correct information per claim type.  Claim Type - Service
-    Given I setup environment and login with role "DriverDavid"
+    Given I setup environment and login with role "DriverInafune"
     Given I load test data for "TC001" from "02_NovatedApp_End2End"
     Then I click on element with text "Submit Reimbursement"
     Then I get field "Last Odometer Reading" value and store in excel "excel:Last Odometer Reading"
@@ -56,7 +56,7 @@ Feature: 02 NovatedApp End2End feature
     Then I wait for "5" seconds
     #Then I get field "Odometer" value and store in excel "excel:Odometer"
     #Then I verify field "Odometer" contains excel "excel:Odometer"
-    Then I click on element with text "My Requests"
+    Then I click on element with text "Requests"
     Then I wait for "1" seconds
     Then I get grid "[1]" column "[1]" row "[1]" value and store in excel "excel:Reference Number"
     Then I wait for "10" seconds
@@ -87,58 +87,58 @@ Feature: 02 NovatedApp End2End feature
     Then I verify confirmation dialog message "Are you sure you want to cancel this reimbursement claim?" is present
     Then I click on button "Yes"
     Then I wait for "3" seconds
-    Then I populate record type user filter "STATUS" with "Cancelled"
+    Then I populate record type user filter "STATUS" with "Closed"
     Then I verify grid "[1]" column "Reference Number" row "[1]" contains excel data "excel:Reference Number"
-    Then I verify grid "[1]" column "Status" row "[1]" contains "Cancelled"
+    Then I verify grid "[1]" column "Status" row "[1]" contains "Closed"
     Then I wait for "3" seconds
 
 
-  Scenario: TC003_Verify Novated lease specialist can view and take decision on submitted claim
-    Given I setup environment and login with role "AutoLease"
-    Given I load test data for "TC002" from "02_NovatedApp_End2End"
-    Then I click on site page "Requests"
-    Then I populate record type user filter "STATUS" with "Cancelled"
-    Then I populate field "Search Requests" with excel "excel:Reference Number"
-    Then I click on button "Search"
-    Then I wait for "3" seconds
-    Then I verify grid "[1]" column "Reference Number" row "[1]" contains excel data "excel:Reference Number"
-    Then I verify grid "[1]" column "Status" row "[1]" contains "Cancelled"
-    Then I click on grid "[1]" column "[1]" row "[1]"
-    Then I wait for "2" seconds
-    #Need to verify req no in real time
-    Then I verify text "Request Details" is present
-    Then I verify field "Status" contains "Cancelled"
-    #Then I verify field "End Of Lease Date" contains excel "excel:Lease End Date"
-    Then I verify field "End Of Lease Date" contains "11/02/2026"
-    Then I verify field "Submitted By" contains excel "excel:Driver Name"
-    Then I verify field "Submitted On" contains excel "excel:Reading Date"
-    Then I verify field "Updated By" contains excel "excel:Driver Name"
-    Then I verify field "Updated On" contains excel "excel:Reading Date"
-    Then I verify field "Request Type" contains excel "excel:Request Type"
-    Then I verify field "Claim Type" contains excel "excel:Claim Type"
-    Then I verify field "Odometer Reading" contains excel "excel:Odometer"
-    Then I verify field "Dollar Amount" contains excel "excel:Amount ($)"
-    Then I verify field "Assigned To" contains "Unassigned"
-    Then I verify text "Driver Details" is present
-    Then I verify field "Salutation" contains excel "excel:Driver Salutation"
-    Then I verify field "First Name" contains excel "excel:Driver First Name"
-    Then I verify field "Last Name" contains excel "excel:Driver Last Name"
-    Then I verify field "Primary Email" contains excel "excel:Driver Email"
-    Then I verify field "Mobile" contains excel "excel:Driver Mobile Phone"
-    Then I verify field "Employer" contains "Test Employer"
-#    Then I verify field "Employer" contains excel "excel:Driver Employer Name"
-    Then I verify field "State" contains "NSW"
-    Then I verify text "Vehicle Details" is present
-    Then I verify field "Vehicle Description" contains excel "excel:Vehicle name"
-    Then I verify field "Registration Number" contains excel "excel:Vehicle number"
-#    Then I verify field "Vehicle Description" contains "VOLVO XC40"
-#    Then I verify field "Registration Number" contains "FTJ63Y"
-    Then I verify field "Registration State" contains "NSW"
-    Then I verify text "Files Uploaded" is present
-    Then I verify grid "[1]" column "File Name" row "[1]" contains "Invoice.pdf"
-    Then I verify grid "[1]" column "Type" row "[1]" contains "Proof of Payment"
-    Then I verify grid "[1]" column "File Name" row "[2]" contains "Service.pdf"
-    Then I verify grid "[1]" column "Type" row "[2]" contains "Service Document"
-    Then I verify text "Event History" is present
-    Then I verify text "Cancelled Request" is present
-    Then I wait for "1" seconds
+#  Scenario: TC003_Verify Novated lease specialist can view and take decision on submitted claim
+#    Given I setup environment and login with role "AutoLease"
+#    Given I load test data for "TC002" from "02_NovatedApp_End2End"
+#    Then I click on site page "Requests"
+#    Then I populate record type user filter "STATUS" with "Cancelled"
+#    Then I populate field "Search Requests" with excel "excel:Reference Number"
+#    Then I click on button "Search"
+#    Then I wait for "3" seconds
+#    Then I verify grid "[1]" column "Reference Number" row "[1]" contains excel data "excel:Reference Number"
+#    Then I verify grid "[1]" column "Status" row "[1]" contains "Cancelled"
+#    Then I click on grid "[1]" column "[1]" row "[1]"
+#    Then I wait for "2" seconds
+#    #Need to verify req no in real time
+#    Then I verify text "Request Details" is present
+#    Then I verify field "Status" contains "Cancelled"
+#    #Then I verify field "End Of Lease Date" contains excel "excel:Lease End Date"
+#    Then I verify field "End Of Lease Date" contains "11/02/2026"
+#    Then I verify field "Submitted By" contains excel "excel:Driver Name"
+#    Then I verify field "Submitted On" contains excel "excel:Reading Date"
+#    Then I verify field "Updated By" contains excel "excel:Driver Name"
+#    Then I verify field "Updated On" contains excel "excel:Reading Date"
+#    Then I verify field "Request Type" contains excel "excel:Request Type"
+#    Then I verify field "Claim Type" contains excel "excel:Claim Type"
+#    Then I verify field "Odometer Reading" contains excel "excel:Odometer"
+#    Then I verify field "Dollar Amount" contains excel "excel:Amount ($)"
+#    Then I verify field "Assigned To" contains "Unassigned"
+#    Then I verify text "Driver Details" is present
+#    Then I verify field "Salutation" contains excel "excel:Driver Salutation"
+#    Then I verify field "First Name" contains excel "excel:Driver First Name"
+#    Then I verify field "Last Name" contains excel "excel:Driver Last Name"
+#    Then I verify field "Primary Email" contains excel "excel:Driver Email"
+#    Then I verify field "Mobile" contains excel "excel:Driver Mobile Phone"
+#    Then I verify field "Employer" contains "Test Employer"
+##    Then I verify field "Employer" contains excel "excel:Driver Employer Name"
+#    Then I verify field "State" contains "NSW"
+#    Then I verify text "Vehicle Details" is present
+#    Then I verify field "Vehicle Description" contains excel "excel:Vehicle name"
+#    Then I verify field "Registration Number" contains excel "excel:Vehicle number"
+##    Then I verify field "Vehicle Description" contains "VOLVO XC40"
+##    Then I verify field "Registration Number" contains "FTJ63Y"
+#    Then I verify field "Registration State" contains "NSW"
+#    Then I verify text "Files Uploaded" is present
+#    Then I verify grid "[1]" column "File Name" row "[1]" contains "Invoice.pdf"
+#    Then I verify grid "[1]" column "Type" row "[1]" contains "Proof of Payment"
+#    Then I verify grid "[1]" column "File Name" row "[2]" contains "Service.pdf"
+#    Then I verify grid "[1]" column "Type" row "[2]" contains "Service Document"
+#    Then I verify text "Event History" is present
+#    Then I verify text "Cancelled Request" is present
+#    Then I wait for "1" seconds

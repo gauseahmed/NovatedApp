@@ -11,7 +11,7 @@ Feature: 06 NovatedApp End2End feature
     And I set stop on error to "screenshot.stop.on.error"
 
   Scenario: TC001_Collecting Driver details to validate in future task
-    Given I setup environment and login with role "Driverneil"
+    Given I setup environment and login with role "DriverNeeti"
     Given I load test data for "TC001" from "06_NovatedApp_End2End"
     Then I get first card values and store in excel "excel:Vehicle number" and "excel:Vehicle name"
     #Then I get lease end date and store in excel "excel:Lease End Date"
@@ -29,7 +29,7 @@ Feature: 06 NovatedApp End2End feature
     Then I get field "Employer Name" value and store in excel "excel:Driver Employer Name"
 
   Scenario: TC002_Verify driver can raise request to Cancel Fuel Card
-    Given I setup environment and login with role "Driverneil"
+    Given I setup environment and login with role "DriverNeeti"
     Given I load test data for "TC001" from "06_NovatedApp_End2End"
     Then I wait for "1" seconds
     Then I click on element with text "Fuel Cards"

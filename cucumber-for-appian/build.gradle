@@ -211,7 +211,7 @@ tasks.register('generateCucumberReport') {
         }
 
         // Configure metadata
-        def config = new Configuration(outputDir, "ORIX SMB Automated Tests")
+        def config = new Configuration(outputDir, "ORIX Novated App Automated Tests")
         config.setBuildNumber("1.0")
 
         // Generate report
