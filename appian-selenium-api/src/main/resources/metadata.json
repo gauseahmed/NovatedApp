@@ -2205,6 +2205,10 @@
                 "label": "xpathAbsoluteCard",
                 "value": "//div[contains(@class, 'CardLayout')]//span[contains(translate(text(),'ABCDEFGHIJKLMNOPQRSTUVWXYZÁÉÍÓÚÜÑÇ','abcdefghijklmnopqrstuvwxyzáéíóúüñç'),%1$s)]"
               },
+              {
+                "label": "xpathAbsoluteReadOnlyParagraph",
+                "value": "//p[contains(@class,'ParagraphText---richtext_paragraph')][starts-with(translate(normalize-space(.),'ABCDEFGHIJKLMNOPQRSTUVWXYZ','abcdefghijklmnopqrstuvwxyz'),translate(%1$s,'ABCDEFGHIJKLMNOPQRSTUVWXYZ','abcdefghijklmnopqrstuvwxyz'))]/ancestor::div[contains(@class,'FieldLayout---field_layout')][1]"
+              },
 
               {
                 "label": "xpathAbsoluteTermCard",

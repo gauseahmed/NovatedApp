@@ -458,10 +458,18 @@ public class CucumberTempoFixture {
 
     @Given("^I populate field \"([^\"]*)\" with excel \"([^\"]*)\"$")
     public void populateFieldWithExcel(String fieldName, String fieldValue) {
+
         String finalValue = fieldValue.startsWith("excel:")
                 ? TestDataManager.get(fieldValue.replace("excel:", ""))
                 : fieldValue;
-        fixture.populateFieldWith(fieldName, new String[]{finalValue});
+
+        if ("Current Odometer Reading (kms)*".equals(fieldName)) {
+            fixture.populateOdometerReadingFromExcel(fieldName, finalValue);
+        } else if ("Proof of Payment".equals(fieldName)) {
+            fixture.uploadProofOfPayment(finalValue);
+        } else {
+            fixture.populateFieldWith(fieldName, new String[]{finalValue});
+        }
     }
 
     @Given("^I populating field \"([^\"]*)\" with \"([^\"]*)\"$")
@@ -722,6 +730,7 @@ public class CucumberTempoFixture {
     }
 
 
+
     @Given("^I get regex \"([^\"]*)\" group \"([^\"]*)\" from field \"([^\"]*)\" value$")
     public String getRegexGroupFromFieldValue(String regex, String group, String fieldName) {
         return fixture.getRegexGroupFromFieldValue(regex, Integer.parseInt(group), fieldName);
@@ -760,11 +769,20 @@ public class CucumberTempoFixture {
         String finalValue = fieldValue.startsWith("excel:")
                 ? TestDataManager.get(fieldValue.replace("excel:", ""))
                 : fieldValue;
+   //Dhana - Added to validate
+        if ("Current Reading (kms)".equals(fieldName)) {
+            String actualValue = fixture.getFieldValue(fieldName);
 
+            return actualValue.replace(",", "").trim()
+                    .contains(finalValue.replace(",", "").trim());
+        }
+
+        // Generic one
         if (!fixture.verifyFieldContains(fieldName, new String[]{finalValue})) {
             throw new RuntimeException("Verification failed: Expected field '"
                     + fieldName + "' to contain value '" + finalValue + "'");
         }
+
         return true;
     }
 

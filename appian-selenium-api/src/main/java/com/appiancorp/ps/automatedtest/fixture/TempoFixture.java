@@ -41,6 +41,7 @@ import com.appiancorp.ps.automatedtest.tempo.task.TempoTaskSort;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.json.JSONObject;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
 import java.util.List;
@@ -1084,6 +1085,54 @@ public class TempoFixture extends BaseFixture {
         TempoFieldFactory.getInstance(settings).populateMultiple(fieldValues, fieldName);
     }
 
+
+    public void uploadProofOfPayment(String filePath) {
+
+        String xpath =
+                "//input[@type='file' " +
+                        "and contains(@class,'MultipleFileUploadWidget---ui-inaccessible')]";
+
+        WebElement fileInput =
+                settings.getDriver().findElement(By.xpath(xpath));
+
+        fileInput.sendKeys(filePath);
+    }
+    public void populateOdometerReadingFromExcel(String fieldName, String fieldValue) {
+        String xpath =
+                "//*[self::h4 or self::p]" +
+                        "[normalize-space(.)=" + xpathLiteral(fieldName) + "]" +
+                        "/parent::div" +
+                        "/following-sibling::div[contains(@class,'FieldLayout---field_layout')][1]" +
+                        "//input[@type='text'][1]";
+
+        WebElement input = settings.getDriver().findElement(By.xpath(xpath));
+
+        input.clear();
+        input.sendKeys(fieldValue);
+    }
+    private String xpathLiteral(String value) {
+        if (!value.contains("'")) {
+            return "'" + value + "'";
+        }
+
+        if (!value.contains("\"")) {
+            return "\"" + value + "\"";
+        }
+
+        String[] parts = value.split("'", -1);
+        StringBuilder result = new StringBuilder("concat(");
+
+        for (int i = 0; i < parts.length; i++) {
+            if (i > 0) {
+                result.append(", \"'\", ");
+            }
+            result.append("'").append(parts[i]).append("'");
+        }
+
+        result.append(")");
+        return result.toString();
+    }
+
     public void populatingFieldWith(String fieldName, String[] fieldValues) {
         TempoField.getInstance(settings).waitFor(fieldName);
         TempoFields2Factory.getInstance(settings).populateMultiple(fieldValues, fieldName);
@@ -1372,10 +1421,87 @@ public class TempoFixture extends BaseFixture {
      * @return The field value
      */
     public String getFieldValue(String fieldName) {
-        TempoField.getInstance(settings).waitFor(fieldName);
-        return TempoFieldFactory.getInstance(settings).capture(fieldName);
-    }
 
+               int occurrence = 1;
+        String baseFieldName = fieldName;
+
+        java.util.regex.Matcher matcher =
+                java.util.regex.Pattern
+                        .compile("^(.*)\\[(\\d+)\\]$")
+                        .matcher(fieldName);
+
+        if (matcher.matches()) {
+            baseFieldName = matcher.group(1).trim();
+            occurrence = Integer.parseInt(matcher.group(2));
+        }
+
+        String lowerFieldName = baseFieldName.toLowerCase();
+
+        String upper =
+                "ABCDEFGHIJKLMNOPQRSTUVWXYZÁÉÍÓÚÜÑÇ";
+
+        String lower =
+                "abcdefghijklmnopqrstuvwxyzáéíóúüñç";
+
+        /*
+         * First find the requested field heading.
+         *
+         * [occurrence] is applied to the FIELD HEADING,
+         * not to the value elements.
+         */
+        String fieldXpath =
+                "(//strong[" +
+                        "contains(" +
+                        "translate(normalize-space(.),'" +
+                        upper + "','" + lower + "')," +
+                        "'" + lowerFieldName + "'" +
+                        ")" +
+                        "])[" + occurrence + "]";
+
+        List<WebElement> fieldHeaders =
+                settings.getDriver()
+                        .findElements(By.xpath(fieldXpath));
+
+        if (!fieldHeaders.isEmpty()) {
+
+            WebElement fieldHeader = fieldHeaders.get(0);
+
+            /*
+             * Picker fields:
+             * Find the picker value inside the same column/card
+             * as the selected field.
+             */
+            String pickerXpath =
+                    "ancestor::div[contains(@class,'ColumnLayout---column')][1]" +
+                            "//span[contains(@class,'PickerTokenWidget---label')]";
+
+            List<WebElement> pickerValues =
+                    fieldHeader.findElements(By.xpath(pickerXpath));
+
+            if (!pickerValues.isEmpty()) {
+
+                WebElement pickerValue = pickerValues.get(0);
+
+                String value = pickerValue.getAttribute("title");
+
+                if (value == null || value.trim().isEmpty()) {
+                    value = pickerValue.getText();
+                }
+
+                return value == null ? "" : value.trim();
+            }
+        }
+
+        /*
+         * Fall back to existing framework behaviour
+         * for non-Picker fields.
+         */
+        TempoField.getInstance(settings).waitFor(fieldName);
+
+        return TempoFieldFactory
+                .getInstance(settings)
+                .capture(fieldName);
+    }
     /**
      * Returns the value of a field using a placeholder.<br>
      * <br>
