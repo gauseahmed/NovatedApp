@@ -27,6 +27,8 @@ public abstract class AbstractTempoField extends AppianObject
             Settings.getByConstant("xpathAbsoluteFieldLayoutLabel");
     public static final String XPATH_ABSOLUTE_FILE_UPLOAD_LABEL =
             Settings.getByConstant("xpathAbsoluteFileUploadLabel");
+    private static final String XPATH_ABSOLUTE_READ_ONLY_PARAGRAPH =
+            Settings.getByConstant("xpathAbsoluteReadOnlyParagraph");
     public static final String XPATH_ABSOLUTE_FIELD_LAYOUT_PLACEHOLDER =
             Settings.getByConstant("xpathAbsoluteFieldLayoutPlaceholder");
     public static final String XPATH_ABSOLUTE_FIELD_LAYOUT_INSTRUCTIONS =
@@ -46,8 +48,24 @@ public abstract class AbstractTempoField extends AppianObject
 
     @Override
     public WebElement getWebElement(String... params) {
-        return settings.getDriver().findElement(By.xpath(getXpath(params)));
+
+        try {
+            // Existing field locator
+            return settings.getDriver().findElement(
+                    By.xpath(getXpath(params))
+            );
+
+        } catch (org.openqa.selenium.NoSuchElementException e) {
+
+            String fieldName = getParam(0, params);
+
+            // Fallback for paragraph-based read-only fields
+            return settings.getDriver().findElement(
+                    By.xpath(getReadOnlyParagraphXpath(fieldName))
+            );
+        }
     }
+
 
     @Override
     public String getXpath(String... params) {
@@ -85,13 +103,39 @@ public abstract class AbstractTempoField extends AppianObject
         String fieldName = getParam(0, params);
 
         try {
-            (new WebDriverWait(settings.getDriver(), Duration.ofSeconds(settings.getTimeoutSeconds()))).until(
-                    ExpectedConditions.visibilityOfElementLocated(By.xpath(getXpath(params))));
+            WebDriverWait wait = new WebDriverWait(
+                    settings.getDriver(),
+                    Duration.ofSeconds(settings.getTimeoutSeconds())
+            );
+
+            try {
+                // Existing field locator
+                wait.until(
+                        ExpectedConditions.visibilityOfElementLocated(
+                                By.xpath(getXpath(params))
+                        )
+                );
+
+            } catch (TimeoutException e) {
+
+                // Fallback for paragraph-based read-only fields
+                wait.until(
+                        ExpectedConditions.visibilityOfElementLocated(
+                                By.xpath(getReadOnlyParagraphXpath(fieldName))
+                        )
+                );
+            }
+
         } catch (Exception e) {
             throw ExceptionBuilder.build(e, settings, "Wait for Field", fieldName);
         }
     }
-
+    private String getReadOnlyParagraphXpath(String fieldName) {
+        return xpathFormat(
+                XPATH_ABSOLUTE_READ_ONLY_PARAGRAPH,
+                fieldName
+        );
+    }
     @Override
     public boolean waitForReturn(boolean waitForPresent, int timeout, String... params) {
         String fieldName = getParam(0, params);

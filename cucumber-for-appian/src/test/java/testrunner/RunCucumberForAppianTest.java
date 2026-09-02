@@ -14,7 +14,7 @@ import org.junit.runner.RunWith;
                 "json:target/cucumber-reports/cucumber.json"
         },
         monochrome = true,
-        tags = "@End2End and not @Regression"
+        tags = "@End2End"
 )
 public class RunCucumberForAppianTest {
 }

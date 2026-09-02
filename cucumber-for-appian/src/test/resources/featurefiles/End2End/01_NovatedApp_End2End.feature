@@ -14,122 +14,160 @@ Feature: 01 NovatedApp End2End feature
   Scenario: TC001_Collecting Driver details to validate in future task
     Given I setup environment and login with role "DriverInafune"
     Given I load test data for "TC001" from "01_NovatedApp_End2End"
-#    Then I click on button with tooltip "Navigation"
-#    Then I wait for "1" secondsa
-#    Then I click on element with text "My Leases"
-#    Then I wait for "1" seconds
-#    Then I get first card values and store in excel "excel:Vehicle number" and "excel:Vehicle name"
-#    Then I get lease end date and store in excel "excel:Lease End Date"
-#    Then I click on element with text "Submit Reimbursement"
-#    Then I get field "Last Odometer Reading" value and store in excel "excel:Last Odometer Reading"
-     #Storing Driver profile information as first step to validate in future tasks
-    Then I click on element with text "Profile"
+    Then I wait for "2" seconds
+    Then I get field "Latest Reading (kms)" value and store in excel "excel:Last Odometer Reading"
+    Then I click on element with text "Profile[2]"
+    Then I wait for "2" seconds
+    Then I verify text "Please ensure your details are accurate." is present
     Then I get field "Salutation" value and store in excel "excel:Driver Salutation"
-    Then I get field "Legal First Name" value and store in excel "excel:Driver First Name"
-    Then I get field "Legal Last Name" value and store in excel "excel:Driver Last Name"
+    Then I get field "Legal First Name" value and store in excel "excel:Legal First Name"
+    Then I get field "Legal Middle Name" value and store in excel "excel:Legal Middle Name"
+    Then I get field "Legal Last Name" value and store in excel "excel:Legal Last Name"
     Then I get field "Date of Birth" value and store in excel "excel:Driver Date of Birth"
     Then I get field "Mobile Phone" value and store in excel "excel:Driver Mobile Phone"
     Then I get field "Email" value and store in excel "excel:Driver Email"
-    Then I get field "Your Residential Address" value and store in excel "excel:Driver Your Residential Address"
+    Then I get field "Work Email" value and store in excel "excel:Driver Work Email"
     Then I get field "Employer Name" value and store in excel "excel:Driver Employer Name"
+    Then I get field "Your Residential Address[2]" value and store in excel "excel:Driver Residential Address"
+    Then I get field "Your Postal Address[2]" value and store in excel "excel:Driver Postal Address"
+    Then I get field "Account Name" value and store in excel "excel:Account Name"
+    Then I get field "Account Holder" value and store in excel "excel:Account Holder"
+    Then I get field "Your Postal Address" value and store in excel "excel:Driver Postal Address"
+    Then I verify text "Automotive Specification Data Powered by JATO Dynamics Limited." is present
+    Then I verify text "© JATO Dynamics Limited 1990 – 2024. All rights reserved. JATO uses all reasonable endeavours to provide accurate and complete information however, JATO does not warrant accuracy or completeness of the data provided. User assumes sole responsibility for results obtained from the use of the data." is present
+
 
   Scenario: TC002_Verify driver can submit and verify request of reimbursement claim with correct information per claim type. Claim Type - Fuel
     Given I setup environment and login with role "DriverInafune"
-    Given I load test data for "TC001" from "01_NovatedApp_End2End"
-#    Then I click on button with tooltip "Navigation"
-#    Then I wait for "1" seconds
-#    Then I click on element with text "My Leases"
-#    Then I wait for "1" seconds
-    Then I click on element with text "Submit Reimbursement"
-    Then I verify field "Last Odometer Reading" contains excel "excel:Last Odometer Reading"
-    Then I get field "Last Reading Date" value and store in excel "excel:Last Reading Date"
-    Then I get field "Reading Date" value and store in excel "excel:Reading Date"
-    Then I verify field "New Odometer" is present
-    Then I verify text "Claims" is present
-    #Need to add auto calculation
-    Then I populate field "New Odometer" with excel "excel:New Odometer"
-    Then I click on icon link "plus-circle"
-    Then I populate field "Claim Type" with excel "excel:Claim Type"
+    Given I load test data for "TC002" from "01_NovatedApp_End2End"
+    Then I verify text "Have a reimbursement to make?" is present
+    Then I click on element with text "Claim Reimbursement[2]"
+    Then I wait for "2" seconds
+    Then I verify text "Claim Reimbursement" is present
+    Then I populate field "Current Odometer Reading (kms)*" with excel "excel:New Odometer"
+    Then I click on button "Next"
+    Then I verify text "Select Claim Type" is present
+    Then I verify text "You can select a maximum of " is present
+    Then I verify text "Not sure if the expense is claimable?" is present
+    Then I verify text "See FAQs" is present
+    Then I click on element with text "Fuel"
+    Then I click on button "Next"
+    #Claim Details
+    Then I verify text "Claim Details" is present
+    Then I verify text "Fuel" is present
     Then I wait for "1" seconds
-    Then I populate field "Amount" with excel "excel:Amount ($)"
-    Then I populate field "File Upload[20]" with excel "excel:Proof of Payment"
-    Then I click on button "Save"
-    Then I wait for "1" seconds
-    Then I click on icon link "square-o"
-    Then I click on button "Submit Claim"
-    Then I click on button "Yes"
-    Then I verify text "Your request has been sent to the ORIX team." is present
-    Then I click on button "DONE"
-    Then I wait for "5" seconds
-    Then I click on element with text "Requests"
-    Then I wait for "1" seconds
-    Then I get grid "[1]" column "[1]" row "[1]" value and store in excel "excel:Reference Number"
-    Then I wait for "10" seconds
+    Then I populate field "Amount (inc. GST)" with excel "excel:Amount"
+    Then I populate field "Date of Purchase" with "TODAY"
+    Then I populate field "Proof of Payment" with excel "excel:Proof of Payment"
+    Then I wait for "3" seconds
+    Then I verify text "This should be evidence of payment made for the service." is present
+    Then I click on button "Next"
+
+    Then I verify text "Fuel" is present
+    Then I verify text " Claim Details Complete" is present
+    Then I verify text "Would you like to add another claim type?" is present
+    Then I verify text "You can submit upto" is present
+    Then I verify text "more claims" is present
+    Then I verify text "Add Another Claim" is present
+    Then I click on button "Next"
+
+    Then I verify text "Confirm Bank Details" is present
+    Then I verify field "Bank Name" contains excel "excel:Bank Name"
+    Then I verify field "Account Name" contains excel "excel:Account Name"
+    Then I verify field "BSB" contains excel "excel:BSB"
+    Then I verify field "Account Number" contains excel "excel:Account Number"
+    Then I click on button "Next"
+
+  #Review
+    Then I verify text "Review" is present
+    Then I verify text "Odometer Reading" is present
+    Then I verify field "Current Reading (kms)" contains excel "excel:New Odometer"
+    Then I click on button "Submit"
+
+   Then I verify text "Submit Reimbursement Claim" is present
+   Then I verify text "Are you sure you want to submit this claim? You won't be able to make changes once it has been submitted." is present
+   Then I click on button "Submit Claim"
+   Then I wait for "2" seconds
+
+   Then I verify text "Claim Submitted" is present
+   Then I verify text "Your reimbursement claim has been submitted successfully." is present
+   Then I verify text "Your can track its progress in the Requests tab." is present
+   Then I verify text "We will respond to your request within 5 business days." is present
+   Then I click on element with text "Go To Requests"
+   Then I wait for "3" seconds
+
+    #Validate Request details
+    Given I setup environment and login with role "DriverInafune"
+    Given I load test data for "TC002" from "01_NovatedApp_End2End"
+    Given I click on element with text "Requests[2]"
+    And I wait for "2" seconds
+    When I populate record type user filter "Request Type" with "Reimbursement Claim"
+    And I sort record grid by column "Submitted On"
+    And I sort record grid by column "Submitted On"
+    Then I get grid "[1]" column "Reference Number" row "[1]" value and store in excel "excel:Request Ref Number"
+
+    Then I click on grid "[1]" column "Reference Number" row "[1]"
+    Then I verify field "Vehicle" contains excel "excel:Vehicle"
+    Then I verify field "Request Type" contains excel "excel:Request Type"
+    Then I verify field "Claim Type" contains excel "excel:Claim Type"
+    Then I verify field "Claim Amount" contains excel "excel:Amount ($)"
+    Then I verify grid "Submitted Documents" column "File Name" row "[1]" contains "Invoice.pdf"
+    Then I verify grid "Submitted Documents" column "Type" row "[1]" contains "Proof of Payment"
+    Then I verify field "Submitted By" contains excel "excel:Submitted By"
+    Then I verify field "Updated By" contains excel "excel:Updated By"
+    
+    Then I verify text "Request Event History" is present
+    Then I verify text "Toshihiko Inafune" is present
+    Then I verify text "Created Request" is present
+
+  
+  Scenario: TC003_Verify Novated lease specialist can view and take decision on submitted claim
+    Given I setup environment and login with role "AutoLease"
+    Given I load test data for "TC003" from "01_NovatedApp_End2End"
+    Then I click on site page "Requests"
+#    Then I populate field "Search Requests" with excel "excel:Reference Number"
+#    Then I click on button "Search"
+    Then I wait for "3" seconds
     Then I click on grid "[1]" column "[1]" row "[1]"
     Then I wait for "2" seconds
-    Then I verify field "Vehicle" contains excel "excel:Vehicle"
-    Then I verify button "Cancel Claim" is enabled
+    #Need to verify req no in real time
+    Then I verify text "Request Details" is present
+    Then I verify field "Status" contains "New"
+    Then I verify field "End Of Lease Date" contains excel "excel:Lease End Date"
+    Then I verify field "Submitted By" contains excel "excel:Driver Name"
+#    Then I verify field "Submitted On" contains excel "excel:Reading Date"
+    Then I verify field "Updated By" contains excel "excel:Driver Name"
+#    Then I verify field "Updated On" contains excel "excel:Reading Date"
     Then I verify field "Request Type" contains excel "excel:Request Type"
     Then I verify field "Claim Type" contains excel "excel:Claim Type"
     Then I verify field "Odometer Reading" contains excel "excel:Odometer"
-    Then I verify field "Claim Amount" contains excel "excel:Amount ($)"
-    Then I verify text "Submitted Documents" is present
+    Then I verify field "Dollar Amount" contains excel "excel:Amount ($)"
+    Then I verify field "Assigned To" contains "Unassigned"
+    Then I wait for "5" seconds
+    Then I verify text "Driver Details" is present
+    Then I verify field "Salutation" contains excel "excel:Driver Salutation"
+    Then I verify field "First Name" contains excel "excel:Legal First Name"
+    Then I verify field "Last Name" contains excel "excel:Legal Last Name"
+    Then I verify field "Primary Email" contains excel "excel:Driver Email"
+    Then I verify field "Mobile" contains excel "excel:Driver Mobile Phone"
+    Then I verify field "Employer" contains "Test Employer"
+    Then I verify field "State" contains "NSW"
+    Then I verify text "Vehicle Details" is present
+    Then I verify field "Vehicle Description" contains excel "excel:Vehicle name"
+    Then I verify field "Registration Number" contains excel "excel:Vehicle number"
+    Then I verify field "Registration State" contains "NSW"
+    Then I verify text "Files Uploaded" is present
     Then I verify grid "[1]" column "File Name" row "[1]" contains "Invoice.pdf"
     Then I verify grid "[1]" column "Type" row "[1]" contains "Proof of Payment"
-    Then I verify field "Submitted By" contains excel "excel:Driver Name"
-    Then I verify field "Request Submission Date" contains excel "excel:Reading Date"
-    Then I verify field "Updated By" contains excel "excel:Driver Name"
-    Then I verify field "Last Update Date" contains excel "excel:Reading Date"
+    Then I verify text "Event History" is present
+    Then I click on button "Take Ownership"
+    Then I wait for "1" seconds
+    Then I verify text "has been successfully assigned to you" is present
+    Then I click on button "DONE"
     Then I wait for "2" seconds
-
-#  Scenario: TC003_Verify Novated lease specialist can view and take decision on submitted claim
-#    Given I setup environment and login with role "AutoLease"
-#    Given I load test data for "TC002" from "01_NovatedApp_End2End"
-#    Then I click on site page "Requests"
-#    Then I populate field "Search Requests" with excel "excel:Reference Number"
-#    Then I click on button "Search"
-#    Then I wait for "3" seconds
-#    Then I click on grid "[1]" column "[1]" row "[1]"
-#    Then I wait for "2" seconds
-#    #Need to verify req no in real time
-#    Then I verify text "Request Details" is present
-#    Then I verify field "Status" contains "New"
-#    #Then I verify field "End Of Lease Date" contains excel "excel:Lease End Date"
-#    Then I verify field "End Of Lease Date" contains excel "excel:Lease End Date"
-#    Then I verify field "Submitted By" contains excel "excel:Driver Name"
-#    Then I verify field "Submitted On" contains excel "excel:Reading Date"
-#    Then I verify field "Updated By" contains excel "excel:Driver Name"
-#    Then I verify field "Updated On" contains excel "excel:Reading Date"
-#    Then I verify field "Request Type" contains excel "excel:Request Type"
-#    Then I verify field "Claim Type" contains excel "excel:Claim Type"
-#    Then I verify field "Odometer Reading" contains excel "excel:Odometer"
-#    Then I verify field "Dollar Amount" contains excel "excel:Amount ($)"
-#    Then I verify field "Assigned To" contains "Unassigned"
-#    Then I wait for "5" seconds
-#    Then I verify text "Driver Details" is present
-#    Then I verify field "Salutation" contains excel "excel:Driver Salutation"
-#    Then I verify field "First Name" contains excel "excel:Driver First Name"
-#    Then I verify field "Last Name" contains excel "excel:Driver Last Name"
-#    Then I verify field "Primary Email" contains excel "excel:Driver Email"
-#    Then I verify field "Mobile" contains excel "excel:Driver Mobile Phone"
-#    Then I verify field "Employer" contains "Test Employer"
-#    Then I verify field "State" contains "NSW"
-#    Then I verify text "Vehicle Details" is present
-#    Then I verify field "Vehicle Description" contains excel "excel:Vehicle name"
-#    Then I verify field "Registration Number" contains excel "excel:Vehicle number"
-#    Then I verify field "Registration State" contains "NSW"
-#    Then I verify text "Files Uploaded" is present
-#    Then I verify grid "[1]" column "File Name" row "[1]" contains "Invoice.pdf"
-#    Then I verify grid "[1]" column "Type" row "[1]" contains "Proof of Payment"
-#    Then I verify text "Event History" is present
-#    Then I click on button "Take Ownership"
-#    Then I wait for "1" seconds
-#    Then I verify text "has been successfully assigned to you" is present
-#    Then I click on button "DONE"
-#    Then I wait for "2" seconds
-#    Then I verify field "Status" contains "In Progress"
-#    Then I verify field "Updated By" contains "Auto Lease"
-#    Then I verify field "Assigned To" contains "Auto Lease"
-#    Then I verify text "Assigned Request" is present
-##    Then I click on button "Action Checklist"
-##    Then I click on button "Submit"
+    Then I verify field "Status" contains "In Progress"
+    Then I verify field "Updated By" contains "Auto Lease"
+    Then I verify field "Assigned To" contains "Auto Lease"
+    Then I verify text "Assigned Request" is present
+#    Then I click on button "Action Checklist"
+#    Then I click on button "Submit"
