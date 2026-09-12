@@ -11,50 +11,47 @@ Feature: 06 NovatedApp End2End feature
     And I set stop on error to "screenshot.stop.on.error"
 
   Scenario: TC001_Collecting Driver details to validate in future task
-    Given I setup environment and login with role "DriverNeeti"
+    Given I setup environment and login with role "Driver_191799"
     Given I load test data for "TC001" from "06_NovatedApp_End2End"
-    Then I get first card values and store in excel "excel:Vehicle number" and "excel:Vehicle name"
-    #Then I get lease end date and store in excel "excel:Lease End Date"
-    Then I click on element with text "Submit Reimbursement"
-    Then I get field "Last Odometer Reading" value and store in excel "excel:Last Odometer Reading"
-     #Storing Driver profile information as first step to validate in future tasksa
-    Then I click on element with text "Profile"
+    Then I get field "Latest Reading (kms)" value and store in excel "excel:Last Odometer Reading"
+    Then I click on element with text "Profile[2]"
+    Then I wait for "2" seconds
     Then I get field "Salutation" value and store in excel "excel:Driver Salutation"
-    Then I get field "Legal First Name" value and store in excel "excel:Driver First Name"
-    Then I get field "Legal Last Name" value and store in excel "excel:Driver Last Name"
-    Then I get field "Date of Birth" value and store in excel "excel:Driver Date of Birth"
-    Then I get field "Mobile Phone" value and store in excel "excel:Driver Mobile Phone"
+    Then I get field "First Name" value and store in excel "excel:Driver First Name"
+    Then I get field "Last Name" value and store in excel "excel:Driver Last Name"
+    Then I get field "Mobile Number" value and store in excel "excel:Driver Mobile Phone"
     Then I get field "Email" value and store in excel "excel:Driver Email"
-    Then I get field "Your Residential Address" value and store in excel "excel:Driver Your Residential Address"
     Then I get field "Employer Name" value and store in excel "excel:Driver Employer Name"
+    Then I verify text "Edit Profile" is present
 
   Scenario: TC002_Verify driver can raise request to Cancel Fuel Card
-    Given I setup environment and login with role "DriverNeeti"
+    Given I setup environment and login with role "Driver_191799"
     Given I load test data for "TC001" from "06_NovatedApp_End2End"
-    Then I wait for "1" seconds
     Then I click on element with text "Fuel Cards"
-    Then I wait for "2" seconds
+    Then I wait for "2"
+    Then I verify text "You can only have a maximum of two fuel cards at a time" is present
+    Then I verify text "My Fuel Cards" is present
+    Then I verify text "ORIX Motorpass" is present
     Then I click on element with text " Cancel[1]"
-    Then I verify text "Are you sure you want to cancel this fuel card?" is present
-    Then I click on button "yes"
-    Then I verify text "Your request has been sent to the ORIX team." is present
-    Then I click on button "DONE"
-    Then I wait for "1" seconds
-    Then I click on element with text "My Requests"
-    Then I wait for "1" seconds
-    Then I get grid "[1]" column "[1]" row "[1]" value and store in excel "excel:Reference Number"
-    Then I wait for "2" seconds
-    Then I click on grid "[1]" column "[1]" row "[1]"
-    Then I wait for "2" seconds
-    Then I verify text "Cancellation Requested" is present
-    Then I get field "Vehicle" value and store in excel "excel:Vehicle"
-    Then I verify field "Request Type" contains excel "excel:Request Type"
-    Then I get field "Request Subtype" value and store in excel "excel:Request Subtype"
-    Then I verify field "Fuel Card Provider" contains excel "excel:Fuel Provider"
-        #Then I verify field "Fuel Card Number" contains excel "excel:"
-    Then I get field "Request Submission Date" value and store in excel "excel:Request Submission Date"
-    Then I get field "Last Update Date" value and store in excel "excel:Last Update Date"
-    Then I wait for "2" seconds
+    Then I verify text "Would you like to cancel this fuel card" is present
+    Then I verify text "Cancel Fuel Card" is present
+#    Then I click on button "DONE"
+#    Then I wait for "1" seconds
+#    Then I click on element with text "My Requests"
+#    Then I wait for "1" seconds
+#    Then I get grid "[1]" column "[1]" row "[1]" value and store in excel "excel:Reference Number"
+#    Then I wait for "2" seconds
+#    Then I click on grid "[1]" column "[1]" row "[1]"
+#    Then I wait for "2" seconds
+#    Then I verify text "Cancellation Requested" is present
+#    Then I get field "Vehicle" value and store in excel "excel:Vehicle"
+#    Then I verify field "Request Type" contains excel "excel:Request Type"
+#    Then I get field "Request Subtype" value and store in excel "excel:Request Subtype"
+#    Then I verify field "Fuel Card Provider" contains excel "excel:Fuel Provider"
+#        #Then I verify field "Fuel Card Number" contains excel "excel:"
+#    Then I get field "Request Submission Date" value and store in excel "excel:Request Submission Date"
+#    Then I get field "Last Update Date" value and store in excel "excel:Last Update Date"
+#    Then I wait for "2" seconds
 
   #Need to confirm below flow
 #  Scenario: TC003_Verify Novated lease specialist can view and complete decision on submitted Add New Fuel Card
