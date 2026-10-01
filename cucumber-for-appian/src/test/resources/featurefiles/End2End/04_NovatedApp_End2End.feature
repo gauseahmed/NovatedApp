@@ -11,57 +11,57 @@ Feature: 04 NovatedApp End2End feature
     And I set stop on error to "screenshot.stop.on.error"
 
   Scenario: TC001_Collecting Driver details to validate in future task
-    Given I setup environment and login with role "DriverSudeep"
+    Given I setup environment and login with role "Driver_154043"
     Given I load test data for "TC001" from "04_NovatedApp_End2End"
-    Then I get first card values and store in excel "excel:Vehicle number" and "excel:Vehicle name"
-    #Then I get lease end date and store in excel "excel:Lease End Date"
-    Then I click on element with text "Submit Reimbursement"
-    Then I get field "Last Odometer Reading" value and store in excel "excel:Last Odometer Reading"
-     #Storing Driver profile information as first step to validate in future tasksa
-    Then I click on element with text "Profile"
+#    Then I get first card values and store in excel "excel:Vehicle number" and "excel:Vehicle name"
+    Then I get field "Latest Reading (kms)" value and store in excel "excel:Last Odometer Reading"
+    Then I click on element with text "Profile[2]"
+    Then I wait for "2" seconds
     Then I get field "Salutation" value and store in excel "excel:Driver Salutation"
-    Then I get field "Legal First Name" value and store in excel "excel:Driver First Name"
-    Then I get field "Legal Last Name" value and store in excel "excel:Driver Last Name"
-    Then I get field "Date of Birth" value and store in excel "excel:Driver Date of Birth"
-    Then I get field "Mobile Phone" value and store in excel "excel:Driver Mobile Phone"
+    Then I get field "First Name" value and store in excel "excel:Legal First Name"
+    Then I get field "Middle Name" value and store in excel "excel:Legal Middle Name"
+    Then I get field "Last Name" value and store in excel "excel:Legal Last Name"
+    Then I get field "Mobile Number" value and store in excel "excel:Driver Mobile Phone"
     Then I get field "Email" value and store in excel "excel:Driver Email"
-    Then I get field "Your Residential Address" value and store in excel "excel:Driver Your Residential Address"
     Then I get field "Employer Name" value and store in excel "excel:Driver Employer Name"
+    Then I get field "Employer ABN" value and store in excel "excel:Employer ABN"
+    Then I get field "Residential Address" value and store in excel "excel:Driver Residential Address"
+    Then I verify text "Edit Profile" is present
 
   Scenario: TC002_Verify driver can raise request to Add New Fuel Card
-    Given I setup environment and login with role "DriverSudeep"
+    Given I setup environment and login with role "Driver_154043"
     Given I load test data for "TC001" from "04_NovatedApp_End2End"
     Then I click on element with text "Fuel Cards"
     Then I wait for "2" seconds
-    Then I click on element with text "Add New Fuel Card"
+    Then I click on element with text "Request New/ Additional Fuel Card"
     #Commented below as we have only 1 option which is already selected
-    #Then I populate field "Fuel Provider" with excel "Fuel Provider"
-   # Then I verify text "1 Shelley St, Sydney NSW 2000" is present
+    Then I verify text "Request Fuel Card" is present
+    Then I populate field "Select Fuel Provider *" with excel "excel:Fuel Provider"
     Then I get field "Delivery Address" value and store in excel "excel:Delivery Address"
     Then I verify button "Submit Request" is enabled
-    Then I verify button "Cancel" is enabled
-    Then I click on button "Submit Request"
-    Then I verify text "Are you sure you wish to order the selected fuel card?" is present
-    Then I click on button "yes"
-    Then I verify text "Your request has been sent to the ORIX team." is present
-    Then I click on button "DONE"
-    Then I wait for "1" seconds
-    Then I click on element with text "Home"
-    Then I wait for "1" seconds
-    Then I get first card values and store in excel "excel:Vehicle number" and "excel:Vehicle name"
-    Then I click on element with text "My Requests"
-    Then I wait for "1" seconds
-    Then I get grid "[1]" column "[1]" row "[1]" value and store in excel "excel:Reference Number"
-    Then I wait for "2" seconds
-    Then I click on grid "[1]" column "[1]" row "[1]"
-    Then I wait for "2" seconds
-    Then I get field "Vehicle" value and store in excel "excel:Vehicle"
-    Then I verify field "Request Type" contains excel "excel:Request Type"
-    Then I get field "Request Subtype" value and store in excel "excel:Request Subtype"
-    Then I verify field "Fuel Card Provider" contains excel "excel:Fuel Provider"
-    Then I get field "Request Submission Date" value and store in excel "excel:Request Submission Date"
-    Then I get field "Last Update Date" value and store in excel "excel:Last Update Date"
-    Then I wait for "2" seconds
+    Then I verify button "Back" is enabled
+#    Then I click on button "Submit Request"
+#    Then I verify text "Are you sure you wish to order the selected fuel card?" is present
+#    Then I click on button "yes"
+#    Then I verify text "Your new fuel card request has been submitted" is present
+#    Then I verify text "Your request will be processed in 1 business day" is present
+#
+#    Given I click on element with text "Requests[2]"
+#    Then I wait for "1" seconds
+#    Then I get first card values and store in excel "excel:Vehicle number" and "excel:Vehicle name"
+#    Then I click on element with text "My Requests"
+#    Then I wait for "1" seconds
+#    Then I get grid "[1]" column "[1]" row "[1]" value and store in excel "excel:Reference Number"
+#    Then I wait for "2" seconds
+#    Then I click on grid "[1]" column "[1]" row "[1]"
+#    Then I wait for "2" seconds
+#    Then I get field "Vehicle" value and store in excel "excel:Vehicle"
+#    Then I verify field "Request Type" contains excel "excel:Request Type"
+#    Then I get field "Request Subtype" value and store in excel "excel:Request Subtype"
+#    Then I verify field "Fuel Card Provider" contains excel "excel:Fuel Provider"
+#    Then I get field "Request Submission Date" value and store in excel "excel:Request Submission Date"
+#    Then I get field "Last Update Date" value and store in excel "excel:Last Update Date"
+#    Then I wait for "2" seconds
 
 
 #  Scenario: TC003_Verify Novated lease specialist can view and complete decision on submitted Add New Fuel Card

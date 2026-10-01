@@ -463,14 +463,28 @@ public class CucumberTempoFixture {
                 ? TestDataManager.get(fieldValue.replace("excel:", ""))
                 : fieldValue;
 
-        if ("Current Odometer Reading (kms)*".equals(fieldName)) {
+        if ("Current Odometer Reading*".equals(fieldName)) {
+
             fixture.populateOdometerReadingFromExcel(fieldName, finalValue);
-        } else if ("Proof of Payment".equals(fieldName)) {
-            fixture.uploadProofOfPayment(finalValue);
+
+        } else if (isFileUploadField(fieldName)) {
+
+            fixture.uploadFile(fieldName, finalValue, 1);
+
         } else {
+
             fixture.populateFieldWith(fieldName, new String[]{finalValue});
         }
     }
+
+    private boolean isFileUploadField(String fieldName) {
+
+        return fieldName.equals("Service Document")
+                || fieldName.equals("Proof of Payment")
+                || fieldName.equals("Tax Invoice");
+    }
+
+
 
     @Given("^I populating field \"([^\"]*)\" with \"([^\"]*)\"$")
     public void populatingFieldWith(String fieldName, String fieldValue) {

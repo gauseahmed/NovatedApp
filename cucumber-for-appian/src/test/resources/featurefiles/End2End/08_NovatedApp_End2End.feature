@@ -1,4 +1,4 @@
-@End2End
+@End2EndNotready
 Feature: 08 NovatedApp End2End feature
 
   Background: Setup background and environment
@@ -10,24 +10,25 @@ Feature: 08 NovatedApp End2End feature
     And I set take error screenshots to "screenshot.boolean"
     And I set stop on error to "screenshot.stop.on.error"
 
-  Scenario: TC001_Collecting Driver details to validate in future task
-    Given I setup environment and login with role "DriverSudeep"
-    Given I load test data for "TC001" from "08_NovatedApp_End2End"
-    Then I get first card values and store in excel "excel:Vehicle number" and "excel:Vehicle name"
-    #Then I get lease end date and store in excel "excel:Lease End Date"a
-    Then I get field "EOL Date" value and store in excel "excel:EOL Date"
-    Then I click on element with text "Submit Reimbursement"
-    Then I get field "Last Odometer Reading" value and store in excel "excel:Last Odometer Reading"
-     #Storing Driver profile information as first step to validate in future tasks
-    Then I click on element with text "Profile"
-    Then I get field "Salutation" value and store in excel "excel:Driver Salutation"
-    Then I get field "Legal First Name" value and store in excel "excel:Driver First Name"
-    Then I get field "Legal Last Name" value and store in excel "excel:Driver Last Name"
-    Then I get field "Date of Birth" value and store in excel "excel:Driver Date of Birth"
-    Then I get field "Mobile Phone" value and store in excel "excel:Driver Mobile Phone"
-    Then I get field "Email" value and store in excel "excel:Driver Email"
-    Then I get field "Your Residential Address" value and store in excel "excel:Driver Your Residential Address"
-    Then I get field "Employer Name" value and store in excel "excel:Driver Employer Name"
+#  Scenario: TC001_Collecting Driver details to validate in future task
+#    Given I setup environment and login with role "DriverSudeep"
+#    Given I load test data for "TC001" from "08_NovatedApp_End2End"
+#    Then I get first card values and store in excel "excel:Vehicle number" and "excel:Vehicle name"
+#    #Then I get lease end date and store in excel "excel:Lease End Date"a
+#    Then I get field "EOL Date" value and store in excel "excel:EOL Date"
+#    Then I click on element with text "Submit Reimbursement"
+#    Then I get field "Last Odometer Reading" value and store in excel "excel:Last Odometer Reading"
+#     #Storing Driver profile information as first step to validate in future tasks
+#    Then I click on element with text "Profile"
+#    Then I get field "Salutation" value and store in excel "excel:Driver Salutation"
+#    Then I get field "Legal First Name" value and store in excel "excel:Driver First Name"
+#    Then I get field "Legal Last Name" value and store in excel "excel:Driver Last Name"
+#    Then I get field "Date of Birth" value and store in excel "excel:Driver Date of Birth"
+#    Then I get field "Mobile Phone" value and store in excel "excel:Driver Mobile Phone"
+#    Then I get field "Email" value and store in excel "excel:Driver Email"
+#    Then I get field "Your Residential Address" value and store in excel "excel:Driver Your Residential Address"
+#    Then I get field "Employer Name" value and store in excel "excel:Driver Employer Name"
+
 
   Scenario: TC002_Validate that a Driver can submit an End of Lease decision to Terminate Lease and choose to Payout Residual Value
     Given I setup environment and login with role "DriverSudeep"

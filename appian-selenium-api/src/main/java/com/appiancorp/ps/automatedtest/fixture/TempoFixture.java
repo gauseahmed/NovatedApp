@@ -1086,6 +1086,48 @@ public class TempoFixture extends BaseFixture {
     }
 
 
+    private String xpathLiteral(String value) {
+        if (!value.contains("'")) {
+            return "'" + value + "'";
+        }
+
+        if (!value.contains("\"")) {
+            return "\"" + value + "\"";
+        }
+
+        String[] parts = value.split("'");
+        StringBuilder result = new StringBuilder("concat(");
+
+        for (int i = 0; i < parts.length; i++) {
+            if (i > 0) {
+                result.append(", \"'\", ");
+            }
+            result.append("'").append(parts[i]).append("'");
+        }
+
+        result.append(")");
+        return result.toString();
+    }
+
+    public void uploadFile(String fieldName, String filePath, int index) {
+
+        String xpath =
+                "//*[self::strong or self::span]" +
+                        "[normalize-space(.)=" + xpathLiteral(fieldName) +
+                        " or normalize-space(.)=" + xpathLiteral(fieldName + " *") + "]" +
+                        "/ancestor::div[contains(@class,'FieldLayout---field_layout')][1]" +
+                        "/following-sibling::*[.//input[@type='file' " +
+                        "and contains(@class,'MultipleFileUploadWidget---ui-inaccessible')]][1]" +
+                        "//input[@type='file' " +
+                        "and contains(@class,'MultipleFileUploadWidget---ui-inaccessible')]" +
+                        "[" + index + "]";
+
+        WebElement fileInput =
+                settings.getDriver().findElement(By.xpath(xpath));
+
+        fileInput.sendKeys(filePath);
+    }
+
     public void uploadProofOfPayment(String filePath) {
 
         String xpath =
@@ -1110,28 +1152,7 @@ public class TempoFixture extends BaseFixture {
         input.clear();
         input.sendKeys(fieldValue);
     }
-    private String xpathLiteral(String value) {
-        if (!value.contains("'")) {
-            return "'" + value + "'";
-        }
 
-        if (!value.contains("\"")) {
-            return "\"" + value + "\"";
-        }
-
-        String[] parts = value.split("'", -1);
-        StringBuilder result = new StringBuilder("concat(");
-
-        for (int i = 0; i < parts.length; i++) {
-            if (i > 0) {
-                result.append(", \"'\", ");
-            }
-            result.append("'").append(parts[i]).append("'");
-        }
-
-        result.append(")");
-        return result.toString();
-    }
 
     public void populatingFieldWith(String fieldName, String[] fieldValues) {
         TempoField.getInstance(settings).waitFor(fieldName);
