@@ -24,6 +24,7 @@ Feature: 05 NovatedApp End2End feature
     Then I get field "Employer Name" value and store in excel "excel:Driver Employer Name"
     Then I verify text "Edit Profile" is present
 
+
   Scenario: TC002_Verify driver can raise request to Replace Fuel Card with reason Lost
     Given I setup environment and login with role "Driver_10581"
     Given I load test data for "TC001" from "05_NovatedApp_End2End"

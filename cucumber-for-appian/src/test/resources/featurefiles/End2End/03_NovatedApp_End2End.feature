@@ -96,7 +96,6 @@ Feature: 03 NovatedApp End2End feature
     Then I verify text "We will respond to your request within 5 business days." is present
     Then I verify text "Go To Requests" is present
     Then I wait for "3" seconds
-
     #Validate Request details
     Given I setup environment and login with role "Driver_191799"
     Given I load test data for "TC002" from "03_NovatedApp_End2End"

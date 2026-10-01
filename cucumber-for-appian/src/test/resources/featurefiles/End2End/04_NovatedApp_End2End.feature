@@ -41,7 +41,6 @@ Feature: 04 NovatedApp End2End feature
     Then I verify button "Submit Request" is enabled
     Then I verify button "Back" is enabled
 #    Then I click on button "Submit Request"
-
 #    Then I verify text "Are you sure you wish to order the selected fuel card?" is present
 #    Then I click on button "yes"
 #    Then I verify text "Your new fuel card request has been submitted" is present

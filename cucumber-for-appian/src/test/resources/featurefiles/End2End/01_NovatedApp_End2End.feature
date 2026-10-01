@@ -10,7 +10,6 @@ Feature: 01 NovatedApp End2End feature
     And I set take error screenshots to "screenshot.boolean"
     And I set stop on error to "screenshot.stop.on.error"
 
-
   Scenario: TC001_Collecting Driver details to validate in future task
     Given I setup environment and login with role "Driver_191799"
     Given I load test data for "TC001" from "01_NovatedApp_End2End"

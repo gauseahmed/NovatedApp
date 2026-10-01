@@ -108,7 +108,6 @@ Feature: 02 NovatedApp End2End feature
     And I sort record grid by column "Submitted On"
     And I sort record grid by column "Submitted On"
     Then I get grid "[1]" column "Reference Number" row "[1]" value and store in excel "excel:Request Ref Number"
-
     Then I click on grid "[1]" column "Reference Number" row "[1]"
 #    Then I verify field "Vehicle" contains excel "excel:Vehicle"
     Then I verify field "Request Type" contains excel "excel:Request Type"
