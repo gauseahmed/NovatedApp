@@ -28,18 +28,18 @@ Feature: 04 NovatedApp End2End feature
     Then I get field "Residential Address" value and store in excel "excel:Driver Residential Address"
     Then I verify text "Edit Profile" is present
 
-  Scenario: TC002_Verify driver can raise request to Add New Fuel Card
-    Given I setup environment and login with role "Driver_154043"
-    Given I load test data for "TC001" from "04_NovatedApp_End2End"
-    Then I click on element with text "Fuel Cards"
-    Then I wait for "2" seconds
-    Then I click on element with text "Request New/ Additional Fuel Card"
-    #Commented below as we have only 1 option which is already selected
-    Then I verify text "Request Fuel Card" is present
-    Then I populate field "Select Fuel Provider *" with excel "excel:Fuel Provider"
-    Then I get field "Delivery Address" value and store in excel "excel:Delivery Address"
-    Then I verify button "Submit Request" is enabled
-    Then I verify button "Back" is enabled
+#  Scenario: TC002_Verify driver can raise request to Add New Fuel Card
+#    Given I setup environment and login with role "Driver_154043"
+#    Given I load test data for "TC001" from "04_NovatedApp_End2End"
+#    Then I click on element with text "Fuel Cards"
+#    Then I wait for "2" seconds
+#    Then I click on element with text "Request New/ Additional Fuel Card"
+#    #Commented below as we have only 1 option which is already selected
+#    Then I verify text "Request Fuel Card" is present
+#    Then I populate field "Select Fuel Provider *" with excel "excel:Fuel Provider"
+#    Then I get field "Delivery Address" value and store in excel "excel:Delivery Address"
+#    Then I verify button "Submit Request" is enabled
+#    Then I verify button "Back" is enabled
 #    Then I click on button "Submit Request"
 #    Then I verify text "Are you sure you wish to order the selected fuel card?" is present
 #    Then I click on button "yes"

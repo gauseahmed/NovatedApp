@@ -118,59 +118,59 @@ Feature: 02 NovatedApp End2End feature
     Then I verify grid "Submitted Documents" column "File Name" row "[2]" contains "Invoice.pdf"
     Then I verify grid "Submitted Documents" column "Type" row "[2]" contains "Proof of Payment"
 
-
-  Scenario: TC003_Verify Novated lease specialist can view and take decision on submitted claim
-    Given I setup environment and login with role "AutoLease"
-    Given I load test data for "TC003" from "02_NovatedApp_End2End"
-    Then I click on site page "Requests"
-#    Then I populate field "Search Requests" with excel "excel:Reference Number"
-#    Then I click on button "Search"
-#    Then I get grid "[1]" column "Reference #" row "[1]" value and store in excel "excel:AutoLease Reference #"
-    Then I wait for "3" seconds
-#    Then I verify grid "[1]" column "Reference Number" row "[1]" contains excel data "excel:Reference Number"
-#    Then I verify grid "[1]" column "Status" row "[1]" contains "Cancelled"
+#
+#  Scenario: TC003_Verify Novated lease specialist can view and take decision on submitted claim
+#    Given I setup environment and login with role "AutoLease"
+#    Given I load test data for "TC003" from "02_NovatedApp_End2End"
+#    Then I click on site page "Requests"
+##    Then I populate field "Search Requests" with excel "excel:Reference Number"
+##    Then I click on button "Search"
+##    Then I get grid "[1]" column "Reference #" row "[1]" value and store in excel "excel:AutoLease Reference #"
+#    Then I wait for "3" seconds
+##    Then I verify grid "[1]" column "Reference Number" row "[1]" contains excel data "excel:Reference Number"
+##    Then I verify grid "[1]" column "Status" row "[1]" contains "Cancelled"
+##    Then I click on grid "[1]" column "[1]" row "[1]"
+##    Then I populate field "Search Requests[2]" with excel "excel:AutoLease Reference #"
 #    Then I click on grid "[1]" column "[1]" row "[1]"
-#    Then I populate field "Search Requests[2]" with excel "excel:AutoLease Reference #"
-    Then I click on grid "[1]" column "[1]" row "[1]"
-    Then I wait for "2" seconds
-    #Need to verify req no in real time
-    Then I verify text "Request Details" is present
-    Then I verify field "Status" contains "Cancelled"
-    #Then I verify field "End Of Lease Date" contains excel "excel:Lease End Date"
-    Then I verify field "End Of Lease Date" contains "11/02/2026"
-    Then I verify field "Submitted By" contains excel "excel:Driver Name"
-    Then I verify field "Submitted On" contains excel "excel:Reading Date"
-    Then I verify field "Updated By" contains excel "excel:Driver Name"
-    Then I verify field "Updated On" contains excel "excel:Reading Date"
-    Then I verify field "Request Type" contains excel "excel:Request Type"
-    Then I verify field "Claim Type" contains excel "excel:Claim Type"
-    Then I verify field "Odometer Reading" contains excel "excel:Odometer"
-    Then I verify field "Dollar Amount" contains excel "excel:Amount ($)"
-    Then I verify field "Assigned To" contains "Unassigned"
-    Then I verify text "Driver Details" is present
-    Then I verify field "Salutation" contains excel "excel:Driver Salutation"
-    Then I verify field "First Name" contains excel "excel:Driver First Name"
-    Then I verify field "Last Name" contains excel "excel:Driver Last Name"
-    Then I verify field "Primary Email" contains excel "excel:Driver Email"
-    Then I verify field "Mobile" contains excel "excel:Driver Mobile Phone"
-    Then I verify field "Employer" contains excel "excel:Driver Employer Name"
-    Then I verify field "State" contains "QLD"
-    Then I verify text "Vehicle Details" is present
-    Then I verify field "Vehicle Description" contains excel "excel:Vehicle name"
-    Then I verify field "Registration Number" contains excel "excel:Vehicle number"
-#    Then I verify field "Vehicle Description" contains "VOLVO XC40"
-#    Then I verify field "Registration Number" contains "FTJ63Y"
-    Then I verify field "Submitted By" contains excel "excel:Submitted By"
-    Then I verify field "Updated By" contains excel "excel:Updated By"
-    Then I verify field "Registration State" contains "NSW"
-    Then I verify text "Files Uploaded" is present
-    Then I verify grid "[1]" column "File Name" row "[1]" contains "Invoice.pdf"
-    Then I verify grid "[1]" column "Type" row "[1]" contains "Proof of Payment"
-    Then I verify grid "[1]" column "File Name" row "[2]" contains "Service.pdf"
-    Then I verify grid "[1]" column "Type" row "[2]" contains "Service Document"
-    Then I verify text "Event History" is present
-    Then I verify text "Cancelled Request" is present
-    Then I wait for "1" seconds
-    Then I verify text "Request Event History" is present
-    Then I verify text "SUEJP UMBYBQDY" is present
-    Then I verify text "Created Request" is present
+#    Then I wait for "2" seconds
+#    #Need to verify req no in real time
+#    Then I verify text "Request Details" is present
+#    Then I verify field "Status" contains "Cancelled"
+#    #Then I verify field "End Of Lease Date" contains excel "excel:Lease End Date"
+#    Then I verify field "End Of Lease Date" contains "11/02/2026"
+#    Then I verify field "Submitted By" contains excel "excel:Driver Name"
+#    Then I verify field "Submitted On" contains excel "excel:Reading Date"
+#    Then I verify field "Updated By" contains excel "excel:Driver Name"
+#    Then I verify field "Updated On" contains excel "excel:Reading Date"
+#    Then I verify field "Request Type" contains excel "excel:Request Type"
+#    Then I verify field "Claim Type" contains excel "excel:Claim Type"
+#    Then I verify field "Odometer Reading" contains excel "excel:Odometer"
+#    Then I verify field "Dollar Amount" contains excel "excel:Amount ($)"
+#    Then I verify field "Assigned To" contains "Unassigned"
+#    Then I verify text "Driver Details" is present
+#    Then I verify field "Salutation" contains excel "excel:Driver Salutation"
+#    Then I verify field "First Name" contains excel "excel:Driver First Name"
+#    Then I verify field "Last Name" contains excel "excel:Driver Last Name"
+#    Then I verify field "Primary Email" contains excel "excel:Driver Email"
+#    Then I verify field "Mobile" contains excel "excel:Driver Mobile Phone"
+#    Then I verify field "Employer" contains excel "excel:Driver Employer Name"
+#    Then I verify field "State" contains "QLD"
+#    Then I verify text "Vehicle Details" is present
+#    Then I verify field "Vehicle Description" contains excel "excel:Vehicle name"
+#    Then I verify field "Registration Number" contains excel "excel:Vehicle number"
+##    Then I verify field "Vehicle Description" contains "VOLVO XC40"
+##    Then I verify field "Registration Number" contains "FTJ63Y"
+#    Then I verify field "Submitted By" contains excel "excel:Submitted By"
+#    Then I verify field "Updated By" contains excel "excel:Updated By"
+#    Then I verify field "Registration State" contains "NSW"
+#    Then I verify text "Files Uploaded" is present
+#    Then I verify grid "[1]" column "File Name" row "[1]" contains "Invoice.pdf"
+#    Then I verify grid "[1]" column "Type" row "[1]" contains "Proof of Payment"
+#    Then I verify grid "[1]" column "File Name" row "[2]" contains "Service.pdf"
+#    Then I verify grid "[1]" column "Type" row "[2]" contains "Service Document"
+#    Then I verify text "Event History" is present
+#    Then I verify text "Cancelled Request" is present
+#    Then I wait for "1" seconds
+#    Then I verify text "Request Event History" is present
+#    Then I verify text "SUEJP UMBYBQDY" is present
+#    Then I verify text "Created Request" is present

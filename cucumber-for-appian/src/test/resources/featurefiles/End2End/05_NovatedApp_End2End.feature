@@ -11,7 +11,7 @@ Feature: 05 NovatedApp End2End feature
     And I set stop on error to "screenshot.stop.on.error"
 
   Scenario: TC001_Collecting Driver details to validate in future task
-    Given I setup environment and login with role "Driver_10581"
+    Given I setup environment and login with role "Driver_139638"
     Given I load test data for "TC001" from "05_NovatedApp_End2End"
     Then I get field "Latest Reading (kms)" value and store in excel "excel:Last Odometer Reading"
     Then I click on element with text "Profile[2]"
@@ -26,18 +26,18 @@ Feature: 05 NovatedApp End2End feature
 
 
   Scenario: TC002_Verify driver can raise request to Replace Fuel Card with reason Lost
-    Given I setup environment and login with role "Driver_10581"
+    Given I setup environment and login with role "Driver_139638"
     Given I load test data for "TC001" from "05_NovatedApp_End2End"
     Then I click on element with text "Fuel Cards"
     Then I wait for "2" seconds
-    Then I verify text "You can only have a maximum of two fuel cards at a time" is present
+    Then I verify text "Fuel card requests are not available for your lease at this time." is present
     Then I verify text "My Fuel Cards" is present
     Then I verify text "ORIX Motorpass" is present
-    Then I verify text "6002 3000 8553 4138" is present
+    Then I verify text "0600 2300 0125 3676" is present
     Then I click on element with text "Replace[2]"
     Then I wait for "1" seconds
     Then I verify text "Replace Fuel Card" is present
-    Then I verify text "ORIX Motorpass Fuel Card - Ending in 4138" is present
+    Then I verify text "ORIX Motorpass Fuel Card - Ending in 3676" is present
     Then I populate field "Reason for replacement" with excel "excel:Replace Fuel Card"
     Then I get field "Delivery Address" value and store in excel "excel:Delivery Address"
     Then I verify button "Submit Request" is enabled

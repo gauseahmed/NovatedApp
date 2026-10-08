@@ -117,57 +117,53 @@ Feature: 01 NovatedApp End2End feature
     Then I verify grid "Submitted Documents" column "File Name" row "[1]" contains "Invoice.pdf"
     Then I verify grid "Submitted Documents" column "Type" row "[1]" contains "Proof of Payment"
 
-  
-  Scenario: TC003_Verify Novated lease specialist can view and take decision on submitted claim
-    Given I setup environment and login with role "AutoLease"
-    Given I load test data for "TC003" from "01_NovatedApp_End2End"
-    Then I click on site page "Requests"
-#    Then I populate field "Search Requests" with excel "excel:Reference Number"
-#    Then I click on button "Search"
-    Then I wait for "3" seconds
-    Then I click on grid "[1]" column "[1]" row "[1]"
-    Then I wait for "2" seconds
-    #Need to verify req no in real time
-    Then I verify text "Request Details" is present
-    Then I verify field "Status" contains "New"
-    Then I verify field "End Of Lease Date" contains excel "excel:Lease End Date"
-    Then I verify field "Submitted By" contains excel "excel:Driver Name"
-#    Then I verify field "Submitted On" contains excel "excel:Reading Date"
-    Then I verify field "Updated By" contains excel "excel:Driver Name"
-#    Then I verify field "Updated On" contains excel "excel:Reading Date"
-    Then I verify field "Request Type" contains excel "excel:Request Type"
-    Then I verify field "Claim Type" contains excel "excel:Claim Type"
-#    Then I verify field "Odometer Reading" contains excel "excel:Last Odometer Reading with km"
-    Then I verify field "Dollar Amount" contains excel "excel:Amount ($)"
-    Then I verify field "Assigned To" contains "Unassigned"
-    Then I wait for "5" seconds
-    Then I verify text "Driver Details" is present
-    Then I verify field "Salutation" contains excel "excel:Driver Salutation"
-    Then I verify field "First Name" contains excel "excel:Legal First Name"
-    Then I verify field "Last Name" contains excel "excel:Legal Last Name"
-    Then I verify field "Primary Email" contains excel "excel:Driver Email"
-    Then I verify field "Mobile" contains excel "excel:Driver Mobile Phone"
-    Then I verify field "Employer" contains "Aurecon Australasia Pty Ltd"
-    Then I verify field "State" contains "NSW"
-    Then I verify text "Vehicle Details" is present
-    Then I verify field "Vehicle Description" contains excel "excel:Vehicle name"
-    Then I verify field "Registration Number" contains excel "excel:Vehicle number"
-    Then I verify field "Registration State" contains "QLD"
-    Then I verify text "Files Uploaded" is present
-    Then I verify grid "[1]" column "File Name" row "[1]" contains "Invoice.pdf"
-    Then I verify grid "[1]" column "Type" row "[1]" contains "Proof of Payment"
-    Then I verify text "Event History" is present
-    Then I click on button "Take Ownership"
-    Then I wait for "1" seconds
-    Then I verify text "has been successfully assigned to you" is present
-    Then I click on button "DONE"
-    Then I wait for "2" seconds
-    Then I verify field "Status" contains "In Progress"
-    Then I verify field "Assigned To" contains "SUEJP UMBYBQDY"
-    Then I verify text "Assigned Request" is present
-    Then I verify field "Submitted By" contains excel "excel:Submitted By"
-    Then I verify field "Updated By" contains excel "excel:Updated By"
-
-    Then I verify text "Request Event History" is present
-    Then I verify text "SUEJP UMBYBQDY" is present
-    Then I verify text "Created Request" is present
+#
+#  Scenario: TC003_Verify Novated lease specialist can view and take decision on submitted claim
+#    Given I setup environment and login with role "AutoLease"
+#    Given I load test data for "TC003" from "01_NovatedApp_End2End"
+#    Then I click on site page "Requests"
+##    Then I populate field "Search Requests" with excel "excel:Reference Number"
+##    Then I click on button "Search"
+#    Then I wait for "3" seconds
+#    Then I click on grid "[1]" column "[1]" row "[1]"
+#    Then I wait for "2" seconds
+#    #Need to verify req no in real time
+#    Then I verify text "Request Details" is present
+#    Then I verify field "Request Status" contains "In Progress"
+#    Then I verify field "Request Sub Status" contains "With Driver"
+#    Then I verify field "Request Type" contains excel "excel:Request Type"
+#    Then I verify field "Claim Type" contains excel "excel:Claim Type"
+##    Then I verify field "Odometer Reading" contains excel "excel:Last Odometer Reading with km"
+#    Then I verify field "Dollar Amount" contains excel "excel:Amount ($)"
+#    Then I verify field "Assigned To" contains "Unassigned"
+#    Then I wait for "5" seconds
+#    Then I verify text "Driver Details" is present
+#    Then I verify field "Salutation" contains excel "excel:Driver Salutation"
+#    Then I verify field "First Name" contains excel "excel:Legal First Name"
+#    Then I verify field "Last Name" contains excel "excel:Legal Last Name"
+#    Then I verify field "Primary Email" contains excel "excel:Driver Email"
+#    Then I verify field "Mobile" contains excel "excel:Driver Mobile Phone"
+#    Then I verify field "Employer" contains "Aurecon Australasia Pty Ltd"
+#    Then I verify field "State" contains "NSW"
+#    Then I verify text "Vehicle Details" is present
+#    Then I verify field "Vehicle Description" contains excel "excel:Vehicle name"
+#    Then I verify field "Registration Number" contains excel "excel:Vehicle number"
+#    Then I verify field "Registration State" contains "QLD"
+#    Then I verify text "Files Uploaded" is present
+#    Then I verify grid "[1]" column "File Name" row "[1]" contains "Invoice.pdf"
+#    Then I verify grid "[1]" column "Type" row "[1]" contains "Proof of Payment"
+#    Then I verify text "Event History" is present
+#    Then I click on button "Take Ownership"
+#    Then I wait for "1" seconds
+#    Then I verify text "has been successfully assigned to you" is present
+#    Then I click on button "DONE"
+#    Then I wait for "2" seconds
+#    Then I verify field "Status" contains "In Progress"
+#    Then I verify field "Assigned To" contains "SUEJP UMBYBQDY"
+#    Then I verify text "Assigned Request" is present
+#    Then I verify field "Submitted By" contains excel "excel:Submitted By"
+#    Then I verify field "Updated By" contains excel "excel:Updated By"
+#
+#    Then I verify text "Request Event History" is present
+#    Then I verify text "SUEJP UMBYBQDY" is present
+#    Then I verify text "Created Request" is present

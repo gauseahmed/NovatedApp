@@ -1117,9 +1117,9 @@ public class TempoFixture extends BaseFixture {
                         " or normalize-space(.)=" + xpathLiteral(fieldName + " *") + "]" +
                         "/ancestor::div[contains(@class,'FieldLayout---field_layout')][1]" +
                         "/following-sibling::*[.//input[@type='file' " +
-                        "and contains(@class,'MultipleFileUploadWidget---ui-inaccessible')]][1]" +
+                        "and contains(@class,'MultipleFileUploadWidget---ui_inaccessible')]][1]" +
                         "//input[@type='file' " +
-                        "and contains(@class,'MultipleFileUploadWidget---ui-inaccessible')]" +
+                        "and contains(@class,'MultipleFileUploadWidget---ui_inaccessible')]" +
                         "[" + index + "]";
 
         WebElement fileInput =
@@ -1132,7 +1132,7 @@ public class TempoFixture extends BaseFixture {
 
         String xpath =
                 "//input[@type='file' " +
-                        "and contains(@class,'MultipleFileUploadWidget---ui-inaccessible')]";
+                        "and contains(@class,'MultipleFileUploadWidget---ui_inaccessible')]";
 
         WebElement fileInput =
                 settings.getDriver().findElement(By.xpath(xpath));
