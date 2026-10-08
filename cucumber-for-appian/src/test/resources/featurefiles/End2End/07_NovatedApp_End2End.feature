@@ -11,7 +11,7 @@ Feature: 07 NovatedApp End2End feature
     And I set stop on error to "screenshot.stop.on.error"
 
   Scenario: TC001_Collecting Driver details to validate in future task
-    Given I setup environment and login with role "Driver_10581"
+    Given I setup environment and login with role "Driver_191799"
     Given I load test data for "TC001" from "07_NovatedApp_End2End"
     Then I get field "Latest Reading (kms)" value and store in excel "excel:Last Odometer Reading"
     Then I click on element with text "Profile[2]"
@@ -26,12 +26,21 @@ Feature: 07 NovatedApp End2End feature
 
 
   Scenario: TC002_Verify driver can View  payout
-    Given I setup environment and login with role "Driver_10581"
+    Given I setup environment and login with role "Driver_191799"
     Given I load test data for "TC001" from "07_NovatedApp_End2End"
     Then I click on element with text "View Payout"
     Then I wait for "1" seconds
-    Then I verify text "If you wish to proceed with terminating your lease, you will need to complete the next steps. This includes providing a remittance advice for payment and completing the required termination form. These items are required before your termination can be finalised. You will have the ability to withdraw the request up until the point of providing ORIX with your remittance advice." is present
-   Then I verify button "PROCEED" is enabled
+    Then I verify text "Payout Amount:" is present
+    Then I verify text "Payout Valid-to Date:" is present
+    Then I verify text "Payout Document:" is present
+#    Then I verify text "If you wish to proceed with terminating your lease, you will need to complete the next steps. This includes providing a remittance advice for payment and completing the required termination form. These items are required before your termination can be finalised. You will have the ability to withdraw the request up until the point of providing ORIX with your remittance advice." is present
+   Then I verify button "VIEW PAYOUT DOCUMENTS" is enabled
+  Then I click on button "VIEW PAYOUT DOCUMENTS"
+  Then I verify text "Documents" is present
+  Then I verify text "Remittance Advice" is present
+  Then I verify text "- Upload your remittance advice or payment confirmation showing the amount, payment date, and refere... " is present
+  Then I verify text "Forms" is present
+  Then I verify text "Motor Vehicle Declaration Form" is present
 #    Then I verify button "Continue" is enabled
 #    Then I verify button "Cancel" is enabled
 #    Then I click on button "Continue"

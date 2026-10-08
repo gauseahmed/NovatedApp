@@ -11,7 +11,7 @@ Feature: 06 NovatedApp End2End feature
     And I set stop on error to "screenshot.stop.on.error"
 
   Scenario: TC001_Collecting Driver details to validate in future task
-    Given I setup environment and login with role "Driver_191799"
+    Given I setup environment and login with role "Driver_139638"
     Given I load test data for "TC001" from "06_NovatedApp_End2End"
     Then I get field "Latest Reading (kms)" value and store in excel "excel:Last Odometer Reading"
     Then I click on element with text "Profile[2]"
@@ -26,15 +26,16 @@ Feature: 06 NovatedApp End2End feature
 
 
   Scenario: TC002_Verify driver can raise request to Cancel Fuel Card
-    Given I setup environment and login with role "Driver_191799"
+    Given I setup environment and login with role "Driver_139638"
     Given I load test data for "TC001" from "06_NovatedApp_End2End"
     Then I click on element with text "Fuel Cards"
     Then I wait for "2"
-    Then I verify text "You can only have a maximum of two fuel cards at a time" is present
+    Then I verify text "Fuel card requests are not available for your lease at this time." is present
     Then I verify text "My Fuel Cards" is present
     Then I verify text "ORIX Motorpass" is present
-    Then I click on element with text " Cancel[1]"
+    Then I click on element with text "Cancel[2]"
     Then I verify text "Would you like to cancel this fuel card" is present
+    Then I verify text "Active" is present
     Then I verify text "Cancel Fuel Card" is present
 #    Then I click on button "DONE"
 #    Then I wait for "1" seconds
